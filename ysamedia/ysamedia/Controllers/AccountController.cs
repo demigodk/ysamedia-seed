@@ -2,10 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ysamedia.Entities;
 using ysamedia.Models;
 using ysamedia.Models.AccountViewModels;
 using ysamedia.Services;
@@ -20,17 +25,19 @@ namespace ysamedia.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ysamediaDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger, ysamediaDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
         }
 
         [TempData]
@@ -205,7 +212,32 @@ namespace ysamedia.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+
+            var vm = new RegisterViewModel();
+            vm.GenderList = new List<TblGender>
+            {
+                new TblGender { GenderId = 1, Gname = "Male" },
+                new TblGender { GenderId = 2, Gname = "Female" }
+            };
+
+
+            vm.MonthList = new List<Month>
+            {
+                new Month { MonthId = 1, Name = "January" },
+                new Month { MonthId = 2, Name = "February" },
+                new Month { MonthId = 3, Name = "March" },
+                new Month { MonthId = 4, Name = "April" },
+                new Month { MonthId = 5, Name = "May" },
+                new Month { MonthId = 6, Name = "June" },
+                new Month { MonthId = 7, Name = "July" },
+                new Month { MonthId = 8, Name = "August" },
+                new Month { MonthId = 9, Name = "September" },
+                new Month { MonthId = 10, Name = "October" },
+                new Month { MonthId = 11, Name = "November" },
+                new Month { MonthId = 12, Name = "December" }
+            };
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -216,11 +248,19 @@ namespace ysamedia.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                /*** DateTime -> (yyyy/MM/dd HHmmss) ***/
+                DateTime tempDOB = new DateTime(int.Parse(model.Year), model.Month, int.Parse(model.Day), 0, 0, 0);
+
                 var user = new ApplicationUser
-                {
+                {                    
+                    FirstName = model.Name,
+                    Surname = model.Surname,
+                    DisplayName = model.Name + " " + model.Surname,
                     UserName = model.Email,
-                    Email = model.Email,
-                    Approved = 0                // 0 for not approved.
+                    Email = model.Email,                           
+                    Approved = 0,
+                    GenderId = model.GenderId,   
+                    DateOfBirth = tempDOB
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

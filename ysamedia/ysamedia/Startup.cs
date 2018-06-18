@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ysamedia.Data;
+using ysamedia.Entities;
 using ysamedia.Models;
 using ysamedia.Services;
 
@@ -25,7 +26,7 @@ namespace ysamedia
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ysamediaContext>(options =>
+            services.AddDbContext<ysamediaDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()               

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using ysamedia.Models;
+using ysamedia.Entities;
 
 namespace ysamedia.Data
 {
@@ -14,7 +14,7 @@ namespace ysamedia.Data
          * */
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new ysamediaContext(serviceProvider.GetRequiredService<DbContextOptions<ysamediaContext>>()))
+            using (var context = new ysamediaDbContext(serviceProvider.GetRequiredService<DbContextOptions<ysamediaDbContext>>()))
             {
                 
                 if (!context.TblQuestion.Any())
