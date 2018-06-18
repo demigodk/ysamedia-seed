@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ysamedia.Models
@@ -8,5 +9,10 @@ namespace ysamedia.Models
     {
         [Required]
         public int Approved { get; set; }
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+        public string DisplayName { get; set; }
+        public int GenderId { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

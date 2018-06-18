@@ -12,9 +12,27 @@
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <label asp-for="GenderId"></label>
+                <select asp-for="GenderId"
+                        class="form-control"
+                        asp-items="@(new SelectList(Model.GenderList, "GenderId", "Gname"))">
+                        <option>Please select</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Password"></label>
@@ -26,7 +44,26 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            <div class="form-group">
+                <label asp-for="DateOfBirth"></label>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select asp-for="Month" class="form-control"
+                            asp-items="@(new SelectList(Model.MonthList, "MonthId", "Name"))">
+                            <option>Please select</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="Day" type="text" class="form-control" id="inputDay" placeholder="Day" />
+                        <span asp-validation-for="Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="Year" type="text" class="form-control" id="inputYear" placeholder="Year" />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                </div>               
+            </div>
+            <button type="submit" class="btn btn-default">Create Account</button>           
         </form>
     </div>
 </div>
