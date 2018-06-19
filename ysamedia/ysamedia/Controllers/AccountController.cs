@@ -215,7 +215,7 @@ namespace ysamedia.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             
-            var viewModel = new ListHelper().generateLists();
+            //var viewModel = new ListHelper().generateLists();
 
             //____________________________TBLGender_________________________
             List<TblGender> GenderList = new List<TblGender>();
@@ -223,7 +223,7 @@ namespace ysamedia.Controllers
             GenderList = (from g in _context.TblGender
                           select g).ToList();
 
-            GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
+            //GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
             ViewBag.ListOfGenders = GenderList;
             //_______________________________TBLGender End______________________
 
@@ -248,7 +248,7 @@ namespace ysamedia.Controllers
             //____________________________________________________________________
 
 
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]
@@ -309,63 +309,41 @@ namespace ysamedia.Controllers
             ViewBag.ListOfYears = YearList;
             //__________________________________________________________________________
 
-
-            if (ModelState.IsValid || !(ModelState.IsValid))
+            if (ModelState.IsValid)
             {
-                model.GenderId = model.GenderId;
-                model.Month = model.Month;
-                model.Day = model.Day;
-                model.Year = model.Year;
+                var user = new ApplicationUser
+                {
+                    FirstName = model.Name,
+                    Surname = model.Surname,
+                    DisplayName = model.Name + " " + model.Surname,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Approved = 0,
+                    GenderId = model.GenderId,
+                    DateOfBirth = new DateTime(model.Year, model.Month, model.Day, 0, 0, 0)
+                };
 
-                return View(model);
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
+                }
+
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
-        //{
-        //    ViewData["ReturnUrl"] = returnUrl;
-
-        //    if (ModelState.IsValid)
-        //    {                
-        //        var user = new ApplicationUser
-        //        {                    
-        //            FirstName = model.Name,
-        //            Surname = model.Surname,
-        //            DisplayName = model.Name + " " + model.Surname,
-        //            UserName = model.Email,
-        //            Email = model.Email,                           
-        //            Approved = 0,
-        //            GenderId = model.GenderId,   
-        //            DateOfBirth = new DateTime(model.Year, model.Month, model.Day, 0, 0, 0)
-        //        };
-
-        //        var result = await _userManager.CreateAsync(user, model.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            _logger.LogInformation("User created a new account with password.");
-
-        //            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        //            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-        //            await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-        //            await _signInManager.SignInAsync(user, isPersistent: false);
-        //            _logger.LogInformation("User created a new account with password.");
-        //            return RedirectToLocal(returnUrl);
-        //        }                
-
-        //        AddErrors(result);
-        //    }          
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
