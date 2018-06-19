@@ -12,7 +12,7 @@ namespace ysamedia.Data
         {
             // context.Database.EnsureCreated
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { "Administrator", "Admin", "MediaMember", "ChurchMember" };
+            string[] roleNames = { "Administrator", "Admin", "Member", "Guest" };
 
             IdentityResult roleResult;
 
