@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\MediaUser\**" />
+    <Content Remove="Views\MediaUser\**" />
+    <EmbeddedResource Remove="Views\MediaUser\**" />
+    <None Remove="Views\MediaUser\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20180613173639_PendingMigration.cs" />
     <Compile Remove="Data\Migrations\20180613173639_PendingMigration.Designer.cs" />
   </ItemGroup>
@@ -23,10 +30,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\MediaUser\" />
   </ItemGroup>
 
 </Project>
