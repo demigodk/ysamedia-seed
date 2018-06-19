@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
-using ysamedia.Models;
 
 namespace ysamedia.Data
 {
