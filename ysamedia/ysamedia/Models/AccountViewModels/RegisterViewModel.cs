@@ -42,38 +42,16 @@ namespace ysamedia.Models.AccountViewModels
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please select month")]  
-        [DateOfBirth(2,28)]
+        [AprNumDays(2, 28), FebNumDays(4, 30), JuneNumDays(6, 30), SepNumDays(9, 30), NovNumDays(11, 30)]
         public int Month { get; set; }
 
         [Required(ErrorMessage = "Please select day")]
-        [DateOfBirth(2, 28)]
+        [AprNumDays(2, 28), FebNumDays(4, 30), JuneNumDays(6, 30), SepNumDays(9, 30), NovNumDays(11, 30)]
         public int Day { get; set; }
              
         [Required(ErrorMessage = "Please select year")]
         public int Year { get; set; }
 
-        public List<TblGender> GenderList { get; set; }
-
-        //public List<Month> MonthList { get; set; }
-        //public List<Day> DayList { get; set; }
-        //public List<Year> YearList { get; set; }       
-    }
-
-    //public class Day
-    //{
-    //    public int DayId { get; set; }
-    //    public int DayNum { get; set; }
-    //}
-
-    //public class Month
-    //{
-    //    public int MonthId { get; set; }
-    //    public string Name { get; set; }
-    //}
-
-    //public class Year
-    //{
-    //    public int YearId { get; set; }
-    //    public int YearNum { get; set; }
-    //}
+        //public List<TblGender> GenderList { get; set; }       
+    }   
 }
