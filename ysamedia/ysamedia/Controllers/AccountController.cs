@@ -10,6 +10,8 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ysamedia.Classes.Lists;
+using ysamedia.Classes.Lists.ListItems;
 using ysamedia.Entities;
 using ysamedia.Models;
 using ysamedia.Models.AccountViewModels;
@@ -212,32 +214,41 @@ namespace ysamedia.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            
+            //var viewModel = new ListHelper().generateLists();
 
-            var vm = new RegisterViewModel();
-            vm.GenderList = new List<TblGender>
-            {
-                new TblGender { GenderId = 1, Gname = "Male" },
-                new TblGender { GenderId = 2, Gname = "Female" }
-            };
+            //____________________________TBLGender_________________________
+            List<TblGender> GenderList = new List<TblGender>();
+
+            GenderList = (from g in _context.TblGender
+                          select g).ToList();
+
+            //GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
+            ViewBag.ListOfGenders = GenderList;
+            //_______________________________TBLGender End______________________
 
 
-            vm.MonthList = new List<Month>
-            {
-                new Month { MonthId = 1, Name = "January" },
-                new Month { MonthId = 2, Name = "February" },
-                new Month { MonthId = 3, Name = "March" },
-                new Month { MonthId = 4, Name = "April" },
-                new Month { MonthId = 5, Name = "May" },
-                new Month { MonthId = 6, Name = "June" },
-                new Month { MonthId = 7, Name = "July" },
-                new Month { MonthId = 8, Name = "August" },
-                new Month { MonthId = 9, Name = "September" },
-                new Month { MonthId = 10, Name = "October" },
-                new Month { MonthId = 11, Name = "November" },
-                new Month { MonthId = 12, Name = "December" }
-            };
+            //__________________________ Day List______________________________
+            List<Day> DayList = new List<Day>();
+            DayList = new ListContainer().getDayList();
 
-            return View(vm);
+            ViewBag.ListOfDays = DayList;
+            //___________________________ DayList End_________________________
+
+            //__________________________ Month List_____________________________
+            List<Month> MonthList = new List<Month>();
+            MonthList = new ListContainer().getMonthList();
+            ViewBag.ListOfMonths = MonthList;
+            //____________________________________________________________________
+
+            //__________________________ Year List_____________________________
+            List<Year> YearList = new List<Year>();
+            YearList = new ListContainer().getYearList();
+            ViewBag.ListOfYears = YearList;
+            //____________________________________________________________________
+
+
+            return View();
         }
 
         [HttpPost]
@@ -246,21 +257,70 @@ namespace ysamedia.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
+            //______________________________ selectedGender_________________________
+            int selectedGender = model.GenderId;
+            ViewBag.selectedGender = model.GenderId;
+
+            /********** Setting Data Back to ViewBag After Posting Form ******/
+
+            List<TblGender> GenderList = new List<TblGender>();
+
+            GenderList = (from g in _context.TblGender
+                          select g).ToList();
+
+            GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
+            ViewBag.ListOfGenders = GenderList;
+            //______________________________________________________________________
+
+            //____________________________ selectedDay________________________________
+            int selectedDay = model.Day;
+            ViewBag.selectedDay = model.Day;
+
+            /********** Setting data back to ViewBag After Posting Form ****************/
+
+            List<Day> DayList = new List<Day>();
+            DayList = new ListContainer().getDayList();
+
+            ViewBag.ListOfDays = DayList;
+            //__________________________________________________________________________
+
+            //____________________________ selectedMonth________________________________
+            int selectedMonth = model.Month;
+            ViewBag.selectedMonth = model.Month;
+
+            /********** Setting data back to ViewBag After Posting Form ****************/
+
+            List<Month> MonthList = new List<Month>();
+            MonthList = new ListContainer().getMonthList();
+
+            ViewBag.ListOfMonths = MonthList;
+            //__________________________________________________________________________
+
+            //____________________________ selectedYear________________________________
+            int selectedYear = model.Year;
+            ViewBag.selectedYear = model.Year;
+
+            /********** Setting data back to ViewBag After Posting Form ****************/
+
+            List<Year> YearList = new List<Year>();
+            YearList = new ListContainer().getYearList();
+
+            ViewBag.ListOfYears = YearList;
+            //__________________________________________________________________________
+
             if (ModelState.IsValid)
             {
-                /*** DateTime -> (yyyy/MM/dd HHmmss) ***/
-                DateTime tempDOB = new DateTime(int.Parse(model.Year), model.Month, int.Parse(model.Day), 0, 0, 0);
-
                 var user = new ApplicationUser
-                {                    
+                {
                     FirstName = model.Name,
                     Surname = model.Surname,
                     DisplayName = model.Name + " " + model.Surname,
                     UserName = model.Email,
-                    Email = model.Email,                           
+                    Email = model.Email,
                     Approved = 0,
-                    GenderId = model.GenderId,   
-                    DateOfBirth = tempDOB
+                    GenderId = model.GenderId,
+                    DateOfBirth = new DateTime(model.Year, model.Month, model.Day, 0, 0, 0)
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -276,13 +336,14 @@ namespace ysamedia.Controllers
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
+
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
