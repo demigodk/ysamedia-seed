@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using ysamedia.Data;
@@ -10,6 +11,7 @@ using ysamedia.Models.UserManagementViewModels;
 
 namespace ysamedia.Controllers
 {
+    [Authorize(Roles = "Administrator, Admin")]
     public class UserManagementController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -28,7 +30,7 @@ namespace ysamedia.Controllers
         {            
             var vm = new UserManagementIndexViewModel
             {
-                Users = _dbContext.Users.OrderBy(u => u.DisplayName).ToList()
+                Users = _dbContext.Users.OrderBy(u => u.DisplayName).Include(u => u.Roles).ToList()
             };
             
             return View(vm);
@@ -52,9 +54,10 @@ namespace ysamedia.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(UserManagementAddRoleViewModel rvm)
         {
+            var user = await GetUserById(rvm.UserId);
+
             if (ModelState.IsValid)
-            {
-                var user = await GetUserById(rvm.UserId);
+            {                
                 var result = await _userManager.AddToRoleAsync(user, rvm.NewRole);
 
                 if (result.Succeeded)
@@ -68,6 +71,7 @@ namespace ysamedia.Controllers
                 }                
             }
 
+            rvm.Email = user.Email;
             rvm.Roles = GetAllRoles();
             return View(rvm);          
         }
