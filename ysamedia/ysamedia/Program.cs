@@ -20,11 +20,13 @@ namespace ysamedia
                 try
                 {
                     // For seeding Identity tables in ApplicationDbContext 
+                    //var context = services.GetRequiredService<ApplicationDbContext>();
+                    //UserRoleSeed.InitializeAsync(context, services).Wait();
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    UserRoleSeed.InitializeAsync(context, services).Wait();
+                    DbInitializer.InitializeAsync(context, services).Wait();
 
                     /************* Seeds All The Relevant Non-Asp.Net Identity Tables **************/
-                    DbInitializer.Initialize(services);
+                    //DbInitializer.Initialize(services);
                 }
                 catch(Exception ex)
                 {

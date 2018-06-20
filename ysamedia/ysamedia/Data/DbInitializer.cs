@@ -1,26 +1,77 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ysamedia.Entities;
+using ysamedia.Models;
 
+/// <summary>
+/// @author         :   Bondo Kalombo
+/// @date           :   20-06-2018
+/// 
+/// This class seeds the database with needed startup information.
+/// </summary>
 namespace ysamedia.Data
 {
-    public static class DbInitializer
-    {        
-        /**
-         * The code checks if there are any students in the database, and if not, it assumes the database is new and needs to 
-         * be seeded with test data. It loads test data into arrays rather than List<T> collections to optimize performance.
-         * */
-        public static void Initialize(IServiceProvider serviceProvider)
+    public static class DbInitializer 
+    {       
+        // Creates an Admin role and one Admin user
+        public static async Task InitializeAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            using (var context = new ysamediaDbContext(serviceProvider.GetRequiredService<DbContextOptions<ysamediaDbContext>>()))
+            // create database schema if none exists
+            context.Database.EnsureCreated();
+
+            var _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            string[] roleNames = { "Administrator", "Admin", "Member", "Guest" };
+
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
             {
-                
-                if (!context.TblQuestion.Any())
+                var roleExists = await _roleManager.RoleExistsAsync(roleName);
+
+                if (!roleExists)
+                {
+                    roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            // Create the default Admin account and apply the Admin role
+            string firstName = "YSM";
+            string surname = "Admin";
+            string email = "ysmadmin@gmail.com";
+            int genderId = 1;
+            string password = "P0dC@5tYSM";
+            int day = 10;
+            int month = 10;
+            int year = 2000;            
+                                    
+            var user = new ApplicationUser
+            {
+                FirstName = firstName,
+                Surname = surname,
+                DisplayName = firstName + " " + surname,
+                UserName = email,
+                Email = email,
+                Approved = 1,
+                GenderId = genderId,
+                DateOfBirth = new DateTime(year, month, day, 0, 0, 0)
+            };
+
+            var result = await _userManager.CreateAsync(user, password);            
+            await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(email), "Admin");
+       
+            using (var ysmcontext = new ysamediaDbContext(serviceProvider.GetRequiredService<DbContextOptions<ysamediaDbContext>>()))
+            {
+
+                if (!ysmcontext.TblQuestion.Any())
                 {
                     /**************** Seed tblQuestion Table *******************/
-                    context.TblQuestion.AddRange(
+                    ysmcontext.TblQuestion.AddRange(
 
                        new TblQuestion { QuestionId = 1, Question = "In which denomination or church do you belong to?" },
                        new TblQuestion { QuestionId = 2, Question = "What brought you here to Yahweh Shamma Assembly?" },
@@ -30,36 +81,36 @@ namespace ysamedia.Data
                        new TblQuestion { QuestionId = 6, Question = "Would you like to follow some teachings and become a member at our community?" }
                     );
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblGender.Any())
+                if (!ysmcontext.TblGender.Any())
                 {
                     /***************** Seed tblGender Table ********************/
-                    context.TblGender.AddRange(
+                    ysmcontext.TblGender.AddRange(
                     new TblGender { GenderId = 1, Gname = "Male" },
                     new TblGender { GenderId = 2, Gname = "Female" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
 
                 }
 
-                if (!context.TblAgeGroup.Any())
+                if (!ysmcontext.TblAgeGroup.Any())
                 {
                     /***************** Seed tblAgeGroup Table ********************/
-                    context.TblAgeGroup.AddRange(
+                    ysmcontext.TblAgeGroup.AddRange(
                         new TblAgeGroup { AgroupId = 1, AgeRange = "18-25" },
                         new TblAgeGroup { AgroupId = 2, AgeRange = "26-35" },
                         new TblAgeGroup { AgroupId = 3, AgeRange = "36-50" },
                         new TblAgeGroup { AgroupId = 4, AgeRange = "51-75" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblDepartment.Any())
+                if (!ysmcontext.TblDepartment.Any())
                 {
                     /***************** Seed tblDepartment Table ********************/
-                    context.TblDepartment.AddRange(
+                    ysmcontext.TblDepartment.AddRange(
                         new TblDepartment { DepartmentId = 1, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Lights" },
                         new TblDepartment { DepartmentId = 2, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Camera" },
                         new TblDepartment { DepartmentId = 3, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Social Media" },
@@ -70,38 +121,38 @@ namespace ysamedia.Data
                         new TblDepartment { DepartmentId = 8, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Book Shop" },
                         new TblDepartment { DepartmentId = 9, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Journalism" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblRelationshipStatus.Any())
+                if (!ysmcontext.TblRelationshipStatus.Any())
                 {
                     /***************** Seed tblRelationshipStatus Table ********************/
-                    context.TblRelationshipStatus.AddRange(
+                    ysmcontext.TblRelationshipStatus.AddRange(
                     new TblRelationshipStatus { RelationshipId = 1, RelationshipCategory = "Single" },
                     new TblRelationshipStatus { RelationshipId = 2, RelationshipCategory = "Engaged" },
                     new TblRelationshipStatus { RelationshipId = 3, RelationshipCategory = "Married" },
                     new TblRelationshipStatus { RelationshipId = 4, RelationshipCategory = "Widow" },
                     new TblRelationshipStatus { RelationshipId = 5, RelationshipCategory = "Widower" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblTransportType.Any())
+                if (!ysmcontext.TblTransportType.Any())
                 {
                     /***************** Seed tblTransportType Table ********************/
-                    context.TblTransportType.AddRange(
+                    ysmcontext.TblTransportType.AddRange(
                         new TblTransportType { TransportId = 1, TransportName = "Own Transport" },
                         new TblTransportType { TransportId = 2, TransportName = "Public Transport" },
                         new TblTransportType { TransportId = 3, TransportName = "Family Transport" },
                         new TblTransportType { TransportId = 4, TransportName = "Walking Distance" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblDriverLicence.Any())
+                if (!ysmcontext.TblDriverLicence.Any())
                 {
                     /***************** Seed tblDriverLicence Table ********************/
-                    context.TblDriverLicence.AddRange(
+                    ysmcontext.TblDriverLicence.AddRange(
                         new TblDriverLicence { LicenceId = 1, LicenceCode = "A1" },
                         new TblDriverLicence { LicenceId = 2, LicenceCode = "A" },
                         new TblDriverLicence { LicenceId = 3, LicenceCode = "B" },
@@ -111,25 +162,25 @@ namespace ysamedia.Data
                         new TblDriverLicence { LicenceId = 7, LicenceCode = "EC1" },
                         new TblDriverLicence { LicenceId = 8, LicenceCode = "EC" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblDependantCategory.Any())
+                if (!ysmcontext.TblDependantCategory.Any())
                 {
                     /***************** Seed tblDependantCategory Table ********************/
-                    context.TblDependantCategory.AddRange(
+                    ysmcontext.TblDependantCategory.AddRange(
                         new TblDependantCategory { CategoryId = 1, CategoryName = "Pre-School", DependantId = null, CategoryCount = 0 },
                         new TblDependantCategory { CategoryId = 2, CategoryName = "Primary", DependantId = null, CategoryCount = 0 },
                         new TblDependantCategory { CategoryId = 3, CategoryName = "High School", DependantId = null, CategoryCount = 0 },
                         new TblDependantCategory { CategoryId = 4, CategoryName = "Tertiary", DependantId = null, CategoryCount = 0 });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblAttribute.Any())
+                if (!ysmcontext.TblAttribute.Any())
                 {
                     /***************** Seed tblAttribute Table ********************/
-                    context.TblAttribute.AddRange(
+                    ysmcontext.TblAttribute.AddRange(
                         new TblAttribute { AttributeId = 1, AttributeName = "Outgoing (People Person)" },
                         new TblAttribute { AttributeId = 2, AttributeName = "Reserved (Shy)" },
                         new TblAttribute { AttributeId = 3, AttributeName = "Innovative" },
@@ -166,25 +217,25 @@ namespace ysamedia.Data
                         new TblAttribute { AttributeId = 34, AttributeName = "Convincing" },
                         new TblAttribute { AttributeId = 35, AttributeName = "Resourceful" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblScreeningQuestion.Any())
+                if (!ysmcontext.TblScreeningQuestion.Any())
                 {
                     /***************** Seed tblScreeningQuestion Table ********************/
-                    context.TblScreeningQuestion.AddRange(
+                    ysmcontext.TblScreeningQuestion.AddRange(
                         new TblScreeningQuestion { QuestionId = 1, Question = "In your own words, what is the role of the church’s media department?" },
                         new TblScreeningQuestion { QuestionId = 2, Question = "What kind of influence do you think a media department has on the church?" },
                         new TblScreeningQuestion { QuestionId = 3, Question = "Are media members supposed to carry themselves in a specific manner?" },
                         new TblScreeningQuestion { QuestionId = 4, Question = "What is your understanding of being a servant of God?" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblNegativeAttribute.Any())
+                if (!ysmcontext.TblNegativeAttribute.Any())
                 {
                     /***************** Seed tblNegativeAttribute Table ********************/
-                    context.TblNegativeAttribute.AddRange(
+                    ysmcontext.TblNegativeAttribute.AddRange(
                         new TblNegativeAttribute { AttributeId = 1, Attribute = "Arrogant" },
                         new TblNegativeAttribute { AttributeId = 2, Attribute = "Undisciplined" },
                         new TblNegativeAttribute { AttributeId = 3, Attribute = "Impatient" },
@@ -221,13 +272,13 @@ namespace ysamedia.Data
                         new TblNegativeAttribute { AttributeId = 34, Attribute = "Judgemental" },
                         new TblNegativeAttribute { AttributeId = 35, Attribute = "Does not like authority" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
 
-                if (!context.TblRatingQuestion.Any())
+                if (!ysmcontext.TblRatingQuestion.Any())
                 {
                     /***************** Seed tblRatingQuestion Table ********************/
-                    context.TblRatingQuestion.AddRange(
+                    ysmcontext.TblRatingQuestion.AddRange(
                         new TblRatingQuestion { QuestionId = 1, Question = "A group should always have shared vision and goals" },
                         new TblRatingQuestion { QuestionId = 2, Question = "Every members needs and wants should be met in the group" },
                         new TblRatingQuestion { QuestionId = 3, Question = "Everyone should be heard and every idea should be taken into consideration" },
@@ -245,10 +296,9 @@ namespace ysamedia.Data
                         new TblRatingQuestion { QuestionId = 15, Question = "All members should suffer consequences of one members mistakes" },
                         new TblRatingQuestion { QuestionId = 16, Question = "A team is accountable to its leaders" });
 
-                    context.SaveChanges();
+                    ysmcontext.SaveChanges();
                 }
-
             }
-        }       
+        }
     }
 }

@@ -323,8 +323,12 @@ namespace ysamedia.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    //If user created successfully add them to Member role
+                    await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(model.Email), "Member");
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
