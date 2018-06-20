@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Classes.Lists;
 using ysamedia.Classes.Lists.ListItems;
+using ysamedia.Classes.Validation;
 using ysamedia.Entities;
 using ysamedia.Models;
 using ysamedia.Models.AccountViewModels;
@@ -305,7 +306,7 @@ namespace ysamedia.Controllers
             YearList = new ListContainer().getYearList();
 
             ViewBag.ListOfYears = YearList;
-            //__________________________________________________________________________
+            //__________________________________________________________________________           
 
             if (ModelState.IsValid)
             {
@@ -318,7 +319,7 @@ namespace ysamedia.Controllers
                     Email = model.Email,
                     Approved = 0,
                     GenderId = model.GenderId,
-                    DateOfBirth = new DateTime(model.Year, model.Month, model.Day, 0, 0, 0)
+                    DateOfBirth = new DateTime(new YearGetter().getYearOfBirth(model.Year), model.Month, model.Day, 0, 0, 0)
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
