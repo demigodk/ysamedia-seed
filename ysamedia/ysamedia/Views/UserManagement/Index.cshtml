@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model ysamedia.Models.UserManagementViewModels.UserManagementIndexViewModel
+@inject UserManager<ApplicationUser> UserManager
+
+<table>
+    <thead>
+    <th>First Name</th>
+    <th>Surname</th>
+    <th>Email</th>
+    <th>Roles</th>
+    <th>Options</th>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.Surname</td>
+                <td>@user.Email</td>
+                <td>@(string.Join(",", await UserManager.GetRolesAsync(user)))</td>
+                <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

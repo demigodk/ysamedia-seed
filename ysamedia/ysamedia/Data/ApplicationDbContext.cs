@@ -24,6 +24,33 @@ namespace ysamedia.Data
             builder.Entity<IdentityRole>().ToTable("tblRole");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("tblRoleClaim");
             builder.Entity<IdentityUserToken<string>>().ToTable("tblUserToken");
+
+
+            ///
+            /// <summary
+            /// The code below is needed for navigating through the Identity objects
+            /// e.g. Roles
+            /// <summary>
+            builder.Entity<ApplicationUser>()
+            .HasMany(e => e.Claims)
+            .WithOne()
+            .HasForeignKey(e => e.UserId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.Logins)
+                .WithOne()
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.Roles)
+                .WithOne()
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

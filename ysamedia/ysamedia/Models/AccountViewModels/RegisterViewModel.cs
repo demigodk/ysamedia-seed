@@ -50,8 +50,6 @@ namespace ysamedia.Models.AccountViewModels
         public int Day { get; set; }
              
         [Required(ErrorMessage = "Please select year")]
-        public int Year { get; set; }
-
-        //public List<TblGender> GenderList { get; set; }       
+        public int Year { get; set; }               
     }   
 }
