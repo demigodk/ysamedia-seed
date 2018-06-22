@@ -4,6 +4,7 @@ namespace ysamedia.Entities
 {
     public partial class ysamediaDbContext : DbContext
     {
+
         public ysamediaDbContext()
         {
         }
@@ -60,14 +61,14 @@ namespace ysamedia.Entities
         // Unable to generate entity type for table 'dbo.tblUserRole'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.tblUserToken'. Please see the warning messages.
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -112,7 +113,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.AgeRange)
                     .IsRequired()
-                    .HasMaxLength(10);
+                    .HasColumnType("nchar(10)");
             });
 
             modelBuilder.Entity<TblAnswer>(entity =>
@@ -339,7 +340,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.LicenceCode)
                     .IsRequired()
-                    .HasMaxLength(10);
+                    .HasColumnType("nchar(10)");
             });
 
             modelBuilder.Entity<TblEducation>(entity =>
@@ -352,7 +353,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.EducationType)
                     .IsRequired()
-                    .HasMaxLength(10);
+                    .HasColumnType("nchar(10)");
 
                 entity.Property(e => e.QualificationName)
                     .IsRequired()
@@ -399,7 +400,7 @@ namespace ysamedia.Entities
                 entity.Property(e => e.Gname)
                     .IsRequired()
                     .HasColumnName("GName")
-                    .HasMaxLength(10);
+                    .HasColumnType("nchar(10)");
             });
 
             modelBuilder.Entity<TblLanguage>(entity =>
@@ -446,6 +447,11 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Year).HasMaxLength(50);
+
+                entity.HasOne(d => d.TimeIn)
+                    .WithMany(p => p.TblLog)
+                    .HasForeignKey(d => d.TimeInId)
+                    .HasConstraintName("FK_tblLog_tblTimeIn");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.TblLog)
@@ -694,9 +700,9 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.Chapter).HasMaxLength(50);
 
-                entity.Property(e => e.EndVerse).HasMaxLength(10);
+                entity.Property(e => e.EndVerse).HasColumnType("nchar(10)");
 
-                entity.Property(e => e.StartVerse).HasMaxLength(10);
+                entity.Property(e => e.StartVerse).HasColumnType("nchar(10)");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -717,7 +723,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.SkillId).ValueGeneratedNever();
 
-                entity.Property(e => e.Proficiency).HasMaxLength(20);
+                entity.Property(e => e.Proficiency).HasColumnType("nchar(20)");
 
                 entity.Property(e => e.SkillDesc).HasMaxLength(256);
 
@@ -813,12 +819,6 @@ namespace ysamedia.Entities
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.Log)
-                    .WithMany(p => p.TblTimeIn)
-                    .HasForeignKey(d => d.LogId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblTimeIn_tblLog");
             });
 
             modelBuilder.Entity<TblTransportType>(entity =>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ysamedia.Entities
 {
@@ -12,7 +11,6 @@ namespace ysamedia.Entities
             TblUser = new HashSet<TblUser>();
         }
 
-        [Key]
         public int GenderId { get; set; }
         public string Gname { get; set; }
 
