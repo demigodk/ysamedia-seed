@@ -14,7 +14,6 @@ namespace ysamedia.Entities
             TblDlicenceUserBridge = new HashSet<TblDlicenceUserBridge>();
             TblEducation = new HashSet<TblEducation>();
             TblLanguage = new HashSet<TblLanguage>();
-            TblLog = new HashSet<TblLog>();
             TblNegAttributeUserBridge = new HashSet<TblNegAttributeUserBridge>();
             TblPhoto = new HashSet<TblPhoto>();
             TblRateAnswerUserBridge = new HashSet<TblRateAnswerUserBridge>();
@@ -65,7 +64,6 @@ namespace ysamedia.Entities
         public ICollection<TblDlicenceUserBridge> TblDlicenceUserBridge { get; set; }
         public ICollection<TblEducation> TblEducation { get; set; }
         public ICollection<TblLanguage> TblLanguage { get; set; }
-        public ICollection<TblLog> TblLog { get; set; }
         public ICollection<TblNegAttributeUserBridge> TblNegAttributeUserBridge { get; set; }
         public ICollection<TblPhoto> TblPhoto { get; set; }
         public ICollection<TblRateAnswerUserBridge> TblRateAnswerUserBridge { get; set; }

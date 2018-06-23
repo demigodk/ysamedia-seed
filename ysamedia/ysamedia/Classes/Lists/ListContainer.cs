@@ -48,18 +48,18 @@ namespace ysamedia.Classes.Lists
         {
             List<Month> monthList = new List<Month>
             {
-                new Month { MonthId = 1, Name = "January" },
-                new Month { MonthId = 2, Name = "February" },
-                new Month { MonthId = 3, Name = "March" },
-                new Month { MonthId = 4, Name = "April" },
+                new Month { MonthId = 1, Name = "Jan" },
+                new Month { MonthId = 2, Name = "Feb" },
+                new Month { MonthId = 3, Name = "Mar" },
+                new Month { MonthId = 4, Name = "Apr" },
                 new Month { MonthId = 5, Name = "May" },
-                new Month { MonthId = 6, Name = "June" },
-                new Month { MonthId = 7, Name = "July" },
-                new Month { MonthId = 8, Name = "August" },
-                new Month { MonthId = 9, Name = "September" },
-                new Month { MonthId = 10, Name = "October" },
-                new Month { MonthId = 11, Name = "November" },
-                new Month { MonthId = 12, Name = "December" }
+                new Month { MonthId = 6, Name = "Jun" },
+                new Month { MonthId = 7, Name = "Jul" },
+                new Month { MonthId = 8, Name = "Aug" },
+                new Month { MonthId = 9, Name = "Sep" },
+                new Month { MonthId = 10, Name = "Oct" },
+                new Month { MonthId = 11, Name = "Nov" },
+                new Month { MonthId = 12, Name = "Dec" }
             };
 
             return monthList;

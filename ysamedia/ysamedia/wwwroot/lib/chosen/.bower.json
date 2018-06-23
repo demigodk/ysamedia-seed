@@ -47,7 +47,6 @@
     "commit": "d7b454f6e5b3264b91d9351f7b81203063940250"
   },
   "_source": "https://github.com/harvesthq/bower-chosen.git",
-  "_target": "v1.8.6",
-  "_originalSource": "chosen",
-  "_direct": true
+  "_target": "1.8.6",
+  "_originalSource": "chosen"
 }

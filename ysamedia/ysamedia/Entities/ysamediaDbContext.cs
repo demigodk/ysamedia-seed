@@ -4,7 +4,6 @@ namespace ysamedia.Entities
 {
     public partial class ysamediaDbContext : DbContext
     {
-
         public ysamediaDbContext()
         {
         }
@@ -54,6 +53,7 @@ namespace ysamedia.Entities
         public virtual DbSet<TblTransUserBridge> TblTransUserBridge { get; set; }
         public virtual DbSet<TblUser> TblUser { get; set; }
         public virtual DbSet<TblUserClaim> TblUserClaim { get; set; }
+        public virtual DbSet<TblUserLog> TblUserLog { get; set; }
         public virtual DbSet<TblUserLogin> TblUserLogin { get; set; }
         public virtual DbSet<TblVacancy> TblVacancy { get; set; }
         public virtual DbSet<TblWorkPreference> TblWorkPreference { get; set; }
@@ -438,26 +438,10 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
-                entity.Property(e => e.Month).HasMaxLength(50);
-
-                entity.Property(e => e.Reason).HasMaxLength(256);
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
-
-                entity.Property(e => e.Year).HasMaxLength(50);
-
                 entity.HasOne(d => d.TimeIn)
                     .WithMany(p => p.TblLog)
                     .HasForeignKey(d => d.TimeInId)
                     .HasConstraintName("FK_tblLog_tblTimeIn");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblLog)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblLog_tblUser");
             });
 
             modelBuilder.Entity<TblNegativeAttribute>(entity =>
@@ -916,6 +900,19 @@ namespace ysamedia.Entities
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.TblUserClaim)
                     .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<TblUserLog>(entity =>
+            {
+                entity.HasKey(e => e.UserLogId);
+
+                entity.ToTable("tblUserLog");
+
+                entity.Property(e => e.UserLogId).ValueGeneratedNever();
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<TblUserLogin>(entity =>
