@@ -5,24 +5,47 @@
 }
 
 <h3>@ViewData["Title"]</h3>
-    <div class="row">
-        <div class="col-md-8">
-            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group col-md-4">
-                    <label asp-for="date"></label>
-                    <input asp-for="date" class="form-control" id="txtdate"/>
-                    <span asp-validation-for="date" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-default">Save Entry</button>
-            </form>
-        </div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="date"></label>
+                <input asp-for="date" class="form-control" id="txtdate" />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Select Users</label>
+                @Html.ListBoxFor(model => model.SelectedIDArray, new MultiSelectList(ViewBag.ListOfUsers, "UserId", "DisplayName"),
+                               new { id = "multiSelectDropDown", multiple = "multiple" })
+                <span asp-validation-for="SelectedIDArray" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label>Select Users</label>
+               
+                <span asp-validation-for="SelectedIDArray" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="TimeInID"></label>
+                <select asp-for="TimeInID"
+                        class="form-control"
+                        asp-items="@(new SelectList(ViewBag.ListOfTimes, "TimeId", "Category"))">
+                    <option value="" hidden disabled selected>Please select</option>
+                </select>
+                <span asp-validation-for="TimeInID" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Save Entry</button>
+        </form>
     </div>
+</div>
+<hr />
 
 <link href="~/lib/jquery-ui/themes/flick/jquery-ui.css" rel="stylesheet" />
 
 @section scripts {
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>
 
@@ -32,6 +55,14 @@
                 showOn: 'both',
                 buttonText: 'Calendar',
                 dateFormat: 'yy/mm/dd'
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#multiSelectDropDown").chosen({
+                width: "100%"
             });
         });
     </script>
