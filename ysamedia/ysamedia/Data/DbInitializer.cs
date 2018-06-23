@@ -84,6 +84,19 @@ namespace ysamedia.Data
                     ysmcontext.SaveChanges();
                 }
 
+               if (!ysmcontext.TblTimeIn.Any())
+                {
+                    ysmcontext.TblTimeIn.AddRange(
+
+                        new TblTimeIn { TimeId = 1, Category = "Before 08:00 AM", TimeCount = 0 },
+                        new TblTimeIn { TimeId = 2, Category = "Before 08:15 AM", TimeCount = 0 },
+                        new TblTimeIn { TimeId = 3, Category = "After 08:30  AM", TimeCount = 0},
+                        new TblTimeIn { TimeId = 4, Category = "Absent", TimeCount = 0}
+                    );
+
+                    ysmcontext.SaveChanges();
+               }
+
                 if (!ysmcontext.TblGender.Any())
                 {
                     /***************** Seed tblGender Table ********************/
