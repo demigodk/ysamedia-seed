@@ -1,0 +1,28 @@
+﻿@model ICollection<ysamedia.Entities.TblLog>
+
+@{
+    ViewData["Title"] = "ShowLog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowLog</h2>
+<br/>
+<h2>Count : @Model.ToList().Count</h2>
+<br/>
+@foreach (var item in Model)
+{
+    <dl>
+        <dt><b>Log ID:</b></dt>
+        <dd>@item.LogId</dd>
+    </dl>
+    <dl>
+        <dt><b>Date:</b></dt>
+        <dd>@item.Date</dd>
+    </dl>
+    <dl>
+        <dt><b>Time In ID:</b></dt>
+        <dd>@item.TimeInId</dd>
+    </dl>
+    <hr/>
+}
+
