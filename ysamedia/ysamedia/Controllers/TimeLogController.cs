@@ -106,53 +106,42 @@ namespace ysamedia.Controllers
         [HttpGet]
         public IActionResult DisplayLog()
         {
+            // Getting and binding the tblTimeIn entries for dropdown selection
+            List<TblTimeIn> TimeList = new List<TblTimeIn>();
+
+            TimeList = (from t in _context.TblTimeIn
+                        select t).ToList();
+
+            ViewBag.ListOfTimes = TimeList;
+
             return View();
         }
 
+        // Allows the user to select a date for displayings logs entered on that date
         [HttpPost]
         public IActionResult DisplayLog(ShowLogViewModel vm)
         {
             DateTime tempDate = DateTime.Parse(vm.date);
 
-            //List<TblLog> LogList = new List<TblLog>();
+            ViewBag.TheDate = tempDate;
 
-            //if (ModelState.IsValid)
-            //{               
-            //    LogList = (from u in _context.TblLog
-            //               where u.Date == tempDate
-            //               select u).ToList();
-
-            //    ViewBag.ListOfLogs = LogList;
-            //}
-
-            return RedirectToAction("ShowLog", tempDate);
+            TimeLogSupport timeLogSupport = new TimeLogSupport(_context);
+            
+            return RedirectToAction("ShowLog", vm);            
         }
 
         [HttpGet]
-        public IActionResult ShowLog(DateTime date)
+        public IActionResult ShowLog(DateTime date, ShowLogViewModel vm)
         {
-            DateTime tempDate = date;
+            TimeLogSupport timeLogSupport = new TimeLogSupport(_context);
 
-            List<TblLog> LogList = new List<TblLog>();
+            string dt = date.ToString("yyyy/MM/dd");                        
+            
+            ViewBag.TheDate = dt;
 
-            if (ModelState.IsValid)
-            {
-                //List<TblLog> LogList = new List<TblLog>();
-
-                LogList = (from u in _context.TblLog
-                           where u.Date == tempDate
-                           select u).ToList();
-
-                ViewBag.ListOfLogs = LogList;
-            }
-
-            return View(LogList);
-        }
-                      
-        public IActionResult ShowIDs(TimeLogViewModel vm)
-        {
-            List<string> tempList = vm.SelectedIDArray;            
-            return View(tempList);
-        }
+            ViewBag.TheCategory = timeLogSupport.getTimeInCategory(vm.timeInId);
+            
+            return View(timeLogSupport.getUserName(vm));           
+        }                              
     }
 }
