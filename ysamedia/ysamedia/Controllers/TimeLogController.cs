@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ysamedia.Classes.TimeLogHelper;
 using ysamedia.Entities;
 using ysamedia.Models.TimeLogViewModels;
 
@@ -44,35 +45,42 @@ namespace ysamedia.Controllers
         [HttpPost]
         public IActionResult Index(TimeLogViewModel vm)
         {
-            int maxId = 0;
-
-            if (_context.TblLog.Any())
-            {
-                maxId = _context.TblLog.Max(t => t.LogId);
-            }
-
-            int userLogMaxId = 0;
-
-            if (_context.TblUserLog.Any())
-            {
-                userLogMaxId = _context.TblUserLog.Max(t => t.UserLogId);
-            }
-
+            
             if (ModelState.IsValid)
             {
+
+                // Get the maximum PK in tblLog
+                int maxLogId = 0;
+
+                if (_context.TblLog.Any())
+                {
+                    maxLogId = _context.TblLog.Max(t => t.LogId);
+                }
+
+                // Get the maximum PK in tblUserLog
+                int userLogMaxId = 0;
+
+                if (_context.TblUserLog.Any())
+                {
+                    userLogMaxId = _context.TblUserLog.Max(t => t.UserLogId);
+                }
+
+                // The date selected by the user (goes in tblLog)
                 DateTime enteredDate = DateTime.Parse(vm.date);
 
+                // Write the Log record
                 TblLog Log = new TblLog
                 {
-                    LogId = (maxId + 1),
+                    LogId = (maxLogId + 1),
                     Date = enteredDate,
                     TimeInId = vm.TimeInID
                 };
                 _context.Add(Log);
                 _context.SaveChanges();
 
+
                 int tempLogId = 0;
-                tempLogId = (maxId + 1);
+                tempLogId = (maxLogId + 1);
 
                 int count = (vm.SelectedIDArray).Count;
 
@@ -83,38 +91,64 @@ namespace ysamedia.Controllers
                 for(int i = 0; i < ((vm.SelectedIDArray).Count); i++)
                 {
                     userLogMaxId += 1;
-                    tempULog[i] = createUserLogRecord(tempLogId, userkeys[i], userLogMaxId);
+                    tempULog[i] = TimeLogSupport.createUserLogRecord(tempLogId, userkeys[i], userLogMaxId);
                     _context.Add(tempULog[i]);
                 }
 
                 _context.SaveChanges();
                 
-                return RedirectToAction("ShowIDs", vm);
+                return RedirectToAction("ShowLog", vm);
             }
 
             return View();           
+        }       
+
+        [HttpGet]
+        public IActionResult DisplayLog()
+        {
+            return View();
         }
 
-        private static TblUserLog createUserLogRecord(int logid, string userid, int userlogid)
+        [HttpPost]
+        public IActionResult DisplayLog(ShowLogViewModel vm)
         {
-            TblUserLog termItem = new TblUserLog()
+            DateTime tempDate = DateTime.Parse(vm.date);
+
+            //List<TblLog> LogList = new List<TblLog>();
+
+            //if (ModelState.IsValid)
+            //{               
+            //    LogList = (from u in _context.TblLog
+            //               where u.Date == tempDate
+            //               select u).ToList();
+
+            //    ViewBag.ListOfLogs = LogList;
+            //}
+
+            return RedirectToAction("ShowLog", tempDate);
+        }
+
+        [HttpGet]
+        public IActionResult ShowLog(DateTime date)
+        {
+            DateTime tempDate = date;
+
+            List<TblLog> LogList = new List<TblLog>();
+
+            if (ModelState.IsValid)
             {
-                LogId = logid,
-                UserId = userid,
-                UserLogId = userlogid
-            };
+                //List<TblLog> LogList = new List<TblLog>();
 
-            return termItem;
+                LogList = (from u in _context.TblLog
+                           where u.Date == tempDate
+                           select u).ToList();
+
+                ViewBag.ListOfLogs = LogList;
+            }
+
+            return View(LogList);
         }
-       
-        private static Random random = new Random();
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }    
-
+                      
         public IActionResult ShowIDs(TimeLogViewModel vm)
         {
             List<string> tempList = vm.SelectedIDArray;            
