@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ysamedia.Entities;
 
 namespace ysamedia.Models.TimeLogViewModels
 {
@@ -16,6 +18,8 @@ namespace ysamedia.Models.TimeLogViewModels
 
         public string Userid { get; set; }
 
-        public static List<ShowLogViewModel> Logs { get; set; }
+        public string Name { get; set; }
+
+        public static List<TblUser> Logs { get; set; }
     }
 }

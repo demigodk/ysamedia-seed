@@ -2,7 +2,7 @@
  * @author      :   Bondo Kalombo
  * @date        :   2018-06-20
  * 
- * Summary - When the user submits the registration form, the pass along the Values for DayId, MonthId and YearId.
+ * Summary - When the user submits the registration form, they pass along the Values for DayId, MonthId and YearId.
  * The other two values correspond to the Day and Month in those Lists. So I had to get the Corresponding YearId
  * value by way of the getYearOfBirth(int year) method implemented in this class.
  * **/
