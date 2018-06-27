@@ -41,7 +41,7 @@ namespace ysamedia.Classes.TimeLogHelper
         }       
 
         // Returns a List<TblUser> containing all the records returned from the select query
-        public List<TblUser> getUserName(ShowLogViewModel vm)
+        public List<TblUser> getUserName(TimeLogViewModel vm)
         {
             List<TblUser> showLVM = new List<TblUser>();
 
@@ -50,7 +50,7 @@ namespace ysamedia.Classes.TimeLogHelper
             showLVM = (from l in _context.TblLog
                        join c in _context.TblUserLog on l.LogId equals c.LogId
                        join u in _context.TblUser on c.UserId equals u.UserId
-                       where c.UserId == u.UserId && l.TimeInId == vm.timeInId && l.Date == date
+                       where c.UserId == u.UserId && l.TimeInId == vm.TimeInID && l.Date == date
                        select u).ToList();
 
             return showLVM;

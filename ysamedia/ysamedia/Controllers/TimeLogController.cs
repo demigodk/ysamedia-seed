@@ -119,7 +119,7 @@ namespace ysamedia.Controllers
 
         // Allows the user to select a date for displayings logs entered on that date
         [HttpPost]
-        public IActionResult DisplayLog(ShowLogViewModel vm)
+        public IActionResult DisplayLog(TimeLogViewModel vm)
         {
             DateTime tempDate = DateTime.Parse(vm.date);
 
@@ -131,7 +131,7 @@ namespace ysamedia.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowLog(DateTime date, ShowLogViewModel vm)
+        public IActionResult ShowLog(DateTime date, TimeLogViewModel vm)
         {
             TimeLogSupport timeLogSupport = new TimeLogSupport(_context);
 
@@ -139,9 +139,9 @@ namespace ysamedia.Controllers
             
             ViewBag.TheDate = dt;
 
-            ViewBag.TheCategory = timeLogSupport.getTimeInCategory(vm.timeInId);
+            ViewBag.TheCategory = timeLogSupport.getTimeInCategory(vm.TimeInID);
             
             return View(timeLogSupport.getUserName(vm));           
-        }                              
+        }                                     
     }
 }
