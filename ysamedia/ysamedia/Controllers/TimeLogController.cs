@@ -9,7 +9,7 @@ using ysamedia.Models.TimeLogViewModels;
 
 namespace ysamedia.Controllers
 {
-    [Authorize(Roles = "Administrator, Admin")]    
+    [Authorize]    
     public class TimeLogController : Controller
     {
 
@@ -19,7 +19,8 @@ namespace ysamedia.Controllers
         {            
             _context = context;
         }
-        
+
+        [Authorize(Roles = "Administrator, Admin")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -43,6 +44,7 @@ namespace ysamedia.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator, Admin")]
         [HttpPost]
         public IActionResult Index(TimeLogViewModel vm)
         {
