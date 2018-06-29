@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ysamedia</title>
+    <title>@ViewData["Title"] - YSA MEDIA</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -30,14 +30,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ysamedia</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">YSA MEDIA</a>
             </div>
             <div class="navbar-collapse collapse">
-                @*<ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Church" asp-action="ChurchMember">Member Registration</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>*@
+                    <li><a asp-area="" asp-controller="TimeLog" asp-action="Index">Add Log</a></li>
+                    <li><a asp-area="" asp-controller="TimeLog" asp-action="ShowLog">View Logs</a></li>
+                    <li><a asp-area="" asp-controller="TimeLog" asp-action="DisplayLog">Display Log</a></li>
+                    <li><a asp-area="" asp-controller="UserManagement" asp-action="Index">User Roles</a></li>
+                    <li><a asp-area="" asp-controller="ChurchMember" asp-action="MemberRegister">Church Form</a></li>
+                    <li><a asp-area="" asp-controller="UserProfile" asp-action="Index">Profile</a></li>
+                </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
@@ -46,7 +50,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - ysamedia</p>
+            <p>&copy; 2018 - YSA MEDIA</p>
         </footer>
     </div>
 
