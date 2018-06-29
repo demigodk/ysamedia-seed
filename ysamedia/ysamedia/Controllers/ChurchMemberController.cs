@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ysamedia.Entities;
 using ysamedia.Models.ChurchViewModels;
 
 namespace ysamedia.Controllers
 {
+    [Authorize(Roles = "Administrator, Admin")]
     public class ChurchMemberController : Controller
     {
         private ysamediaDbContext db = new ysamediaDbContext();
