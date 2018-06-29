@@ -14,14 +14,14 @@
                 <label asp-for="date"></label>
                 <input asp-for="date" class="form-control" id="txtdate" />
                 <span asp-validation-for="date" class="text-danger"></span>
-            </div>           
+            </div>
             <div class="form-group">
                 <div class="with-select">
                     <select asp-for="SelectedIDArray"
                             class="chosen-select" required
                             asp-items="@(new MultiSelectList(ViewBag.ListOfUsers, "UserId", "DisplayName"))" multiple="multiple"></select>
                 </div>
-            </div>                    
+            </div>
             <div class="form-group">
                 <label asp-for="TimeInID"></label>
                 <select asp-for="TimeInID"
@@ -38,12 +38,14 @@
 <hr />
 
 <link href="~/lib/jquery-ui/themes/flick/jquery-ui.css" rel="stylesheet" />
+<link href="~/lib/chosen/chosen.css" rel="stylesheet" />
 
 @section scripts {
 
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/lib/chosen/chosen.jquery.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -52,14 +54,14 @@
                 buttonText: 'Calendar',
                 dateFormat: 'yy/mm/dd'
             });
-        });       
+        });
 
         // Chosen validation
         $('.chosen-select').chosen({
             no_results_text: "Oops, Nothing Found!",
             placeholder_text_multiple: "Select Members",
             width: "100%"
-        });            
+        });
         $.validator.setDefaults({ ignore: ":hidden:not(select)" });
 
         // validation of chosen on change
@@ -88,5 +90,5 @@
             }
         });
 
-    </script>   
+    </script>
 }
