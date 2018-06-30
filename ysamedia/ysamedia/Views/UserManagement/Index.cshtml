@@ -2,7 +2,42 @@
 @model ysamedia.Models.UserManagementViewModels.UserManagementIndexViewModel
 @inject UserManager<ApplicationUser> UserManager
 
-<table>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="m-t-0 header-title">Assign User Roles</h4>
+            <p class="text-muted font-14 m-b-20">               
+            </p>
+            <table class="table">
+                <thead class="thead-light">                
+                    <tr>
+                        <th>First Name</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.FirstName</td>
+                            <td>@user.Surname</td>
+                            <td>@user.Email</td>
+                            <td>@(string.Join(",", await UserManager.GetRolesAsync(user)))</td>
+                            <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>
+
+@*<table>
     <thead>
     <th>First Name</th>
     <th>Surname</th>
@@ -22,4 +57,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@

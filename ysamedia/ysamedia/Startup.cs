@@ -61,7 +61,7 @@ namespace ysamedia
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=TimeLog}/{action=DisplayLog}/{id?}");
             });           
         }
     }
