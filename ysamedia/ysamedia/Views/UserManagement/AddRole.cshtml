@@ -1,10 +1,31 @@
 ﻿@model ysamedia.Models.UserManagementViewModels.UserManagementAddRoleViewModel
 
-<h3>Add Role For @Model.Email</h3>
-<div asp-validation-summary="All"></div>
-<form asp-controller="UserManagement" asp-action="AddRole">
-    <input asp-for="UserId" type="hidden"/>
-    <select asp-for="NewRole" asp-items="Model.Roles">       
-    </select>
-    <input type="submit" value="Add Role" />
-</form>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <h4 class="m-t-0 header-title">Add Role For @Model.Email</h4>
+                <p class="text-muted m-b-30 font-14">                    
+                </p>
+                <hr/>
+                <br/>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="p-20">
+                            <form asp-controller="UserManagement" asp-action="AddRole" class="form-horizontal" role="form">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Role To Add</label>
+                                    <div class="col-10">
+                                        <input asp-for="UserId" type="hidden" />
+                                        <select asp-for="NewRole" asp-items="Model.Roles" class="form-control"></select>
+                                        <br/>
+                                        <button class="btn btn-block btn-custom waves-effect waves-light" type="submit">Add Role</button>
+                                    </div>
+                                </div>                                                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                
