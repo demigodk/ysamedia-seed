@@ -1,79 +1,127 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using ysamedia.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - YSA MEDIA</title>
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="ysa media user management web app" name="description" />    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/images/favicon.ico">
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link href="~/lib/chosen/chosen.css" rel="stylesheet" />
-        <link href="~/css/Google-Style-Login.css" rel="stylesheet" />
-        <link href="~/css/Pretty-Registration-Form.css" rel="stylesheet" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link href="~/lib/chosen/chosen.css" rel="stylesheet" />
-    </environment>
+    <!--chartist Chart CSS -->
+    <link rel="stylesheet" href="~/plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">   
+    <!-- App css -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">YSA MEDIA</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="TimeLog" asp-action="Index">Record Log</a></li>                   
-                    <li><a asp-area="" asp-controller="TimeLog" asp-action="DisplayLog">Display Logs</a></li>
-                    <li><a asp-area="" asp-controller="UserManagement" asp-action="Index">User Roles</a></li>
-                    @*<li><a asp-area="" asp-controller="ChurchMember" asp-action="MemberRegister">Church Form</a></li>
-                    <li><a asp-area="" asp-controller="UserProfile" asp-action="Index">Profile</a></li>*@
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - YSA MEDIA</p>
-        </footer>
-    </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/lib/chosen/chosen.jquery.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>        
-    </environment>
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                        <a href="index.html" class="logo">
+                            <span>
+                                @*<img src="assets/images/logo.png" alt="" height="22">*@
+                            </span>
+                            <i>
+                                @*<img src="assets/images/logo_sm.png" alt="" height="28">*@
+                            </i>
+                        </a>
+                    </div>
+                <!-- User box -->
+                <div class="user-box">
+                    <div class="user-img">
+                        <img src="~/images/avatar_2x.png" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
+                    </div>
+                    <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a> </h5>
+                    <p class="text-muted">Member</p>
+                </div>
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <ul class="metismenu" id="side-menu">
+                        <!--<li class="menu-title">Navigation</li>-->
+                        <li>
+                            <a asp-controller="TimeLog" asp-action="Index">
+                                <i class="fas fa-book"></i><span> Create Log </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="TimeLog" asp-action="DisplayLog">
+                                <i class="fas fa-archive"></i><span> View Logs </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="UserManagement" asp-action="Index">
+                                <i class="fas fa-id-card-alt"></i><span> Assign Role </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="ChurchMember" asp-action="MemberRegister">
+                                <i class="fas fa-address-book"></i><span> Add Church Member </span>
+                            </a>
+                        </li>                        
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+
+            @await Html.PartialAsync("_LoginPartial")
+
+            <!-- Top Bar End -->
+            <!-- Start Page content -->
+
+            <div class="content">
+                <div class="container-fluid">
+
+                    @RenderBody()
+
+                    <!-- end row -->
+                </div> <!-- container -->
+            </div> <!-- content -->
+            <footer class="footer text-right">
+                2018 © Highdmin. - Coderthemes.com
+            </footer>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+    <!-- jQuery  -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/waves.js"></script>
+    <script src="/js/jquery.slimscroll.js"></script>
+    <!-- App js -->
+    <script src="~/js/jquery.core.js"></script>
+    <script src="~/js/jquery.app.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
