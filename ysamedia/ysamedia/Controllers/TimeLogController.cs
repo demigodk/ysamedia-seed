@@ -9,7 +9,7 @@ using ysamedia.Models.TimeLogViewModels;
 
 namespace ysamedia.Controllers
 {
-    [Authorize(Roles = "Administrator, Admin")]    
+    [Authorize(Roles = "Administrator, Admin, Guest, Member")]    
     public class TimeLogController : Controller
     {
 
