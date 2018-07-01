@@ -76,13 +76,13 @@
                             </li>
                          }
                         @if (User.IsInRole("Administrator"))
-    {
-                    <li>
-                        <a asp-controller="ChurchMember" asp-action="MemberRegister">
-                            <i class="fas fa-address-book"></i><span> Church Form </span>
-                        </a>
-                    </li>
-}
+                        {
+                            <li>
+                                <a asp-controller="ChurchMember" asp-action="MemberRegister">
+                                    <i class="fas fa-address-book"></i><span> Church Form </span>
+                                </a>
+                            </li>
+                        }
                         <li>
                             <a asp-controller="UserScreening" asp-action="Index">
                                 <i class="fas fa-file-alt"></i><span> Media Form </span>

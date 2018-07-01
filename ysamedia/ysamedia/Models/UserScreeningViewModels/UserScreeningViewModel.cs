@@ -7,5 +7,10 @@ namespace ysamedia.Models.UserScreeningViewModels
 {
     public class UserScreeningViewModel
     {
+        public string Question1 { get; set; }
+
+        public string Question2 { get; set; }
+
+
     }
 }
