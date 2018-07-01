@@ -347,13 +347,13 @@ namespace ysamedia.Controllers
             return View(model);
         }
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            _logger.LogInformation("User logged out.");           
+            return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
         [HttpPost]

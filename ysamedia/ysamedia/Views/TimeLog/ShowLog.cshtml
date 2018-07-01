@@ -1,26 +1,38 @@
 ﻿@model ICollection<ysamedia.Entities.TblUser>
-
 @{
     ViewData["Title"] = "Log - " + ViewBag.TheDate;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
-<br />
-<h2>@Model.ToList().Count - @ViewBag.TheCategory</h2>
-<br />
-@foreach (var item in Model)
-{       
-    <dl>
-        <dt><b>Name :</b></dt>
-        <dd>@item.DisplayName</dd>
-    </dl>   
-    <hr />
-}
-
-<h3>Date: @ViewBag.TheDate</h3>
-
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="m-t-0 header-title">@ViewBag.TheDate - @ViewBag.TheCategory</h4>
+            <p class="text-muted font-14 m-b-20">
+                @Model.ToList().Count Members in this category
+            </p>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                      <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.Surname</td>
+                      </tr>
+                    }
+                </tbody>
+            </table>
+            <hr />            
+        </div>
+    </div>
+ </div>
+   
 
 
 

@@ -1,7 +1,7 @@
-﻿@model ysamedia.Models.ChurchViewModels.ChurchMemberViewModel
+﻿@model ysamedia.Models.UserScreeningViewModels.UserScreeningViewModel
 
-@{ 
-    ViewData["Title"] = "Church Form";
+@{
+    ViewData["Title"] = "Media Form";
 }
 
 <div class="row">
@@ -9,7 +9,7 @@
         <div class="card-box">
             <h2 class="m-t-0 header-title">@ViewData["Title"]</h2>
             <p class="text-muted m-b-30 font-14">
-                Registration form for new church members
+                Media registration form, for users who want to join media.
             </p>
             <div class="row">
                 <div class="col-12">
@@ -223,64 +223,18 @@
                             </div>
                             <br />
                             <hr />
-                            <br />                           
+                            <br />
                             <div class="form-group row">
                                 <label class="col-4 col-form-label">Enter A Date For This Form Entry</label>
                                 <div class="col-8">
                                     <input class="form-control" type="date" name="date">
                                 </div>
-                            </div>      
+                            </div>
                             <button class="btn btn-block btn-custom waves-effect waves-light" type="submit" id="validateIt">Submit Form</button>
                         </form>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-            @*<div class="row">
-                <div class="col-md-4">
-                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                        <h4>Add A New Church Member.</h4>
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-
-                        <div class="form-group">
-                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="Surname" class="form-control" placeholder="Surname" />
-                            <span asp-validation-for="Surname" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="GenderId" class="form-control" placeholder="GenderId" />
-                            <span asp-validation-for="GenderId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="AgeGroupId" class="form-control" placeholder="AgeGroupId" />
-                            <span asp-validation-for="AgeGroupId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="RelationshipId" class="form-group" placeholder="RelationshipId" />
-                            <span asp-validation-for="RelationshipId" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-default btn-primary">Submit</button>
-                    </form>
-                    </dv>
-                </div>*@
+</div>

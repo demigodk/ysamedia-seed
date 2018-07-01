@@ -3,6 +3,6 @@
   "private": true,
   "dependencies": {
     "jquery-ui": "1.12.1",
-    "chosen" :  "1.8.6"
+    "chosen": "1.8.6"    
   }
 }
