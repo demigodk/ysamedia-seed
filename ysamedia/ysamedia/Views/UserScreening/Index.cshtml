@@ -25,32 +25,37 @@
             <div class="row">
                 <div class="col-12">
                     <div class="p-20">
-                        <form asp-controller="UserScreening" asp-action="Index" class="form-horizontal" role="form" method="post" id="my-form">
+                        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" class="form-horizontal" method="post" id="my-form">
+                            <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group row">
                                 <label class="col-12 col-form-label"><b>Please Answer The Following Questions</b></label>
-                            </div>
+                            </div>                            
                             <div class="form-group row">
                                 <p class="col-12 col-form-label">Q1. In your own words, what is the role of the church’s media department?</p>
                                 <div class="col-12">
                                     <textarea asp-for="Question1" class="form-control" rows="2"></textarea>
+                                    <span asp-validation-for="Question1" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-12 col-form-label">Q2. What kind of influence do you think a media department has on the church?</p>
                                 <div class="col-12">
                                     <textarea asp-for="Question2" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="Question2" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-12 col-form-label">Q3. Are media members supposed to carry themselves in a specific manner?</p>
                                 <div class="col-12">
                                     <textarea asp-for="Question3" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="Question3" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-12 col-form-label">Q4. What is your understanding of being a servant of God?</p>
                                 <div class="col-12">
                                     <textarea asp-for="Question4" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="Question4" class="text-danger"></span>
                                 </div>
                             </div>
                             <br />
@@ -71,7 +76,6 @@
                             <br />
                             <hr />
                             <br />
-
                             <div class="form-group row">
                                 <label class="col-12 col-form-label"><b>Please select the top ten most applicable to you</b></label>
                             </div>
@@ -79,17 +83,16 @@
                                 <p class="col-12 col-form-label">Select From List</p>
                                 <div class="col-12">
                                     <div class="with-select">
-                                            <select asp-for="NegAttribute"
-                                                    class="chosen-select" required
-                                                    asp-items="@(new MultiSelectList(ViewBag.ListNegAttri, "AttributeId", "Attribute"))" multiple="multiple"></select>
-                                        </div>
+                                        <select asp-for="NegAttribute"
+                                                class="chosen-select" required
+                                                asp-items="@(new MultiSelectList(ViewBag.ListNegAttri, "AttributeId", "Attribute"))" multiple="multiple"></select>
+                                    </div>
                                 </div>
                             </div>
                             <br />
                             <hr />
                             <br />
-                            
-                                @*<div class="form-group row">
+                            <div class="form-group row">
                                 <label class="col-12 col-form-label"><b>Please rate from 1-5 in order of importance to you.</b></label>
                             </div>
                             <div class="form-group row">
@@ -100,110 +103,119 @@
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q1. A group should always have shared vision and goals</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion1" type="number" MaxValue="5" class="form-control" value="">
-                                    <span asp-validation-for="RQuestion1" class="text-danger"></span>
+                                    <input asp-for="RQuestion1" class="form-control">
+
                                 </div>
+                                <span asp-validation-for="RQuestion1" class="text-danger"></span>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q2. Every members needs and wants should be met in the group</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion2" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion2" class="form-control" value="">
                                     <span asp-validation-for="RQuestion2" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q3. Everyone should be heard and every idea should be taken into consideration</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion3" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion3" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion3" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q4. Teams are best run when there is a culture of democracy</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion4" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion4" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion4" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q5. People should only be given tasks they want to do</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion5" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion5" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion5" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q6. Nothing should be done without go ahead from person in charge</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion6" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion6" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion6" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q7. Getting along with every team member is an absolute must</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion7" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion7" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion7" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q8. A member should always stand their ground and MUST be heard</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion9" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion8" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion8" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q9. Every problem/issue addressed in a team should be addressed</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion9" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion9" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion9" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q10. Every team member is a leader and should be an example</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion10" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion10" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion10" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q11. There should be zero tolerance of members who don’t pull their weight</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion11" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion11" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion11" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q12. Team building is crucial to running a successful department</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion12" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion12" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion12" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q13. Training and upscaling of skills should be number priority in a team</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion13" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion13" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion13" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q14. Successful team members have a responsibility towards those not doing so well</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion14" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion14" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion14" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q15. All members should suffer consequences of one members mistakes</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion15" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion15" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion15" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-7 col-form-label">Q16. A team is accountable to its leaders</p>
                                 <div class="col-5">
-                                    <input asp-for="RQuestion16" type="number" class="form-control" value="">
+                                    <input asp-for="RQuestion16" class="form-control" value="">
+                                    <span asp-validation-for="RQuestion16" class="text-danger"></span>
                                 </div>
                             </div>
                             <br />
                             <hr />
                             <br />
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">Enter A Date For This Form Entry</label>
-                                <div class="col-8">
-                                    <input asp-for="DateRecorded" class="form-control" type="date" name="date">
-                                </div>
-                            </div>*@
                             <button class="btn btn-block btn-custom waves-effect waves-light" type="submit" id="validateIt">Submit Form</button>
                         </form>
                     </div>
@@ -217,11 +229,11 @@
 @section scripts {
 
     @await Html.PartialAsync("_ValidationScriptsPartial")
-   
+
     <script src="~/lib/chosen/chosen.jquery.js"></script>
     <script src="~/lib/chosen/chosen.proto.js"></script>
 
-    <script>       
+    <script>
         // Chosen validation
         $('.chosen-select').chosen({
             no_results_text: "Oops, Nothing Found!",

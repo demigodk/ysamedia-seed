@@ -311,7 +311,7 @@ namespace ysamedia.Data
                         new TblRatingQuestion { QuestionId = 16, Question = "A team is accountable to its leaders" });
 
                     ysmcontext.SaveChanges();
-                }
+                }               
             }
         }
     }
