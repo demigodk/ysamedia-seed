@@ -45,8 +45,8 @@
                     </div>
                 <!-- User box -->
                 <div class="user-box">
-                    <div class="user-img">
-                        <img src="~/images/avatar_2x.png" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
+                    <div class="user-img">                       
+                        <img src="~/uploads/img/members/Untitled-2.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid"/>
                     </div>
                     <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a> </h5>
                     <p class="text-muted">Member</p>
@@ -83,6 +83,11 @@
                                 </a>
                             </li>
                         }
+                        @*<li>
+                            <a asp-controller="UserProfile" asp-action="UserInformation">
+                                <i class="fas fa-file-alt"></i><span> Personal </span>
+                            </a>                            
+                        </li>*@
                         <li>
                             <a asp-controller="UserScreening" asp-action="Index">
                                 <i class="fas fa-file-alt"></i><span> Media Form </span>

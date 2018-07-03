@@ -8,12 +8,28 @@
 {
     <div class="topbar">
         <nav class="navbar-custom">
-            <ul class="list-unstyled topbar-right-menu float-right mb-0">                
-                <li>
-                    <a asp-area="" asp-controller="Account" asp-action="Logout" title="Account">
-                        <i class="fas fa-sign-out-alt"></i><span>Logout</span>                       
+            <ul class="list-unstyled topbar-right-menu float-right mb-0">    
+
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                        @*<img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">*@ <span class="ml-1"><i class="fas fa-bars"></i></span>
                     </a>
-                </li>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">                       
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fas fa-portrait"></i><span>Profile</span>
+                        </a>
+                        <!-- item-->
+                        <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
+                            <i class="fas fa-cog"></i> <span>Settings</span>
+                        </a>
+                        <!-- item-->                       
+                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
+                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                        </a>
+                    </div>
+                </li>               
+
             </ul>
         </nav>
     </div>

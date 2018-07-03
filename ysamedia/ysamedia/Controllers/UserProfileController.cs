@@ -88,6 +88,11 @@ namespace ysamedia.Controllers
             }
             return View(photo);
         }
+
+        public IActionResult ScreeningQuestion()
+        {
+            return View();
+        }
         
         public IActionResult Created()
         {
@@ -124,6 +129,11 @@ namespace ysamedia.Controllers
             ViewData["fName"] = photoLocation;
             ViewData["fileLocation"] = photoLocation;
 
+            return View();
+        }
+
+        public IActionResult UserInformation()
+        {
             return View();
         }
     }
