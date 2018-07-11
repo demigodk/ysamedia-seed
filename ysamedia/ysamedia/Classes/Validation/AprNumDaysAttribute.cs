@@ -31,6 +31,6 @@ namespace ysamedia.Classes.Validation
         private string GetErrorMessage()
         {
             return $"There is no {viewModel.Day} in April";
-        }
+        }        
     }
 }

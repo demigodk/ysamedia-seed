@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using ysamedia.Classes.UserScreeningHelper;
 using ysamedia.Entities;
-using ysamedia.Models;
 using ysamedia.Models.UserScreeningViewModels;
 
 /// <summary>
@@ -19,7 +16,7 @@ namespace ysamedia.Controllers
 {
     public class UserScreeningController : Controller
     {
-        UserManager<ApplicationUser> UserManager;       
+        //UserManager<ApplicationUser> UserManager;       
 
         private readonly ysamediaDbContext _context;
         private readonly string _userId;
@@ -32,153 +29,114 @@ namespace ysamedia.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Rating()
         {
-            // Getting and binding the tblAttribute entries for Multiselect
-            List<TblAttribute> PosAttributeList = new List<TblAttribute>();
+            var model = new RatingViewModel
+            {
+            };
 
-            PosAttributeList = (from p in _context.TblAttribute
-                        select p).ToList();
+            if (_context.TblRateAnswerUserBridge.Any())
+            {
+                
+                List<TblRatingAnswer> tableList = new List<TblRatingAnswer>();
 
-            ViewBag.ListPosAttri = PosAttributeList;
+                tableList = (from a in _context.TblRatingAnswer
+                             join b in _context.TblRateAnswerUserBridge on a.AnswerId equals b.AnswerId
+                             join c in _context.TblRatingQuestion on a.QuestionId equals c.QuestionId
+                             where b.UserId == _userId
+                             select a).ToList();
+               
+                /********* If found records containing the UserId specified *******/
+                if (tableList.Any())
+                {
+                    
+                    foreach (var item in tableList)
+                    {                       
+                        if (item.QuestionId == 1)
+                        {
+                            model.RQuestion1 = item.Rating;
+                        }
+                        else if (item.QuestionId == 2)
+                        {
+                            model.RQuestion2 = item.Rating;
+                        }
+                        else if (item.QuestionId == 3)
+                        {
+                            model.RQuestion3 = item.Rating;
+                        }
+                        else if (item.QuestionId == 4)
+                        {
+                            model.RQuestion4 = item.Rating;
+                        }
+                        else if (item.QuestionId == 5)
+                        {
+                            model.RQuestion5 = item.Rating;
+                        }
+                        else if (item.QuestionId == 6)
+                        {
+                            model.RQuestion6 = item.Rating;
+                        }
+                        else if (item.QuestionId == 7)
+                        {
+                            model.RQuestion7 = item.Rating;
+                        }
+                        else if (item.QuestionId == 8)
+                        {
+                            model.RQuestion8 = item.Rating;
+                        }
+                        else if (item.QuestionId == 9)
+                        {
+                            model.RQuestion9 = item.Rating;
+                        }
+                        else if (item.QuestionId == 10)
+                        {
+                            model.RQuestion10 = item.Rating;
+                        }
+                        else if (item.QuestionId == 11)
+                        {
+                            model.RQuestion11 = item.Rating;                      
+                        }
+                        else if (item.QuestionId == 12)
+                        {
+                            model.RQuestion12 = item.Rating;
+                        }
+                        else if (item.QuestionId == 13)
+                        {
+                            model.RQuestion13 = item.Rating;
+                        }
+                        else if (item.QuestionId == 14)
+                        {
+                            model.RQuestion14 = item.Rating;
+                        }
+                        else if (item.QuestionId == 15)
+                        {
+                            model.RQuestion15 = item.Rating;
+                        }
+                        else if (item.QuestionId == 16)
+                        {
+                            model.RQuestion16 = item.Rating;
+                        }
+                    }                   
+                }
+                
+                return View(model);
+            }
 
-            // Getting and binding the tblNegativeAttribute
-            List<TblNegativeAttribute> NegAttributeList = new List<TblNegativeAttribute>();
-
-            NegAttributeList = (from n in _context.TblNegativeAttribute
-                                select n).ToList();
-
-            ViewBag.ListNegAttri = NegAttributeList;
-
-            return View();
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(UserScreeningViewModel vm)
+        public IActionResult Rating(RatingViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                /**Code Segment 1 - Entering data into tblScreeningAnswer **/
-                int maxAnsId = 0;
-
-                if (_context.TblScreeningAnswer.Any())
-                {
-                    // Get the maximum id in the table, so I can increment it for the next record
-                    maxAnsId = _context.TblScreeningAnswer.Max(a => a.AnswerId);
-                }
-
-                TblScreeningAnswer ScreenAnswer1 = new TblScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 1),
-                    UserId = _userId,
-                    QuestionId = 1,
-                    Answer = vm.Question1
-                };
-                _context.Add(ScreenAnswer1);
-                _context.SaveChanges();
-
-                TblScreeningAnswer ScreenAnswer2 = new TblScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 2),
-                    UserId = _userId,
-                    QuestionId = 2,
-                    Answer = vm.Question2
-                };
-                _context.Add(ScreenAnswer2);
-                _context.SaveChanges();
-
-                TblScreeningAnswer ScreenAnswer3 = new TblScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 3),
-                    UserId = _userId,
-                    QuestionId = 3,
-                    Answer = vm.Question3
-                };
-                _context.Add(ScreenAnswer3);
-                _context.SaveChanges();
-
-                TblScreeningAnswer ScreenAnswer4 = new TblScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 4),
-                    UserId = _userId,
-                    QuestionId = 4,
-                    Answer = vm.Question4
-                };
-                _context.Add(ScreenAnswer4);               
-                _context.SaveChanges();
-
-                /** End code segment 1 **/
-
-                /**************************** Code Segment 2 - Entering data into tblAttributeUserBridge *****************/
-                int bridgeMaxId = 0;
-
-                if (_context.TblAttributeUserBridge.Any())
-                {
-                    bridgeMaxId = _context.TblAttributeUserBridge.Max(b => b.Id);
-                }
-
-                // Count of position attributes selected
-                int bridgeCount = (vm.PosAttribute).Count;
-
-                TblAttributeUserBridge[] attrUserBridge = new TblAttributeUserBridge[bridgeCount];
-                int[] attributeIds = new int[bridgeCount];
-                attributeIds = (vm.PosAttribute).ToArray();
-
-                for (int a = 0; a < ((vm.PosAttribute).Count); a++)
-                {
-                    bridgeMaxId = (bridgeMaxId + 1);
-                    attrUserBridge[a] = UserScreeningSupport.createAttributeRecord(bridgeMaxId, _userId, attributeIds[a]);
-                    _context.Add(attrUserBridge[a]);
-                }
-
-                _context.SaveChanges();
-
-                /** Code Segment 2 End **/
-
-
-                /***************************  Code Segment 3 - Entering data for   tblNegAttributeUserBridge  ****************************/
-                int nbridgeMaxId = 0;
-
-                if (_context.TblNegAttributeUserBridge.Any())
-                {
-                    nbridgeMaxId = _context.TblNegAttributeUserBridge.Max(n => n.Id);
-                }
-
-                // Count of negative attributes selected
-                int nbridgeCount = (vm.NegAttribute).Count;
-
-                TblNegAttributeUserBridge[] negAttriUserBridge = new TblNegAttributeUserBridge[nbridgeCount];
-                int[] negAttributeIds = new int[nbridgeCount];
-                negAttributeIds = (vm.NegAttribute).ToArray();
-
-                for (int i = 0; i < ((vm.NegAttribute).Count); i++)
-                {
-                    nbridgeMaxId += 1;
-                    negAttriUserBridge[i] = UserScreeningSupport.createNegAttributeRecord(nbridgeMaxId, _userId, negAttributeIds[i]);
-                    _context.Add(negAttriUserBridge[i]);
-                }
-                _context.SaveChanges();
-
-                /** Code Segment 3 End **/
-
-
-
-                /************************* Code Segment 4 - Entering Data For tblRatingQuestion ****************************************/
+                /************************* Code Segment 1 - Entering Data For tblRatingQuestion ****************************************/
                 int ratingMaxId = 0;        // Max ID in tblRatingAnswer
 
                 if (_context.TblRatingAnswer.Any())
                 {
                     ratingMaxId = _context.TblRatingAnswer.Max(r => r.AnswerId);
                 }
-
-                //TblRatingAnswer RatingAnswer1 = new TblRatingAnswer
-                //{
-                //    AnswerId = (ratingMaxId + 1),
-                //    Rating = vm.RQuestion1,
-                //    QuestionId = 1
-                //};
-                //_context.Add(RatingAnswer1);
-                //_context.SaveChanges();
 
                 _context.TblRatingAnswer.AddRange(
                     new TblRatingAnswer { AnswerId = (ratingMaxId + 1), Rating = vm.RQuestion1, QuestionId = 1 },
@@ -233,12 +191,194 @@ namespace ysamedia.Controllers
                 return View();
             }
 
-            return RedirectToAction("Reached");
-        }
-
-        public IActionResult Reached()
-        {
             return View();
         }
+               
+        [HttpGet]
+        public IActionResult AttributeSet()
+        {
+            // Getting and binding the tblAttribute entries for Multiselect
+            List<TblAttribute> PosAttributeList = new List<TblAttribute>();
+
+            PosAttributeList = (from p in _context.TblAttribute
+                                select p).ToList();
+            
+            ViewBag.ListPosAttri = PosAttributeList;
+
+
+            // Getting and binding the tblNegativeAttribute
+            List<TblNegativeAttribute> NegAttributeList = new List<TblNegativeAttribute>();
+
+            NegAttributeList = (from n in _context.TblNegativeAttribute
+                                select n).ToList();
+
+            ViewBag.ListNegAttri = NegAttributeList;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AttributeSet(AttributeSetViewModel vm)
+        {
+            /**************************** Code Segment 1 - Entering data into tblAttributeUserBridge *****************/
+            int bridgeMaxId = 0;
+
+            if (_context.TblAttributeUserBridge.Any())
+            {
+                bridgeMaxId = _context.TblAttributeUserBridge.Max(b => b.Id);
+            }
+
+            // Count of positive attributes selected
+            int bridgeCount = (vm.PosAttribute).Count;
+
+            TblAttributeUserBridge[] attrUserBridge = new TblAttributeUserBridge[bridgeCount];
+            int[] attributeIds = new int[bridgeCount];
+            attributeIds = (vm.PosAttribute).ToArray();
+
+            for (int a = 0; a < ((vm.PosAttribute).Count); a++)
+            {
+                bridgeMaxId = (bridgeMaxId + 1);
+                attrUserBridge[a] = UserScreeningSupport.createAttributeRecord(bridgeMaxId, _userId, attributeIds[a]);
+                _context.Add(attrUserBridge[a]);
+            }
+
+            _context.SaveChanges();
+
+            /** Code Segment 1 End **/
+
+            /***************************  Code Segment 2 - Entering data for   tblNegAttributeUserBridge  ****************************/
+            int nbridgeMaxId = 0;
+
+            if (_context.TblNegAttributeUserBridge.Any())
+            {
+                nbridgeMaxId = _context.TblNegAttributeUserBridge.Max(n => n.Id);
+            }
+
+            // Count of negative attributes selected
+            int nbridgeCount = (vm.NegAttribute).Count;
+
+            TblNegAttributeUserBridge[] negAttriUserBridge = new TblNegAttributeUserBridge[nbridgeCount];
+            int[] negAttributeIds = new int[nbridgeCount];
+            negAttributeIds = (vm.NegAttribute).ToArray();
+
+            for (int i = 0; i < ((vm.NegAttribute).Count); i++)
+            {
+                nbridgeMaxId += 1;
+                negAttriUserBridge[i] = UserScreeningSupport.createNegAttributeRecord(nbridgeMaxId, _userId, negAttributeIds[i]);
+                _context.Add(negAttriUserBridge[i]);
+            }
+            _context.SaveChanges();
+
+            /** Code Segment 2 End **/
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult QuestionSet()
+        {
+            if (_context.TblScreeningAnswer.Any())
+            {
+                List<TblScreeningAnswer> tableList = new List<TblScreeningAnswer>();
+
+                tableList = (from a in _context.TblScreeningAnswer
+                             where a.UserId == _userId
+                             select a).ToList();
+
+                if (tableList.Any())
+                {
+                    var model = new QuestionSetViewModel
+                    {
+                    };
+
+                    foreach (var item in tableList)
+                    {
+                        if (item.QuestionId == 1)
+                        {
+                            model.Question1 = item.Answer;                            
+                        }
+                        else if (item.QuestionId == 2)
+                        {
+                            model.Question2 = item.Answer;
+
+                        }
+                        else if (item.QuestionId == 3)
+                        {
+                            model.Question3 = item.Answer;
+
+                        }
+                        else if (item.QuestionId == 4)
+                        {
+                            model.Question4 = item.Answer;
+                        }
+                    }
+
+                    return View(model);
+                }
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult QuestionSet(QuestionSetViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                /**Code Segment 1 - Entering data into tblScreeningAnswer **/
+                int maxAnsId = 0;
+
+                if (_context.TblScreeningAnswer.Any())
+                {
+                    // Get the maximum id in the table, so I can increment it for the next record
+                    maxAnsId = _context.TblScreeningAnswer.Max(a => a.AnswerId);
+                }
+
+                TblScreeningAnswer ScreenAnswer1 = new TblScreeningAnswer
+                {
+                    AnswerId = (maxAnsId + 1),
+                    UserId = _userId,
+                    QuestionId = 1,
+                    Answer = vm.Question1
+                };
+                _context.Add(ScreenAnswer1);
+                _context.SaveChanges();
+
+                TblScreeningAnswer ScreenAnswer2 = new TblScreeningAnswer
+                {
+                    AnswerId = (maxAnsId + 2),
+                    UserId = _userId,
+                    QuestionId = 2,
+                    Answer = vm.Question2
+                };
+                _context.Add(ScreenAnswer2);
+                _context.SaveChanges();
+
+                TblScreeningAnswer ScreenAnswer3 = new TblScreeningAnswer
+                {
+                    AnswerId = (maxAnsId + 3),
+                    UserId = _userId,
+                    QuestionId = 3,
+                    Answer = vm.Question3
+                };
+                _context.Add(ScreenAnswer3);
+                _context.SaveChanges();
+
+                TblScreeningAnswer ScreenAnswer4 = new TblScreeningAnswer
+                {
+                    AnswerId = (maxAnsId + 4),
+                    UserId = _userId,
+                    QuestionId = 4,
+                    Answer = vm.Question4
+                };
+                _context.Add(ScreenAnswer4);
+                _context.SaveChanges();
+
+                /** End code segment 1 **/
+                //Success message here
+            }
+
+            return View(vm);
+        }       
     }
 }

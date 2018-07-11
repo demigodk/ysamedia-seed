@@ -10,9 +10,13 @@ namespace ysamedia.Views.UserProfile
 
         public static string Index => "Index";
 
+        public static string Created => "Created";
+
         public static string ScreeningQuestion => "ScreeningQuestion";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+
+        public static string CreatedNavClass(ViewContext viewContext) => PageNavClass(viewContext, Created);
 
         public static string ScreeningQuestionNavClass(ViewContext viewContext) => PageNavClass(viewContext, ScreeningQuestion);
 

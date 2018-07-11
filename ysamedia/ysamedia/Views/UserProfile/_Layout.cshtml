@@ -2,21 +2,16 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Setup your account</h2>
-
-<div>
-    <h4>Setup your account</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            @await Html.PartialAsync("_UserProfileNav")
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
-        </div>
+<div class="row card-box">
+    <h2 class="header-title m-t-0 m-b-30">User Information Setup</h2>
+    <div class="col-md-12">
+        @await Html.PartialAsync("_UserProfileNav")
+    </div>
+    <div class="col-md-12">
+        @RenderBody()
     </div>
 </div>
 
-@section Scripts{ 
+@section Scripts{
     @RenderSection("Scripts", required: false)
 }

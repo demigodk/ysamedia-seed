@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
+using ysamedia.Models.UserScreeningViewModels;
 
 namespace ysamedia.Controllers
 {
@@ -88,12 +89,7 @@ namespace ysamedia.Controllers
             }
             return View(photo);
         }
-
-        public IActionResult ScreeningQuestion()
-        {
-            return View();
-        }
-        
+               
         public IActionResult Created()
         {
                                     
