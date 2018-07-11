@@ -113,10 +113,11 @@ namespace ysamedia.Data
                 {
                     /***************** Seed tblAgeGroup Table ********************/
                     ysmcontext.TblAgeGroup.AddRange(
-                        new TblAgeGroup { AgroupId = 1, AgeRange = "18-25" },
-                        new TblAgeGroup { AgroupId = 2, AgeRange = "26-35" },
-                        new TblAgeGroup { AgroupId = 3, AgeRange = "36-50" },
-                        new TblAgeGroup { AgroupId = 4, AgeRange = "51-75" });
+                        new TblAgeGroup { AGroupId = 1, AgeRange = "18-25" },
+                        new TblAgeGroup { AGroupId = 2, AgeRange = "26-35" },
+                        new TblAgeGroup { AGroupId = 3, AgeRange = "36-50" },
+                        new TblAgeGroup { AGroupId = 4, AgeRange = "51-75" },
+                        new TblAgeGroup { AGroupId = 5, AgeRange = "N/A" });
 
                     ysmcontext.SaveChanges();
                 }
@@ -146,7 +147,8 @@ namespace ysamedia.Data
                     new TblRelationshipStatus { RelationshipId = 2, RelationshipCategory = "Engaged" },
                     new TblRelationshipStatus { RelationshipId = 3, RelationshipCategory = "Married" },
                     new TblRelationshipStatus { RelationshipId = 4, RelationshipCategory = "Widow" },
-                    new TblRelationshipStatus { RelationshipId = 5, RelationshipCategory = "Widower" });
+                    new TblRelationshipStatus { RelationshipId = 5, RelationshipCategory = "Widower" },
+                    new TblRelationshipStatus { RelationshipId = 6, RelationshipCategory = "Unspecified" });
 
                     ysmcontext.SaveChanges();
                 }
@@ -311,7 +313,7 @@ namespace ysamedia.Data
                         new TblRatingQuestion { QuestionId = 16, Question = "A team is accountable to its leaders" });
 
                     ysmcontext.SaveChanges();
-                }
+                }               
             }
         }
     }

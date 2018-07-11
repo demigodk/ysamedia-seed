@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
+using ysamedia.Models.UserScreeningViewModels;
 
 namespace ysamedia.Controllers
 {
@@ -88,7 +89,7 @@ namespace ysamedia.Controllers
             }
             return View(photo);
         }
-        
+               
         public IActionResult Created()
         {
                                     
@@ -124,6 +125,11 @@ namespace ysamedia.Controllers
             ViewData["fName"] = photoLocation;
             ViewData["fileLocation"] = photoLocation;
 
+            return View();
+        }
+
+        public IActionResult UserInformation()
+        {
             return View();
         }
     }

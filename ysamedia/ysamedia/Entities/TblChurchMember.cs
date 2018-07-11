@@ -16,7 +16,7 @@ namespace ysamedia.Entities
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string CellPhone { get; set; }
         public string HomePhone { get; set; }
         public string WorkPhone { get; set; }

@@ -1,0 +1,65 @@
+﻿@model ysamedia.Models.UserScreeningViewModels.QuestionSetViewModel
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <h2 class="m-t-0 header-title">@ViewData["Title"]</h2>
+            <p class="text-muted m-b-30 font-14">
+                Media registration form, for users who want to join media.
+            </p>
+            <hr />
+            <p class="text-muted m-b-30 font-14">
+                Ecclesiastes 4:9-12
+            </p>
+            <p class="text-muted m-b-30 font-14">
+                “Two are better than one, because they have a good reward for their toil.
+                For if they fall, one will lift up his fellow. But woe to him who is alone when he falls and has not
+                another to lift him up! Again, if two lie together, they keep warm, but how can one keep warm alone? And
+                though a man might prevail against one who is alone, two will withstand him—a threefold cord is not quickly broken.”
+            </p>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-20">
+                        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" class="form-horizontal" method="post" id="my-form">
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label"><b>Please Answer The Following Questions</b></label>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-12 col-form-label">Q1. In your own words, what is the role of the church’s media department?</p>
+                                <div class="col-12">
+                                    <textarea asp-for="Question1" class="form-control" rows="2"></textarea>
+                                    <span asp-validation-for="Question1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-12 col-form-label">Q2. What kind of influence do you think a media department has on the church?</p>
+                                <div class="col-12">
+                                    <textarea asp-for="Question2" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="Question2" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-12 col-form-label">Q3. Are media members supposed to carry themselves in a specific manner?</p>
+                                <div class="col-12">
+                                    <textarea asp-for="Question3" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="Question3" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-12 col-form-label">Q4. What is your understanding of being a servant of God?</p>
+                                <div class="col-12">
+                                    <textarea asp-for="Question4" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="Question4" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <br />
+                            <button class="btn btn-custom waves-effect waves-light" type="submit" id="validateIt">Submit Form</button>                           
+                        </form>
+                            </div>
+                    </div>
+                </div>
+</div>
+</div>
+</div>

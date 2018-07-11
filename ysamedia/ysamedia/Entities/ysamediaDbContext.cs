@@ -3,13 +3,13 @@
 namespace ysamedia.Entities
 {
     public partial class ysamediaDbContext : DbContext
-    {
+    {        
         public ysamediaDbContext()
-        {
+        {           
         }
 
         public ysamediaDbContext(DbContextOptions<ysamediaDbContext> options)
-            : base(options)
+           : base(options)
         {
         }
 
@@ -61,6 +61,15 @@ namespace ysamedia.Entities
         // Unable to generate entity type for table 'dbo.tblUserRole'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.tblUserToken'. Please see the warning messages.
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TblAchievement>(entity =>
@@ -94,11 +103,11 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<TblAgeGroup>(entity =>
             {
-                entity.HasKey(e => e.AgroupId);
+                entity.HasKey(e => e.AGroupId);
 
                 entity.ToTable("tblAgeGroup");
 
-                entity.Property(e => e.AgroupId)
+                entity.Property(e => e.AGroupId)
                     .HasColumnName("AGroupId")
                     .ValueGeneratedNever();
 
@@ -115,9 +124,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.AnswerId).ValueGeneratedNever();
 
-                entity.Property(e => e.Answer)
-                    .IsRequired()
-                    .HasMaxLength(500);
+                entity.Property(e => e.Answer).HasMaxLength(500);
 
                 entity.HasOne(d => d.ChurchMember)
                     .WithMany(p => p.TblAnswer)
@@ -180,7 +187,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.CellPhone).HasMaxLength(15);
 
-                entity.Property(e => e.DateOfBirth).HasColumnType("date");
+                entity.Property(e => e.DateOfBirth).HasMaxLength(50);
 
                 entity.Property(e => e.DateRegistered).HasColumnType("date");
 
@@ -495,8 +502,6 @@ namespace ysamedia.Entities
                 entity.ToTable("tblPhoto");
 
                 entity.Property(e => e.PhotoId).ValueGeneratedNever();
-
-                entity.Property(e => e.Photo).IsRequired();
 
                 entity.Property(e => e.PhotoName)
                     .IsRequired()
