@@ -1,10 +1,14 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Created";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData.AddActivePage(UserProfileNavPages.Created);
 }
 
-<h2>Created</h2>
-
-<label>@ViewData["fName"]</label><br/>
-<img src="@ViewData["fileLocation"]"/>
+<br />
+<h4>@ViewData["Title"]</h4>
+@*@Html.Partial("_StatusMessage", Model.StatusMessage)*@
+<div class="row">
+    <div class="col-md-12">
+        <label>@ViewData["fName"]</label><br />
+        <img src="@ViewData["fileLocation"]" />
+     </div>
+</div>

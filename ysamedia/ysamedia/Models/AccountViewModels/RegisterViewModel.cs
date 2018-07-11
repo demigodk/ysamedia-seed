@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ysamedia.Classes.Validation;
-using ysamedia.Entities;
 
 namespace ysamedia.Models.AccountViewModels
 {

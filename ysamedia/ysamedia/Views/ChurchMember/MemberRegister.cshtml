@@ -1,6 +1,6 @@
 ﻿@model ysamedia.Models.ChurchViewModels.ChurchMemberViewModel
 
-@{ 
+@{
     ViewData["Title"] = "Church Form";
 }
 
@@ -9,235 +9,331 @@
         <div class="card-box">
             <h2 class="m-t-0 header-title">@ViewData["Title"]</h2>
             <p class="text-muted m-b-30 font-14">
-                Registration form for new church members
+                Registration form for new church members 
             </p>
             <div class="row">
                 <div class="col-12">
                     <div class="p-20">
-                        <form class="form-horizontal" role="form">
+                        <form asp-controller="ChurchMember" asp-action="MemberRegister" class="form-horizontal" role="form">
                             <div class="form-group row">
                                 <label class="col-2 col-form-label">First Name(s)</label>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" value="">
+                                    <input asp-for="FirstName" class="form-control">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-2 col-form-label">Surname</label>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" value="">
+                                    <input asp-for="Surname" class="form-control">
+                                    <span asp-validation-for="Surname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-2 col-form-label">Gender</label>
                                 <div class="col-10">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Unspecified</option>
+                                    <select asp-for="GenderId"
+                                            class="form-control" required=""
+                                            asp-items="@(new SelectList(ViewBag.ListOfGenders, "GenderId", "Gname"))">
+                                        <option value="" hidden disabled selected>Please select</option>
                                     </select>
+                                    <span asp-validation-for="GenderId" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-2 col-form-label">Date Of Birth</label>
-                                <div class="col-10">
-                                    <input class="form-control" type="date" name="date">
+                                <div class="col-3">
+                                    <input asp-for="Day" class="form-control" placeholder="Day" type="number" min="1" max="31"/>
+                                    <span asp-validation-for="Day" class="text-danger"></span>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Age Group</label>
-                                <div class="col-10">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>18 - 25</option>
-                                        <option>26 - 35</option>
-                                        <option>36 - 50</option>
-                                        <option>51 - 75</option>
+                                <div class="col-4">
+                                    <input asp-for="Month" class="form-control" placeholder="Month" type="number" min="1" max="12"/>
+                                    <span asp-validation-for="Month" class="text-danger"></span>
+                                </div>
+                                <div class="col-3">
+                                    <select asp-for="Year" class="form-control">
+                                        <option value="0">N/A</option>
+                                        <option>2008</option>
+                                        <option>2007</option>
+                                        <option>2006</option>
+                                        <option>2005</option>
+                                        <option>2004</option>
+                                        <option>2003</option>
+                                        <option>2002</option>
+                                        <option>2001</option>
+                                        <option>2000</option>
+                                        <option>1999</option>
+                                        <option>1998</option>
+                                        <option>1997</option>
+                                        <option>1996</option>
+                                        <option>1995</option>
+                                        <option>1994</option>
+                                        <option>1993</option>
+                                        <option>1992</option>
+                                        <option>1991</option>
+                                        <option>1990</option>
+                                        <option>1989</option>
+                                        <option>1988</option>
+                                        <option>1987</option>
+                                        <option>1986</option>
+                                        <option>1985</option>
+                                        <option>1984</option>
+                                        <option>1983</option>
+                                        <option>1982</option>
+                                        <option>1981</option>
+                                        <option>1980</option>
+                                        <option>1979</option>
+                                        <option>1978</option>
+                                        <option>1977</option>
+                                        <option>1976</option>
+                                        <option>1975</option>
+                                        <option>1974</option>
+                                        <option>1973</option>
+                                        <option>1972</option>
+                                        <option>1971</option>
+                                        <option>1970</option>
+                                        <option>1969</option>
+                                        <option>1968</option>
+                                        <option>1967</option>
+                                        <option>1966</option>
+                                        <option>1965</option>
+                                        <option>1964</option>
+                                        <option>1963</option>
+                                        <option>1962</option>
+                                        <option>1961</option>
+                                        <option>1960</option>
+                                        <option>1959</option>
+                                        <option>1958</option>
+                                        <option>1957</option>
+                                        <option>1956</option>
+                                        <option>1955</option>
+                                        <option>1954</option>
+                                        <option>1953</option>
+                                        <option>1952</option>
+                                        <option>1951</option>
+                                        <option>1950</option>
+                                        <option>1949</option>
+                                        <option>1948</option>
+                                        <option value="0" hidden disabled selected>Year</option>
                                     </select>
+                                    <span asp-validation-for="Year" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Marital Status</label>
-                                <div class="col-10">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Single</option>
-                                        <option>Engaged</option>
-                                        <option>Married</option>
-                                        <option>Widow</option>
-                                        <option>Widower</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <hr />
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label"><b>Number Of Dependents</b></label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Pre-School</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Primary</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">High-School</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Tertiary</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Occupation</label>
-                                <div class="col-10">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Student</option>
-                                        <option>Internship</option>
-                                        <option>Employed</option>
-                                        <option>Self-Employed</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <hr />
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label"><b>Contact Details</b></label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Cell</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label">Home</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label" for="exampleInputEmail1">Email address</label>
-                                <div class="col-10">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                </div>
-                            </div>
-                            <br />
-                            <hr />
-                            <br />
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label"><b>Physical Address</b></label>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputAddress" class="col-2 col-form-label">Street Address</label>
-                                <div class="col-10">
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Street Address">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputCity" class="col-form-label">City</label>
-                                    <input type="text" class="form-control" id="inputCity">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputState" class="col-form-label">Province</label>
-                                    <select id="inputState" class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Gauteng</option>
-                                        <option>Limpopo</option>
-                                        <option>Mpumalanga</option>
-                                        <option>Kwazulu Natal</option>
-                                        <option>Free State</option>
-                                        <option>North West</option>
-                                        <option>Northern Cape</option>
-                                        <option>Western Cape</option>
-                                        <option>Eastern Cape</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="inputZip" class="col-form-label">Postal Code</label>
-                                    <input type="text" class="form-control" id="inputZip">
-                                </div>
-                            </div>
-                            <br />
-                            <hr />
-                            <br />
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label"><b>Additional Information</b></label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q1. In which denomination or church do you belong to?</label>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="2"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q2. What brought you here to Yahweh Shamma Assembly?</label>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q3. Have you been baptized?</label>
-                                <div class="col-12">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q4. (If you answered "Yes" to Q3) When were you baptized?</label>
-                                <div class="col-12">
-                                    <input class="form-control" type="text" name="date">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q5. Would you please give some comment about the service that you have just attended?</label>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 col-form-label">Q6. Would you like to follow some teachings and become a member at our community?</label>
-                                <div class="col-12">
-                                    <select class="form-control">
-                                        <option>- Please Select -</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <hr />
-                            <br />                           
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">Enter A Date For This Form Entry</label>
-                                <div class="col-8">
-                                    <input class="form-control" type="date" name="date">
-                                </div>
-                            </div>      
-                            <button class="btn btn-block btn-custom waves-effect waves-light" type="submit" id="validateIt">Submit Form</button>
-                        </form>
+                    </div>                    
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Age Group</label>
+                        <div class="col-10">
+                            <select asp-for="AGroupId"
+                                    class="form-control" required=""
+                                    asp-items="@(new SelectList(ViewBag.ListOfAgeGroups, "AGroupId", "AgeRange"))">
+                                <option value="0" hidden disabled selected>Please select</option>
+                            </select>
+                            <span asp-validation-for="AGroupId" class="text-danger"></span>
+                        </div>
+                    </div>                   
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Marital Status</label>
+                        <div class="col-10">
+                            <select asp-for="RelationshipId"
+                                    class="form-control" required=""
+                                    asp-items="@(new SelectList(ViewBag.ListOfRelationships, "RelationshipId", "RelationshipCategory"))">
+                                <option value="0" hidden disabled selected>Please select</option>
+                            </select>
+                            <span asp-validation-for="RelationshipId" class="text-danger"></span>
+                        </div>
                     </div>
+                    <br />
+                    <hr />
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label"><b>Number Of Dependents</b></label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Pre-School</label>
+                        <div class="col-10">
+                            <input asp-for="NumPreschool" class="form-control" type="number" min="1">
+                            <span asp-validation-for="NumPreschool" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Primary</label>
+                        <div class="col-10">
+                            <input asp-for="NumPrimary" class="form-control" type="number" min="1">
+                            <span asp-validation-for="NumPrimary" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">High-School</label>
+                        <div class="col-10">
+                            <input asp-for="NumHigh" class="form-control" type="number" min="1">
+                            <span asp-validation-for="NumHigh" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Tertiary</label>
+                        <div class="col-10">
+                            <input asp-for="NumTertiary" class="form-control" type="number" min="1">
+                            <span asp-validation-for="NumTertiary" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Occupation</label>
+                        <div class="col-10">
+                            <select asp-for="OccupationId" class="form-control">
+                                <option value="1">Student</option>
+                                <option value="2">Internship</option>
+                                <option value="3">Employed</option>
+                                <option value="4">Self-Employed</option>
+                                <option value="5">Other</option>
+                                <option value="0" hidden disabled selected>Please Select</option>
+                            </select>
+                            <span asp-validation-for="OccupationId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label"><b>Contact Details</b></label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Cell Number</label>
+                        <div class="col-10">
+                            <input asp-for="CellNumber" class="form-control">
+                            <span asp-validation-for="CellNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Home Number</label>
+                        <div class="col-10">
+                            <input asp-for="HomeNumber" class="form-control">
+                            <span asp-validation-for="HomeNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Work Number</label>
+                        <div class="col-10">
+                            <input asp-for="WorkNumber" class="form-control">
+                            <span asp-validation-for="WorkNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="exampleInputEmail1">Email Address</label>
+                        <div class="col-10">
+                            <input asp-for="EmailAddress" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label"><b>Physical Address</b></label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputAddress" class="col-2 col-form-label">Street Address</label>
+                        <div class="col-10">
+                            <input asp-for="Street" class="form-control" id="inputAddress" placeholder="Street Address">
+                            <span asp-validation-for="Street" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity" class="col-form-label">City</label>
+                            <input asp-for="City" class="form-control" id="inputCity">
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState" class="col-form-label">Province</label>
+                            <select asp-for="Province" id="inputState" class="form-control">
+                                <option>Gauteng</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>Kwazulu Natal</option>
+                                <option>Free State</option>
+                                <option>North West</option>
+                                <option>Northern Cape</option>
+                                <option>Western Cape</option>
+                                <option>Eastern Cape</option>
+                                <option value="" hidden disabled selected>Please Select</option>
+                            </select>
+                            <span asp-validation-for="Province" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip" class="col-form-label">Postal Code</label>
+                            <input asp-for="PostalCode" class="form-control" id="inputZip" maxlenth="4">
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label"><b>Additional Information</b></label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q1. In which denomination or church do you belong to?</label>
+                        <div class="col-12">
+                            <textarea asp-for="Question1" class="form-control" rows="2" value="0"></textarea>
+                            <span asp-validation-for="Question1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q2. What brought you here to Yahweh Shamma Assembly?</label>
+                        <div class="col-12">
+                            <textarea asp-for="Question2" class="form-control" rows="3" value="0"></textarea>
+                            <span asp-validation-for="Question2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q3. Have you been baptized?</label>
+                        <div class="col-12">
+                            <select asp-for="Question3" class="form-control">
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option value="" hidden disabled selected>Please Select</option>
+                            </select>
+                            <span asp-validation-for="Question3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q4. (If you answered "Yes" to Q3) When were you baptized?</label>
+                        <div class="col-12">
+                            <input asp-for="Question4" class="form-control">
+                            <span asp-validation-for="Question4" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q5. Would you please give some comment about the service that you have just attended?</label>
+                        <div class="col-12">
+                            <textarea asp-for="Question5" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Question5" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Q6. Would you like to follow some teachings and become a member at our community?</label>
+                        <div class="col-12">
+                            <select asp-for="Question6" class="form-control">
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option value="" hidden disabled selected>Please Select</option>
+                            </select>
+                            <span asp-validation-for="Question6" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    <button class="btn btn-custom waves-effect waves-light" type="submit" id="validateIt">Submit Form</button>
+                    </form>
                 </div>
-            </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
 
 
 
@@ -251,36 +347,4 @@
 
 
 
-            
 
-            @*<div class="row">
-                <div class="col-md-4">
-                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                        <h4>Add A New Church Member.</h4>
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-
-                        <div class="form-group">
-                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="Surname" class="form-control" placeholder="Surname" />
-                            <span asp-validation-for="Surname" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="GenderId" class="form-control" placeholder="GenderId" />
-                            <span asp-validation-for="GenderId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="AgeGroupId" class="form-control" placeholder="AgeGroupId" />
-                            <span asp-validation-for="AgeGroupId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="RelationshipId" class="form-group" placeholder="RelationshipId" />
-                            <span asp-validation-for="RelationshipId" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-default btn-primary">Submit</button>
-                    </form>
-                    </dv>
-                </div>*@

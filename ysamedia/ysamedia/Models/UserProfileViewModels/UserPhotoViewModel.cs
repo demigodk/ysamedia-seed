@@ -12,6 +12,7 @@ namespace ysamedia.Models.UserProfileViewModel
         public string PhotoName { get; set; }
         
         public string UserId { get; set; }
-       
+
+        public string StatusMessage { get; set; }
     }
 }
