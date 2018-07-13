@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ysamedia.Models.ChurchViewModels;
 
 namespace ysamedia.Entities
 {
     public partial class ysamediaDbContext : DbContext
-    {        
+    {
         public ysamediaDbContext()
-        {           
+        {
         }
 
         public ysamediaDbContext(DbContextOptions<ysamediaDbContext> options)
@@ -19,6 +20,7 @@ namespace ysamedia.Entities
         public virtual DbSet<TblAttribute> TblAttribute { get; set; }
         public virtual DbSet<TblAttributeUserBridge> TblAttributeUserBridge { get; set; }
         public virtual DbSet<TblChurchMember> TblChurchMember { get; set; }
+        public virtual DbSet<TblChurchMemberOccupationBridge> TblChurchMemberOccupationBridge { get; set; }
         public virtual DbSet<TblDepartment> TblDepartment { get; set; }
         public virtual DbSet<TblDependant> TblDependant { get; set; }
         public virtual DbSet<TblDependantCategory> TblDependantCategory { get; set; }
@@ -103,11 +105,11 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<TblAgeGroup>(entity =>
             {
-                entity.HasKey(e => e.AGroupId);
+                entity.HasKey(e => e.AgroupId);
 
                 entity.ToTable("tblAgeGroup");
 
-                entity.Property(e => e.AGroupId)
+                entity.Property(e => e.AgroupId)
                     .HasColumnName("AGroupId")
                     .ValueGeneratedNever();
 
@@ -187,6 +189,8 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.CellPhone).HasMaxLength(15);
 
+                entity.Property(e => e.City).HasMaxLength(50);
+
                 entity.Property(e => e.DateOfBirth).HasMaxLength(50);
 
                 entity.Property(e => e.DateRegistered).HasColumnType("date");
@@ -203,9 +207,11 @@ namespace ysamedia.Entities
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.MiddleName).HasMaxLength(50);
+                entity.Property(e => e.PostalCode).HasColumnType("nchar(10)");
 
-                entity.Property(e => e.PhysicalAddress).HasMaxLength(250);
+                entity.Property(e => e.Province).HasMaxLength(50);
+
+                entity.Property(e => e.Street).HasMaxLength(50);
 
                 entity.Property(e => e.WorkPhone).HasMaxLength(15);
 
@@ -224,6 +230,27 @@ namespace ysamedia.Entities
                     .WithMany(p => p.TblChurchMember)
                     .HasForeignKey(d => d.RelationshipId)
                     .HasConstraintName("FK_tblChurchMember_tblRelationshipStatus");
+            });
+
+            modelBuilder.Entity<TblChurchMemberOccupationBridge>(entity =>
+            {
+                entity.ToTable("tblChurchMemberOccupationBridge");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
+
+                entity.HasOne(d => d.ChurchMember)
+                    .WithMany(p => p.TblChurchMemberOccupationBridge)
+                    .HasForeignKey(d => d.ChurchMemberId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblChurchMember");
+
+                entity.HasOne(d => d.Occupation)
+                    .WithMany(p => p.TblChurchMemberOccupationBridge)
+                    .HasForeignKey(d => d.OccupationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblOccupation");
             });
 
             modelBuilder.Entity<TblDepartment>(entity =>
@@ -258,6 +285,11 @@ namespace ysamedia.Entities
                     .WithMany(p => p.TblDependant)
                     .HasForeignKey(d => d.ChurchMemberId)
                     .HasConstraintName("FK_tblDependant_tblChurchMember");
+
+                entity.HasOne(d => d.DependantCategory)
+                    .WithMany(p => p.TblDependant)
+                    .HasForeignKey(d => d.DependantCategoryId)
+                    .HasConstraintName("FK_tblDependant_tblDependantCategory");
             });
 
             modelBuilder.Entity<TblDependantCategory>(entity =>
@@ -271,11 +303,6 @@ namespace ysamedia.Entities
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.Dependant)
-                    .WithMany(p => p.TblDependantCategory)
-                    .HasForeignKey(d => d.DependantId)
-                    .HasConstraintName("FK_tblDependantCategory_tblDependantCategory");
             });
 
             modelBuilder.Entity<TblDeptUserBrigdge>(entity =>
@@ -379,12 +406,6 @@ namespace ysamedia.Entities
                 entity.Property(e => e.Description).HasMaxLength(256);
 
                 entity.Property(e => e.JobTitle).HasMaxLength(50);
-
-                entity.HasOne(d => d.Occupation)
-                    .WithMany(p => p.TblEmployee)
-                    .HasForeignKey(d => d.OccupationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblEmployee_tblOccupation");
             });
 
             modelBuilder.Entity<TblGender>(entity =>
@@ -488,11 +509,9 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.OccupationId).ValueGeneratedNever();
 
-                entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.TblOccupation)
-                    .HasForeignKey(d => d.ChurchMemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblOccupation_tblChurchMember");
+                entity.Property(e => e.Occupation)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<TblPhoto>(entity =>
@@ -761,12 +780,6 @@ namespace ysamedia.Entities
                 entity.Property(e => e.InstitutionName).HasMaxLength(256);
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.HasOne(d => d.Occupation)
-                    .WithMany(p => p.TblStudent)
-                    .HasForeignKey(d => d.OccupationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblStudent_tblOccupation");
             });
 
             modelBuilder.Entity<TblSubject>(entity =>
@@ -992,5 +1005,7 @@ namespace ysamedia.Entities
                     .HasConstraintName("FK_tblWorkPreference_tblUser");
             });
         }
+
+        public DbSet<ysamedia.Models.ChurchViewModels.ChurchMemberViewModel> ChurchMemberViewModel { get; set; }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model ysamedia.Models.ChurchViewModels.ChurchMemberViewModel
+
+@{ 
+    ViewData["Title"] = "Church Members";
+}
+
+<p>
+    <a asp-controller="ChurchMember" asp-action="MemberRegister">Create New Record</a>
+</p>
+
+
+<form>
+    <p>
+        Name : <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+</table>

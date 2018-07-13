@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Church\" />
     <Folder Include="wwwroot\uploads\img\members\" />
   </ItemGroup>
 

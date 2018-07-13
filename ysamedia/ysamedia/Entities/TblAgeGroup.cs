@@ -10,7 +10,7 @@ namespace ysamedia.Entities
             TblChurchMember = new HashSet<TblChurchMember>();
         }
 
-        public int AGroupId { get; set; }
+        public int AgroupId { get; set; }
         public string AgeRange { get; set; }
 
         public ICollection<TblChurchMember> TblChurchMember { get; set; }

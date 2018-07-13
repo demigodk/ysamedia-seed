@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ysamedia.Classes.ChurchMemberHelper;
 using ysamedia.Entities;
 using ysamedia.Models.ChurchViewModels;
 
@@ -19,9 +20,24 @@ namespace ysamedia.Controllers
             _context = context;           
         }
 
-        [HttpGet]
-        public IActionResult MemberRegister(/*string returnUrl = null*/)
+        public IList<TblChurchMember> Member { get; set; }
+
+        public async Task ChurchMembers(string searchString)
         {
+            var churchMembers = (from c in _context.TblChurchMember
+                                 select c);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                churchMembers = churchMembers.Where(s => s.FirstName.Contains(searchString));
+            }
+
+            //TblChurchMember = await churchMembers.ToListAsync();
+        }
+
+        [HttpGet]
+        public IActionResult MemberRegister()
+        {          
             //___________________________ TblAgeGroup _____________________________
             List<TblAgeGroup> AgeList = new List<TblAgeGroup>();
 
@@ -57,15 +73,13 @@ namespace ysamedia.Controllers
         public IActionResult MemberRegister(ChurchMemberViewModel model)
         {
 
-            /******************* Code segment 1 - Insert In TblChurchMember ********************************/
+            /******************* Code segment 1 - Insert In TblChurchMember ****************************/
             int maxMemberId = 1;
-
-                string address = model.Street + ", " + model.City + ", " + model.Province + ", " + model.PostalCode;
-
-                if (_context.TblChurchMember.Any())
-                {
-                    maxMemberId = (_context.TblChurchMember.Max(r => r.ChurchMemberId) + 1);
-                }
+            
+            if (_context.TblChurchMember.Any())
+            {
+                maxMemberId = (_context.TblChurchMember.Max(r => r.ChurchMemberId) + 1);
+            }
 
             string dob;
 
@@ -86,30 +100,70 @@ namespace ysamedia.Controllers
             if (model.RelationshipId == 0)
             {
                 model.RelationshipId = 6;       // Unspecified
+            }            
+
+            if (model.OccupationId == 0)
+            {
+                model.OccupationId = 5;         // Other
             }
-            //if (model.OccupationId == "0")
-            //{
-            //    model.OccupationId = "5";
-            //}
+
+            model.DateRecorded = DateTime.Now;
 
             TblChurchMember churchMember = new TblChurchMember
             {
                     ChurchMemberId = maxMemberId,
-                    FirstName = model.FirstName,
-                    MiddleName = null,
+                    FirstName = model.FirstName,                   
                     LastName = model.Surname,
                     DateOfBirth = dob,
                     CellPhone = model.CellNumber,
                     HomePhone = model.HomeNumber,
                     WorkPhone = model.WorkNumber,
                     Email = model.EmailAddress,
-                    PhysicalAddress = address,
-                    DateRegistered = DateTime.Now,
+                    Street = model.Street,
+                    City = model.City,
+                    Province = model.Province,
+                    PostalCode = model.PostalCode,
+                    DateRegistered = model.DateRecorded,
                     AgeGroupId = model.AGroupId,
                     RelationshipId = model.RelationshipId,
                     GenderId = model.GenderId
             };
             _context.TblChurchMember.Add(churchMember);
+            _context.SaveChanges();
+
+
+            /******************* Code Segment - Insert In tblDependant ********************************/
+
+            int maxDependantId = 1;
+           
+            if (_context.TblDependant.Any())
+            {
+                maxDependantId = (_context.TblDependant.Max(d => d.DependantId) + 1);                
+            }
+
+            _context.TblDependant.AddRange(
+                new TblDependant { DependantId = maxDependantId, ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 1 },
+                new TblDependant { DependantId = (maxDependantId + 1), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 2 },
+                new TblDependant { DependantId = (maxDependantId + 2), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 3 },
+                new TblDependant { DependantId = (maxDependantId + 3), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 4 }
+             );
+            _context.SaveChanges();
+                    
+            /******************* Code segment 2 - Insert In TblChurchMemberOccupationBrigde **********/
+            int maxID = 1;
+
+            if (_context.TblChurchMemberOccupationBridge.Any())
+            {
+                maxID = _context.TblChurchMemberOccupationBridge.Max(c => c.Id);
+            }
+
+            TblChurchMemberOccupationBridge churchMemberOccupationBridge = new TblChurchMemberOccupationBridge
+            {
+                Id = ( maxID + 1),
+                ChurchMemberId = maxMemberId,
+                OccupationId = model.OccupationId
+            };
+            _context.TblChurchMemberOccupationBridge.Add(churchMemberOccupationBridge);
             _context.SaveChanges();
 
             /******************* Code segment 2 - Insert In TblAnswer ********************************/
@@ -179,14 +233,17 @@ namespace ysamedia.Controllers
             };
             _context.TblAnswer.Add(answer6);
             _context.SaveChanges();
-                        
-            return RedirectToAction("Reached", model.DateOfBirth);
+
+
+
+            MemberHelper memberHelper = new MemberHelper(_context);
+            
+            return RedirectToAction("ChurchMemberInfo", memberHelper.getViewModel(maxMemberId));            
         }
 
-        public IActionResult Reached(DateTime date)
-        {
-            ViewBag.DOB = date;
-            return View();
-        }
+        public IActionResult ChurchMemberInfo(CompleteViewModel model)
+        {            
+            return View(model);
+        }        
     }
 }

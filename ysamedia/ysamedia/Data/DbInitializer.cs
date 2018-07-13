@@ -84,7 +84,22 @@ namespace ysamedia.Data
                     ysmcontext.SaveChanges();
                 }
 
-               if (!ysmcontext.TblTimeIn.Any())
+                if (!ysmcontext.TblOccupation.Any())
+                {
+                    /*************** Seed tblOccupation Table *******************/
+                    ysmcontext.TblOccupation.AddRange(
+
+                    new TblOccupation { OccupationId = 1, Occupation = "Student" },
+                    new TblOccupation { OccupationId = 2, Occupation = "Internship" },
+                    new TblOccupation { OccupationId = 3, Occupation = "Employed" },
+                    new TblOccupation { OccupationId = 4, Occupation = "Self-Employed" },
+                    new TblOccupation { OccupationId = 5, Occupation = "Other" }
+
+                    );
+                    ysmcontext.SaveChanges();
+                }
+
+                if (!ysmcontext.TblTimeIn.Any())
                 {
                     ysmcontext.TblTimeIn.AddRange(
 
@@ -113,11 +128,11 @@ namespace ysamedia.Data
                 {
                     /***************** Seed tblAgeGroup Table ********************/
                     ysmcontext.TblAgeGroup.AddRange(
-                        new TblAgeGroup { AGroupId = 1, AgeRange = "18-25" },
-                        new TblAgeGroup { AGroupId = 2, AgeRange = "26-35" },
-                        new TblAgeGroup { AGroupId = 3, AgeRange = "36-50" },
-                        new TblAgeGroup { AGroupId = 4, AgeRange = "51-75" },
-                        new TblAgeGroup { AGroupId = 5, AgeRange = "N/A" });
+                        new TblAgeGroup { AgroupId = 1, AgeRange = "18-25" },
+                        new TblAgeGroup { AgroupId = 2, AgeRange = "26-35" },
+                        new TblAgeGroup { AgroupId = 3, AgeRange = "36-50" },
+                        new TblAgeGroup { AgroupId = 4, AgeRange = "51-75" },
+                        new TblAgeGroup { AgroupId = 5, AgeRange = "N/A" });
 
                     ysmcontext.SaveChanges();
                 }
@@ -185,10 +200,10 @@ namespace ysamedia.Data
                 {
                     /***************** Seed tblDependantCategory Table ********************/
                     ysmcontext.TblDependantCategory.AddRange(
-                        new TblDependantCategory { CategoryId = 1, CategoryName = "Pre-School", DependantId = null, CategoryCount = 0 },
-                        new TblDependantCategory { CategoryId = 2, CategoryName = "Primary", DependantId = null, CategoryCount = 0 },
-                        new TblDependantCategory { CategoryId = 3, CategoryName = "High School", DependantId = null, CategoryCount = 0 },
-                        new TblDependantCategory { CategoryId = 4, CategoryName = "Tertiary", DependantId = null, CategoryCount = 0 });
+                        new TblDependantCategory { CategoryId = 1, CategoryName = "Pre-School", CategoryCount = 0 },
+                        new TblDependantCategory { CategoryId = 2, CategoryName = "Primary", CategoryCount = 0 },
+                        new TblDependantCategory { CategoryId = 3, CategoryName = "High School", CategoryCount = 0 },
+                        new TblDependantCategory { CategoryId = 4, CategoryName = "Tertiary", CategoryCount = 0 });
 
                     ysmcontext.SaveChanges();
                 }

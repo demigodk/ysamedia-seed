@@ -12,8 +12,5 @@ namespace ysamedia.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string InstitutionName { get; set; }
-        public int OccupationId { get; set; }
-
-        public TblOccupation Occupation { get; set; }
     }
 }

@@ -7,15 +7,12 @@ namespace ysamedia.Entities
     {
         public TblOccupation()
         {
-            TblEmployee = new HashSet<TblEmployee>();
-            TblStudent = new HashSet<TblStudent>();
+            TblChurchMemberOccupationBridge = new HashSet<TblChurchMemberOccupationBridge>();
         }
 
         public int OccupationId { get; set; }
-        public int ChurchMemberId { get; set; }
+        public string Occupation { get; set; }
 
-        public TblChurchMember ChurchMember { get; set; }
-        public ICollection<TblEmployee> TblEmployee { get; set; }
-        public ICollection<TblStudent> TblStudent { get; set; }
+        public ICollection<TblChurchMemberOccupationBridge> TblChurchMemberOccupationBridge { get; set; }
     }
 }
