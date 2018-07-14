@@ -23,18 +23,18 @@ namespace ysamedia.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            // Getting and binding the tblUser entries for Multiselect
-            List<TblUser> UserList = new List<TblUser>();            
+            // Getting and binding the User entries for Multiselect
+            List<User> UserList = new List<User>();            
 
-            UserList = (from u in _context.TblUser
+            UserList = (from u in _context.User
                         select u).ToList();
 
             ViewBag.ListOfUsers = UserList;
 
-            // Getting and binding the tblTimeIn entries for dropdown selection
-            List<TblTimeIn> TimeList = new List<TblTimeIn>();
+            // Getting and binding the TimeIn entries for dropdown selection
+            List<TimeIn> TimeList = new List<TimeIn>();
 
-            TimeList = (from t in _context.TblTimeIn
+            TimeList = (from t in _context.TimeIn
                         select t).ToList();
 
             ViewBag.ListOfTimes = TimeList;
@@ -50,27 +50,27 @@ namespace ysamedia.Controllers
             if (ModelState.IsValid)
             {
 
-                // Get the maximum PK in tblLog
+                // Get the maximum PK in Log
                 int maxLogId = 0;
 
-                if (_context.TblLog.Any())
+                if (_context.Log.Any())
                 {
-                    maxLogId = _context.TblLog.Max(t => t.LogId);
+                    maxLogId = _context.Log.Max(t => t.LogId);
                 }
 
-                // Get the maximum PK in tblUserLog
+                // Get the maximum PK in UserLog
                 int userLogMaxId = 0;
 
-                if (_context.TblUserLog.Any())
+                if (_context.UserLog.Any())
                 {
-                    userLogMaxId = _context.TblUserLog.Max(t => t.UserLogId);
+                    userLogMaxId = _context.UserLog.Max(t => t.UserLogId);
                 }
 
-                // The date selected by the user (goes in tblLog)
+                // The date selected by the user (goes in Log)
                 DateTime enteredDate = DateTime.Parse(vm.date);
 
                 // Write the Log record
-                TblLog Log = new TblLog
+                Log Log = new Log
                 {
                     LogId = (maxLogId + 1),
                     Date = enteredDate,
@@ -85,7 +85,7 @@ namespace ysamedia.Controllers
 
                 int count = (vm.SelectedIDArray).Count;
 
-                TblUserLog[] tempULog = new TblUserLog[count];
+                UserLog[] tempULog = new UserLog[count];
                 string[] userkeys = new string[count];
                 userkeys = (vm.SelectedIDArray).ToArray();
 
@@ -107,10 +107,10 @@ namespace ysamedia.Controllers
         [HttpGet]
         public IActionResult DisplayLog()
         {
-            // Getting and binding the tblTimeIn entries for dropdown selection
-            List<TblTimeIn> TimeList = new List<TblTimeIn>();
+            // Getting and binding the TimeIn entries for dropdown selection
+            List<TimeIn> TimeList = new List<TimeIn>();
 
-            TimeList = (from t in _context.TblTimeIn
+            TimeList = (from t in _context.TimeIn
                         select t).ToList();
 
             ViewBag.ListOfTimes = TimeList;

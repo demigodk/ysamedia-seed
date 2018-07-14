@@ -17,9 +17,9 @@ namespace ysamedia.Classes.TimeLogHelper
         }
 
         // Enters the UserLog record into the table, using the specified parameters
-        public static TblUserLog createUserLogRecord(int logid, string userid, int userlogid)
+        public static UserLog createUserLogRecord(int logid, string userid, int userlogid)
         {
-            TblUserLog termItem = new TblUserLog()
+            UserLog termItem = new UserLog()
             {
                 LogId = logid,
                 UserId = userid,
@@ -29,27 +29,27 @@ namespace ysamedia.Classes.TimeLogHelper
             return termItem;
         }        
 
-        public List<TblLog> getLogId(DateTime date)
+        public List<Log> getLogId(DateTime date)
         {
-            List<TblLog> LogList = new List<TblLog>();
+            List<Log> LogList = new List<Log>();
 
-            LogList = (from u in _context.TblLog
+            LogList = (from u in _context.Log
                        where u.Date == date
                        select u).ToList();
 
             return LogList;
         }       
 
-        // Returns a List<TblUser> containing all the records returned from the select query
-        public List<TblUser> getUserName(TimeLogViewModel vm)
+        // Returns a List<User> containing all the records returned from the select query
+        public List<User> getUserName(TimeLogViewModel vm)
         {
-            List<TblUser> showLVM = new List<TblUser>();
+            List<User> showLVM = new List<User>();
 
             DateTime date = DateTime.Parse(vm.date);
 
-            showLVM = (from l in _context.TblLog
-                       join c in _context.TblUserLog on l.LogId equals c.LogId
-                       join u in _context.TblUser on c.UserId equals u.UserId
+            showLVM = (from l in _context.Log
+                       join c in _context.UserLog on l.LogId equals c.LogId
+                       join u in _context.User on c.UserId equals u.UserId
                        where c.UserId == u.UserId && l.TimeInId == vm.TimeInID && l.Date == date
                        select u).ToList();
 

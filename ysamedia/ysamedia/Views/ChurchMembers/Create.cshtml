@@ -1,19 +1,23 @@
-﻿@model ysamedia.Entities.TblChurchMember
+﻿@model ysamedia.Entities.ChurchMember
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
-<h4>TblChurchMember</h4>
+<h4>ChurchMember</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ChurchMemberId" />
+            <div class="form-group">
+                <label asp-for="ChurchMemberId" class="control-label"></label>
+                <input asp-for="ChurchMemberId" class="form-control" />
+                <span asp-validation-for="ChurchMemberId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -56,18 +60,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="AgeGroupId" class="control-label"></label>
-                <select asp-for="AgeGroupId" class="form-control" asp-items="ViewBag.AgeGroupId"></select>
-                <span asp-validation-for="AgeGroupId" class="text-danger"></span>
+                <select asp-for="AgeGroupId" class ="form-control" asp-items="ViewBag.AgeGroupId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="RelationshipId" class="control-label"></label>
-                <select asp-for="RelationshipId" class="form-control" asp-items="ViewBag.RelationshipId"></select>
-                <span asp-validation-for="RelationshipId" class="text-danger"></span>
+                <select asp-for="RelationshipId" class ="form-control" asp-items="ViewBag.RelationshipId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="GenderId" class="control-label"></label>
-                <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId"></select>
-                <span asp-validation-for="GenderId" class="text-danger"></span>
+                <select asp-for="GenderId" class ="form-control" asp-items="ViewBag.GenderId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Street" class="control-label"></label>
@@ -90,7 +91,7 @@
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>

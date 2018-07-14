@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ysamedia.Models.ChurchViewModels;
 
 namespace ysamedia.Entities
 {
@@ -14,54 +13,54 @@ namespace ysamedia.Entities
         {
         }
 
-        public virtual DbSet<TblAchievement> TblAchievement { get; set; }
-        public virtual DbSet<TblAgeGroup> TblAgeGroup { get; set; }
-        public virtual DbSet<TblAnswer> TblAnswer { get; set; }
-        public virtual DbSet<TblAttribute> TblAttribute { get; set; }
-        public virtual DbSet<TblAttributeUserBridge> TblAttributeUserBridge { get; set; }
-        public virtual DbSet<TblChurchMember> TblChurchMember { get; set; }
-        public virtual DbSet<TblChurchMemberOccupationBridge> TblChurchMemberOccupationBridge { get; set; }
-        public virtual DbSet<TblDepartment> TblDepartment { get; set; }
-        public virtual DbSet<TblDependant> TblDependant { get; set; }
-        public virtual DbSet<TblDependantCategory> TblDependantCategory { get; set; }
-        public virtual DbSet<TblDeptUserBrigdge> TblDeptUserBrigdge { get; set; }
-        public virtual DbSet<TblDlicenceUserBridge> TblDlicenceUserBridge { get; set; }
-        public virtual DbSet<TblDriverLicence> TblDriverLicence { get; set; }
-        public virtual DbSet<TblEducation> TblEducation { get; set; }
-        public virtual DbSet<TblEmployee> TblEmployee { get; set; }
-        public virtual DbSet<TblGender> TblGender { get; set; }
-        public virtual DbSet<TblLanguage> TblLanguage { get; set; }
-        public virtual DbSet<TblLog> TblLog { get; set; }
-        public virtual DbSet<TblNegativeAttribute> TblNegativeAttribute { get; set; }
-        public virtual DbSet<TblNegAttributeUserBridge> TblNegAttributeUserBridge { get; set; }
-        public virtual DbSet<TblOccupation> TblOccupation { get; set; }
-        public virtual DbSet<TblPhoto> TblPhoto { get; set; }
-        public virtual DbSet<TblQuestion> TblQuestion { get; set; }
-        public virtual DbSet<TblRateAnswerUserBridge> TblRateAnswerUserBridge { get; set; }
-        public virtual DbSet<TblRatingAnswer> TblRatingAnswer { get; set; }
-        public virtual DbSet<TblRatingQuestion> TblRatingQuestion { get; set; }
-        public virtual DbSet<TblRelationshipStatus> TblRelationshipStatus { get; set; }
-        public virtual DbSet<TblRole> TblRole { get; set; }
-        public virtual DbSet<TblRoleClaim> TblRoleClaim { get; set; }
-        public virtual DbSet<TblScreeningAnswer> TblScreeningAnswer { get; set; }
-        public virtual DbSet<TblScreeningQuestion> TblScreeningQuestion { get; set; }
-        public virtual DbSet<TblScreeningScripture> TblScreeningScripture { get; set; }
-        public virtual DbSet<TblSkill> TblSkill { get; set; }
-        public virtual DbSet<TblSkillCategory> TblSkillCategory { get; set; }
-        public virtual DbSet<TblStudent> TblStudent { get; set; }
-        public virtual DbSet<TblSubject> TblSubject { get; set; }
-        public virtual DbSet<TblTimeIn> TblTimeIn { get; set; }
-        public virtual DbSet<TblTransportType> TblTransportType { get; set; }
-        public virtual DbSet<TblTransUserBridge> TblTransUserBridge { get; set; }
-        public virtual DbSet<TblUser> TblUser { get; set; }
-        public virtual DbSet<TblUserClaim> TblUserClaim { get; set; }
-        public virtual DbSet<TblUserLog> TblUserLog { get; set; }
-        public virtual DbSet<TblUserLogin> TblUserLogin { get; set; }
-        public virtual DbSet<TblVacancy> TblVacancy { get; set; }
-        public virtual DbSet<TblWorkPreference> TblWorkPreference { get; set; }
+        public virtual DbSet<Achievement> Achievement { get; set; }
+        public virtual DbSet<AgeGroup> AgeGroup { get; set; }
+        public virtual DbSet<Answer> Answer { get; set; }
+        public virtual DbSet<AttributeUserBridge> AttributeUserBridge { get; set; }
+        public virtual DbSet<ChurchMember> ChurchMember { get; set; }
+        public virtual DbSet<ChurchMemberOccupationBridge> ChurchMemberOccupationBridge { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Dependant> Dependant { get; set; }
+        public virtual DbSet<DependantCategory> DependantCategory { get; set; }
+        public virtual DbSet<DeptUserBrigdge> DeptUserBrigdge { get; set; }
+        public virtual DbSet<DlicenceUserBridge> DlicenceUserBridge { get; set; }
+        public virtual DbSet<DriverLicence> DriverLicence { get; set; }
+        public virtual DbSet<Education> Education { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Language> Language { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
+        public virtual DbSet<NegativeAttribute> NegativeAttribute { get; set; }
+        public virtual DbSet<NegAttributeUserBridge> NegAttributeUserBridge { get; set; }
+        public virtual DbSet<Occupation> Occupation { get; set; }
+        public virtual DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<PositiveAttribute> PositiveAttribute { get; set; }
+        public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<RateAnswerUserBridge> RateAnswerUserBridge { get; set; }
+        public virtual DbSet<RatingAnswer> RatingAnswer { get; set; }
+        public virtual DbSet<RatingQuestion> RatingQuestion { get; set; }
+        public virtual DbSet<RelationshipStatus> RelationshipStatus { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RoleClaim> RoleClaim { get; set; }
+        public virtual DbSet<ScreeningAnswer> ScreeningAnswer { get; set; }
+        public virtual DbSet<ScreeningQuestion> ScreeningQuestion { get; set; }
+        public virtual DbSet<ScreeningScripture> ScreeningScripture { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
+        public virtual DbSet<SkillCategory> SkillCategory { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Subject> Subject { get; set; }
+        public virtual DbSet<TimeIn> TimeIn { get; set; }
+        public virtual DbSet<TransportType> TransportType { get; set; }
+        public virtual DbSet<TransUserBridge> TransUserBridge { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserClaim> UserClaim { get; set; }
+        public virtual DbSet<UserLog> UserLog { get; set; }
+        public virtual DbSet<UserLogin> UserLogin { get; set; }
+        public virtual DbSet<Vacancy> Vacancy { get; set; }
+        public virtual DbSet<WorkPreference> WorkPreference { get; set; }
 
-        // Unable to generate entity type for table 'dbo.tblUserRole'. Please see the warning messages.
-        // Unable to generate entity type for table 'dbo.tblUserToken'. Please see the warning messages.
+        // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
+        // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -74,12 +73,8 @@ namespace ysamedia.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TblAchievement>(entity =>
+            modelBuilder.Entity<Achievement>(entity =>
             {
-                entity.HasKey(e => e.AchievementId);
-
-                entity.ToTable("tblAchievement");
-
                 entity.Property(e => e.AchievementId).ValueGeneratedNever();
 
                 entity.Property(e => e.AchievementName)
@@ -97,17 +92,15 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblAchievement)
+                    .WithMany(p => p.Achievement)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblAchievement_tblUser1");
             });
 
-            modelBuilder.Entity<TblAgeGroup>(entity =>
+            modelBuilder.Entity<AgeGroup>(entity =>
             {
                 entity.HasKey(e => e.AgroupId);
-
-                entity.ToTable("tblAgeGroup");
 
                 entity.Property(e => e.AgroupId)
                     .HasColumnName("AGroupId")
@@ -118,46 +111,29 @@ namespace ysamedia.Entities
                     .HasColumnType("nchar(10)");
             });
 
-            modelBuilder.Entity<TblAnswer>(entity =>
+            modelBuilder.Entity<Answer>(entity =>
             {
-                entity.HasKey(e => e.AnswerId);
-
-                entity.ToTable("tblAnswer");
-
                 entity.Property(e => e.AnswerId).ValueGeneratedNever();
 
-                entity.Property(e => e.Answer).HasMaxLength(500);
+                entity.Property(e => e.Answer1)
+                    .HasColumnName("Answer")
+                    .HasMaxLength(500);
 
                 entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.TblAnswer)
+                    .WithMany(p => p.Answer)
                     .HasForeignKey(d => d.ChurchMemberId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblAnswer_tblChurchMember");
 
                 entity.HasOne(d => d.Question)
-                    .WithMany(p => p.TblAnswer)
+                    .WithMany(p => p.Answer)
                     .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblAnswer_tblQuestion");
             });
 
-            modelBuilder.Entity<TblAttribute>(entity =>
+            modelBuilder.Entity<AttributeUserBridge>(entity =>
             {
-                entity.HasKey(e => e.AttributeId);
-
-                entity.ToTable("tblAttribute");
-
-                entity.Property(e => e.AttributeId).ValueGeneratedNever();
-
-                entity.Property(e => e.AttributeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<TblAttributeUserBridge>(entity =>
-            {
-                entity.ToTable("tblAttributeUserBridge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
@@ -167,24 +143,20 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Attribute)
-                    .WithMany(p => p.TblAttributeUserBridge)
+                    .WithMany(p => p.AttributeUserBridge)
                     .HasForeignKey(d => d.AttributeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblAttributeUserBridge_tblAttribute");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblAttributeUserBridge)
+                    .WithMany(p => p.AttributeUserBridge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblAttributeUserBridge_tblUser");
             });
 
-            modelBuilder.Entity<TblChurchMember>(entity =>
+            modelBuilder.Entity<ChurchMember>(entity =>
             {
-                entity.HasKey(e => e.ChurchMemberId);
-
-                entity.ToTable("tblChurchMember");
-
                 entity.Property(e => e.ChurchMemberId).ValueGeneratedNever();
 
                 entity.Property(e => e.CellPhone).HasMaxLength(15);
@@ -216,49 +188,43 @@ namespace ysamedia.Entities
                 entity.Property(e => e.WorkPhone).HasMaxLength(15);
 
                 entity.HasOne(d => d.AgeGroup)
-                    .WithMany(p => p.TblChurchMember)
+                    .WithMany(p => p.ChurchMember)
                     .HasForeignKey(d => d.AgeGroupId)
                     .HasConstraintName("FK_tblChurchMember_tblAgeGroup");
 
                 entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.TblChurchMember)
+                    .WithMany(p => p.ChurchMember)
                     .HasForeignKey(d => d.GenderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblChurchMember_tblGender");
 
                 entity.HasOne(d => d.Relationship)
-                    .WithMany(p => p.TblChurchMember)
+                    .WithMany(p => p.ChurchMember)
                     .HasForeignKey(d => d.RelationshipId)
                     .HasConstraintName("FK_tblChurchMember_tblRelationshipStatus");
             });
 
-            modelBuilder.Entity<TblChurchMemberOccupationBridge>(entity =>
+            modelBuilder.Entity<ChurchMemberOccupationBridge>(entity =>
             {
-                entity.ToTable("tblChurchMemberOccupationBridge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
 
                 entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.TblChurchMemberOccupationBridge)
+                    .WithMany(p => p.ChurchMemberOccupationBridge)
                     .HasForeignKey(d => d.ChurchMemberId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblChurchMember");
 
                 entity.HasOne(d => d.Occupation)
-                    .WithMany(p => p.TblChurchMemberOccupationBridge)
+                    .WithMany(p => p.ChurchMemberOccupationBridge)
                     .HasForeignKey(d => d.OccupationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblOccupation");
             });
 
-            modelBuilder.Entity<TblDepartment>(entity =>
+            modelBuilder.Entity<Department>(entity =>
             {
-                entity.HasKey(e => e.DepartmentId);
-
-                entity.ToTable("tblDepartment");
-
                 entity.Property(e => e.DepartmentId).ValueGeneratedNever();
 
                 entity.Property(e => e.DepartmentLeaderId).HasMaxLength(450);
@@ -268,35 +234,29 @@ namespace ysamedia.Entities
                     .HasMaxLength(256);
 
                 entity.HasOne(d => d.DepartmentLeader)
-                    .WithMany(p => p.TblDepartment)
+                    .WithMany(p => p.Department)
                     .HasForeignKey(d => d.DepartmentLeaderId)
                     .HasConstraintName("FK_tblDepartment_tblUser");
             });
 
-            modelBuilder.Entity<TblDependant>(entity =>
+            modelBuilder.Entity<Dependant>(entity =>
             {
-                entity.HasKey(e => e.DependantId);
-
-                entity.ToTable("tblDependant");
-
                 entity.Property(e => e.DependantId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.TblDependant)
+                    .WithMany(p => p.Dependant)
                     .HasForeignKey(d => d.ChurchMemberId)
                     .HasConstraintName("FK_tblDependant_tblChurchMember");
 
                 entity.HasOne(d => d.DependantCategory)
-                    .WithMany(p => p.TblDependant)
+                    .WithMany(p => p.Dependant)
                     .HasForeignKey(d => d.DependantCategoryId)
                     .HasConstraintName("FK_tblDependant_tblDependantCategory");
             });
 
-            modelBuilder.Entity<TblDependantCategory>(entity =>
+            modelBuilder.Entity<DependantCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryId);
-
-                entity.ToTable("tblDependantCategory");
 
                 entity.Property(e => e.CategoryId).ValueGeneratedNever();
 
@@ -305,10 +265,8 @@ namespace ysamedia.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblDeptUserBrigdge>(entity =>
+            modelBuilder.Entity<DeptUserBrigdge>(entity =>
             {
-                entity.ToTable("tblDeptUserBrigdge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
@@ -318,21 +276,21 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Department)
-                    .WithMany(p => p.TblDeptUserBrigdge)
+                    .WithMany(p => p.DeptUserBrigdge)
                     .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblDeptUserBrigdge_tblDepartment");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblDeptUserBrigdge)
+                    .WithMany(p => p.DeptUserBrigdge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblDeptUserBrigdge_tblUser");
             });
 
-            modelBuilder.Entity<TblDlicenceUserBridge>(entity =>
+            modelBuilder.Entity<DlicenceUserBridge>(entity =>
             {
-                entity.ToTable("tblDLicenceUserBridge");
+                entity.ToTable("DLicenceUserBridge");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
@@ -343,23 +301,21 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Licence)
-                    .WithMany(p => p.TblDlicenceUserBridge)
+                    .WithMany(p => p.DlicenceUserBridge)
                     .HasForeignKey(d => d.LicenceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblDLicenceUserBridge_tblDriverLicence");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblDlicenceUserBridge)
+                    .WithMany(p => p.DlicenceUserBridge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblDLicenceUserBridge_tblUser");
             });
 
-            modelBuilder.Entity<TblDriverLicence>(entity =>
+            modelBuilder.Entity<DriverLicence>(entity =>
             {
                 entity.HasKey(e => e.LicenceId);
-
-                entity.ToTable("tblDriverLicence");
 
                 entity.Property(e => e.LicenceId).ValueGeneratedNever();
 
@@ -368,12 +324,8 @@ namespace ysamedia.Entities
                     .HasColumnType("nchar(10)");
             });
 
-            modelBuilder.Entity<TblEducation>(entity =>
+            modelBuilder.Entity<Education>(entity =>
             {
-                entity.HasKey(e => e.EducationId);
-
-                entity.ToTable("tblEducation");
-
                 entity.Property(e => e.EducationId).ValueGeneratedNever();
 
                 entity.Property(e => e.EducationType)
@@ -389,18 +341,14 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblEducation)
+                    .WithMany(p => p.Education)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblEducation_tblUser");
             });
 
-            modelBuilder.Entity<TblEmployee>(entity =>
+            modelBuilder.Entity<Employee>(entity =>
             {
-                entity.HasKey(e => e.EmployeeId);
-
-                entity.ToTable("tblEmployee");
-
                 entity.Property(e => e.EmployeeId).ValueGeneratedNever();
 
                 entity.Property(e => e.Description).HasMaxLength(256);
@@ -408,12 +356,8 @@ namespace ysamedia.Entities
                 entity.Property(e => e.JobTitle).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblGender>(entity =>
+            modelBuilder.Entity<Gender>(entity =>
             {
-                entity.HasKey(e => e.GenderId);
-
-                entity.ToTable("tblGender");
-
                 entity.Property(e => e.GenderId).ValueGeneratedNever();
 
                 entity.Property(e => e.Gname)
@@ -422,16 +366,13 @@ namespace ysamedia.Entities
                     .HasColumnType("nchar(10)");
             });
 
-            modelBuilder.Entity<TblLanguage>(entity =>
+            modelBuilder.Entity<Language>(entity =>
             {
-                entity.HasKey(e => e.LanguageId);
-
-                entity.ToTable("tblLanguage");
-
                 entity.Property(e => e.LanguageId).ValueGeneratedNever();
 
-                entity.Property(e => e.Language)
+                entity.Property(e => e.Language1)
                     .IsRequired()
+                    .HasColumnName("Language")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Proficiency).HasMaxLength(150);
@@ -441,33 +382,27 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblLanguage)
+                    .WithMany(p => p.Language)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblLanguage_tblUser");
             });
 
-            modelBuilder.Entity<TblLog>(entity =>
+            modelBuilder.Entity<Log>(entity =>
             {
-                entity.HasKey(e => e.LogId);
-
-                entity.ToTable("tblLog");
-
                 entity.Property(e => e.LogId).ValueGeneratedNever();
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.HasOne(d => d.TimeIn)
-                    .WithMany(p => p.TblLog)
+                    .WithMany(p => p.Log)
                     .HasForeignKey(d => d.TimeInId)
                     .HasConstraintName("FK_tblLog_tblTimeIn");
             });
 
-            modelBuilder.Entity<TblNegativeAttribute>(entity =>
+            modelBuilder.Entity<NegativeAttribute>(entity =>
             {
                 entity.HasKey(e => e.AttributeId);
-
-                entity.ToTable("tblNegativeAttribute");
 
                 entity.Property(e => e.AttributeId).ValueGeneratedNever();
 
@@ -476,10 +411,8 @@ namespace ysamedia.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblNegAttributeUserBridge>(entity =>
+            modelBuilder.Entity<NegAttributeUserBridge>(entity =>
             {
-                entity.ToTable("tblNegAttributeUserBridge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
@@ -489,38 +422,33 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Attribute)
-                    .WithMany(p => p.TblNegAttributeUserBridge)
+                    .WithMany(p => p.NegAttributeUserBridge)
                     .HasForeignKey(d => d.AttributeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblNegAttributeUserBridge_tblNegativeAttribute");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblNegAttributeUserBridge)
+                    .WithMany(p => p.NegAttributeUserBridge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblNegAttributeUserBridge_tblUser");
             });
 
-            modelBuilder.Entity<TblOccupation>(entity =>
+            modelBuilder.Entity<Occupation>(entity =>
             {
-                entity.HasKey(e => e.OccupationId);
-
-                entity.ToTable("tblOccupation");
-
                 entity.Property(e => e.OccupationId).ValueGeneratedNever();
 
-                entity.Property(e => e.Occupation)
+                entity.Property(e => e.Occupation1)
                     .IsRequired()
+                    .HasColumnName("Occupation")
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblPhoto>(entity =>
+            modelBuilder.Entity<Photo>(entity =>
             {
-                entity.HasKey(e => e.PhotoId);
-
-                entity.ToTable("tblPhoto");
-
                 entity.Property(e => e.PhotoId).ValueGeneratedNever();
+
+                entity.Property(e => e.Photo1).HasColumnName("Photo");
 
                 entity.Property(e => e.PhotoName)
                     .IsRequired()
@@ -531,29 +459,35 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblPhoto)
+                    .WithMany(p => p.Photo)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblPhoto_tblUser");
             });
 
-            modelBuilder.Entity<TblQuestion>(entity =>
+            modelBuilder.Entity<PositiveAttribute>(entity =>
             {
-                entity.HasKey(e => e.QuestionId);
+                entity.HasKey(e => e.AttributeId);
 
-                entity.ToTable("tblQuestion");
+                entity.Property(e => e.AttributeId).ValueGeneratedNever();
 
+                entity.Property(e => e.AttributeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Question>(entity =>
+            {
                 entity.Property(e => e.QuestionId).ValueGeneratedNever();
 
-                entity.Property(e => e.Question)
+                entity.Property(e => e.Question1)
                     .IsRequired()
+                    .HasColumnName("Question")
                     .HasMaxLength(700);
             });
 
-            modelBuilder.Entity<TblRateAnswerUserBridge>(entity =>
+            modelBuilder.Entity<RateAnswerUserBridge>(entity =>
             {
-                entity.ToTable("tblRateAnswerUserBridge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
@@ -563,38 +497,34 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Answer)
-                    .WithMany(p => p.TblRateAnswerUserBridge)
+                    .WithMany(p => p.RateAnswerUserBridge)
                     .HasForeignKey(d => d.AnswerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblRateAnswerUserBridge_tblRatingAnswer");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblRateAnswerUserBridge)
+                    .WithMany(p => p.RateAnswerUserBridge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblRateAnswerUserBridge_tblUser");
             });
 
-            modelBuilder.Entity<TblRatingAnswer>(entity =>
+            modelBuilder.Entity<RatingAnswer>(entity =>
             {
                 entity.HasKey(e => e.AnswerId);
-
-                entity.ToTable("tblRatingAnswer");
 
                 entity.Property(e => e.AnswerId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Question)
-                    .WithMany(p => p.TblRatingAnswer)
+                    .WithMany(p => p.RatingAnswer)
                     .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblRatingAnswer_tblRatingQuestion");
             });
 
-            modelBuilder.Entity<TblRatingQuestion>(entity =>
+            modelBuilder.Entity<RatingQuestion>(entity =>
             {
                 entity.HasKey(e => e.QuestionId);
-
-                entity.ToTable("tblRatingQuestion");
 
                 entity.Property(e => e.QuestionId).ValueGeneratedNever();
 
@@ -603,11 +533,9 @@ namespace ysamedia.Entities
                     .HasMaxLength(500);
             });
 
-            modelBuilder.Entity<TblRelationshipStatus>(entity =>
+            modelBuilder.Entity<RelationshipStatus>(entity =>
             {
                 entity.HasKey(e => e.RelationshipId);
-
-                entity.ToTable("tblRelationshipStatus");
 
                 entity.Property(e => e.RelationshipId).ValueGeneratedNever();
 
@@ -616,10 +544,8 @@ namespace ysamedia.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblRole>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.ToTable("tblRole");
-
                 entity.HasIndex(e => e.NormalizedName)
                     .HasName("RoleNameIndex")
                     .IsUnique()
@@ -632,24 +558,22 @@ namespace ysamedia.Entities
                 entity.Property(e => e.NormalizedName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<TblRoleClaim>(entity =>
+            modelBuilder.Entity<RoleClaim>(entity =>
             {
-                entity.ToTable("tblRoleClaim");
-
-                entity.HasIndex(e => e.RoleId);
+                entity.HasIndex(e => e.RoleId)
+                    .HasName("IX_tblRoleClaim_RoleId");
 
                 entity.Property(e => e.RoleId).IsRequired();
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.TblRoleClaim)
-                    .HasForeignKey(d => d.RoleId);
+                    .WithMany(p => p.RoleClaim)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_tblRoleClaim_tblRole_RoleId");
             });
 
-            modelBuilder.Entity<TblScreeningAnswer>(entity =>
+            modelBuilder.Entity<ScreeningAnswer>(entity =>
             {
                 entity.HasKey(e => e.AnswerId);
-
-                entity.ToTable("tblScreeningAnswer");
 
                 entity.Property(e => e.AnswerId).ValueGeneratedNever();
 
@@ -662,23 +586,21 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Question)
-                    .WithMany(p => p.TblScreeningAnswer)
+                    .WithMany(p => p.ScreeningAnswer)
                     .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblScreeningAnswer_tblScreeningQuestion");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblScreeningAnswer)
+                    .WithMany(p => p.ScreeningAnswer)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblScreeningAnswer_tblUser");
             });
 
-            modelBuilder.Entity<TblScreeningQuestion>(entity =>
+            modelBuilder.Entity<ScreeningQuestion>(entity =>
             {
                 entity.HasKey(e => e.QuestionId);
-
-                entity.ToTable("tblScreeningQuestion");
 
                 entity.Property(e => e.QuestionId).ValueGeneratedNever();
 
@@ -687,11 +609,9 @@ namespace ysamedia.Entities
                     .HasMaxLength(250);
             });
 
-            modelBuilder.Entity<TblScreeningScripture>(entity =>
+            modelBuilder.Entity<ScreeningScripture>(entity =>
             {
                 entity.HasKey(e => e.ScriptureId);
-
-                entity.ToTable("tblScreeningScripture");
 
                 entity.Property(e => e.ScriptureId).ValueGeneratedNever();
 
@@ -708,18 +628,14 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblScreeningScripture)
+                    .WithMany(p => p.ScreeningScripture)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblScreeningScripture_tblUser");
             });
 
-            modelBuilder.Entity<TblSkill>(entity =>
+            modelBuilder.Entity<Skill>(entity =>
             {
-                entity.HasKey(e => e.SkillId);
-
-                entity.ToTable("tblSkill");
-
                 entity.Property(e => e.SkillId).ValueGeneratedNever();
 
                 entity.Property(e => e.Proficiency).HasColumnType("nchar(20)");
@@ -735,22 +651,20 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.SkillCat)
-                    .WithMany(p => p.TblSkill)
+                    .WithMany(p => p.Skill)
                     .HasForeignKey(d => d.SkillCatId)
                     .HasConstraintName("FK_tblSkill_tblSkillCategory");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblSkill)
+                    .WithMany(p => p.Skill)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblSkill_tblUser");
             });
 
-            modelBuilder.Entity<TblSkillCategory>(entity =>
+            modelBuilder.Entity<SkillCategory>(entity =>
             {
                 entity.HasKey(e => e.SkillCatId);
-
-                entity.ToTable("tblSkillCategory");
 
                 entity.Property(e => e.SkillCatId).ValueGeneratedNever();
 
@@ -759,12 +673,8 @@ namespace ysamedia.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblStudent>(entity =>
+            modelBuilder.Entity<Student>(entity =>
             {
-                entity.HasKey(e => e.StudentId);
-
-                entity.ToTable("tblStudent");
-
                 entity.Property(e => e.StudentId).ValueGeneratedNever();
 
                 entity.Property(e => e.Category)
@@ -782,12 +692,8 @@ namespace ysamedia.Entities
                 entity.Property(e => e.StartDate).HasColumnType("date");
             });
 
-            modelBuilder.Entity<TblSubject>(entity =>
+            modelBuilder.Entity<Subject>(entity =>
             {
-                entity.HasKey(e => e.SubjectId);
-
-                entity.ToTable("tblSubject");
-
                 entity.Property(e => e.SubjectId).ValueGeneratedNever();
 
                 entity.Property(e => e.SubjectName)
@@ -795,17 +701,15 @@ namespace ysamedia.Entities
                     .HasMaxLength(250);
 
                 entity.HasOne(d => d.Education)
-                    .WithMany(p => p.TblSubject)
+                    .WithMany(p => p.Subject)
                     .HasForeignKey(d => d.EducationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblSubject_tblEducation");
             });
 
-            modelBuilder.Entity<TblTimeIn>(entity =>
+            modelBuilder.Entity<TimeIn>(entity =>
             {
                 entity.HasKey(e => e.TimeId);
-
-                entity.ToTable("tblTimeIn");
 
                 entity.Property(e => e.TimeId).ValueGeneratedNever();
 
@@ -814,11 +718,9 @@ namespace ysamedia.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TblTransportType>(entity =>
+            modelBuilder.Entity<TransportType>(entity =>
             {
                 entity.HasKey(e => e.TransportId);
-
-                entity.ToTable("tblTransportType");
 
                 entity.Property(e => e.TransportId).ValueGeneratedNever();
 
@@ -827,10 +729,8 @@ namespace ysamedia.Entities
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<TblTransUserBridge>(entity =>
+            modelBuilder.Entity<TransUserBridge>(entity =>
             {
-                entity.ToTable("tblTransUserBridge");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
@@ -840,24 +740,20 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Transport)
-                    .WithMany(p => p.TblTransUserBridge)
+                    .WithMany(p => p.TransUserBridge)
                     .HasForeignKey(d => d.TransportId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblTransUserBridge_tblTransportType");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblTransUserBridge)
+                    .WithMany(p => p.TransUserBridge)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblTransUserBridge_tblUser");
             });
 
-            modelBuilder.Entity<TblUser>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId);
-
-                entity.ToTable("tblUser");
-
                 entity.HasIndex(e => e.NormalizedEmail)
                     .HasName("EmailIndex");
 
@@ -893,30 +789,26 @@ namespace ysamedia.Entities
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
                 entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.TblUser)
+                    .WithMany(p => p.User)
                     .HasForeignKey(d => d.GenderId)
                     .HasConstraintName("FK_tblUser_tblGender");
             });
 
-            modelBuilder.Entity<TblUserClaim>(entity =>
+            modelBuilder.Entity<UserClaim>(entity =>
             {
-                entity.ToTable("tblUserClaim");
-
-                entity.HasIndex(e => e.UserId);
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_tblUserClaim_UserId");
 
                 entity.Property(e => e.UserId).IsRequired();
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblUserClaim)
-                    .HasForeignKey(d => d.UserId);
+                    .WithMany(p => p.UserClaim)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_tblUserClaim_tblUser_UserId");
             });
 
-            modelBuilder.Entity<TblUserLog>(entity =>
+            modelBuilder.Entity<UserLog>(entity =>
             {
-                entity.HasKey(e => e.UserLogId);
-
-                entity.ToTable("tblUserLog");
-
                 entity.Property(e => e.UserLogId).ValueGeneratedNever();
 
                 entity.Property(e => e.UserId)
@@ -924,27 +816,23 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
             });
 
-            modelBuilder.Entity<TblUserLogin>(entity =>
+            modelBuilder.Entity<UserLogin>(entity =>
             {
                 entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
 
-                entity.ToTable("tblUserLogin");
-
-                entity.HasIndex(e => e.UserId);
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_tblUserLogin_UserId");
 
                 entity.Property(e => e.UserId).IsRequired();
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblUserLogin)
-                    .HasForeignKey(d => d.UserId);
+                    .WithMany(p => p.UserLogin)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_tblUserLogin_tblUser_UserId");
             });
 
-            modelBuilder.Entity<TblVacancy>(entity =>
+            modelBuilder.Entity<Vacancy>(entity =>
             {
-                entity.HasKey(e => e.VacancyId);
-
-                entity.ToTable("tblVacancy");
-
                 entity.Property(e => e.VacancyId).ValueGeneratedNever();
 
                 entity.Property(e => e.DatePosted).HasColumnType("date");
@@ -960,27 +848,25 @@ namespace ysamedia.Entities
                     .HasMaxLength(256);
 
                 entity.HasOne(d => d.Department)
-                    .WithMany(p => p.TblVacancy)
+                    .WithMany(p => p.Vacancy)
                     .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblVacancy_tblDepartment");
 
                 entity.HasOne(d => d.FilledByNavigation)
-                    .WithMany(p => p.TblVacancyFilledByNavigation)
+                    .WithMany(p => p.VacancyFilledByNavigation)
                     .HasForeignKey(d => d.FilledBy)
                     .HasConstraintName("FK_tblVacancy_filledBy_tblUser");
 
                 entity.HasOne(d => d.PostedByNavigation)
-                    .WithMany(p => p.TblVacancyPostedByNavigation)
+                    .WithMany(p => p.VacancyPostedByNavigation)
                     .HasForeignKey(d => d.PostedBy)
                     .HasConstraintName("FK_tblVacancy_tblUser");
             });
 
-            modelBuilder.Entity<TblWorkPreference>(entity =>
+            modelBuilder.Entity<WorkPreference>(entity =>
             {
                 entity.HasKey(e => e.WorkPrefId);
-
-                entity.ToTable("tblWorkPreference");
 
                 entity.Property(e => e.WorkPrefId).ValueGeneratedNever();
 
@@ -993,19 +879,17 @@ namespace ysamedia.Entities
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.PrefDepartmentNavigation)
-                    .WithMany(p => p.TblWorkPreference)
+                    .WithMany(p => p.WorkPreference)
                     .HasForeignKey(d => d.PrefDepartment)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblWorkPreference_tblDepartment");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TblWorkPreference)
+                    .WithMany(p => p.WorkPreference)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblWorkPreference_tblUser");
             });
         }
-
-        public DbSet<ysamedia.Models.ChurchViewModels.ChurchMemberViewModel> ChurchMemberViewModel { get; set; }
     }
 }

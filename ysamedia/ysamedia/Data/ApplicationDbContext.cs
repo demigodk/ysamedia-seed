@@ -16,14 +16,14 @@ namespace ysamedia.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityUser>().ToTable("tblUser").Property(p => p.Id).HasColumnName("UserId");
-            builder.Entity<ApplicationUser>().ToTable("tblUser").Property(p => p.Id).HasColumnName("UserId");
-            builder.Entity<IdentityUserRole<string>>().ToTable("tblUserRole");
-            builder.Entity<IdentityUserLogin<string>>().ToTable("tblUserLogin");
-            builder.Entity<IdentityUserClaim<string>>().ToTable("tblUserClaim");
-            builder.Entity<IdentityRole>().ToTable("tblRole");
-            builder.Entity<IdentityRoleClaim<string>>().ToTable("tblRoleClaim");
-            builder.Entity<IdentityUserToken<string>>().ToTable("tblUserToken");
+            builder.Entity<IdentityUser>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+            builder.Entity<ApplicationUser>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRole");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");
+            builder.Entity<IdentityRole>().ToTable("Role");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
 
 
             ///

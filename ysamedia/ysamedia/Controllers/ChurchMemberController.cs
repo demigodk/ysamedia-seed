@@ -24,7 +24,7 @@ namespace ysamedia.Controllers
 
         public async Task ChurchMembers(string searchString)
         {
-            var churchMembers = (from c in _context.TblChurchMember
+            var churchMembers = (from c in _context.ChurchMember
                                  select c);
 
             if (!String.IsNullOrEmpty(searchString))
@@ -39,27 +39,27 @@ namespace ysamedia.Controllers
         public IActionResult MemberRegister()
         {          
             //___________________________ TblAgeGroup _____________________________
-            List<TblAgeGroup> AgeList = new List<TblAgeGroup>();
+            List<AgeGroup> AgeList = new List<AgeGroup>();
 
-            AgeList = (from a in _context.TblAgeGroup
+            AgeList = (from a in _context.AgeGroup
                        select a).ToList();
 
             ViewBag.ListOfAgeGroups = AgeList;
             //_________________________ TblAgeGroup End ____________________________
 
             //____________________________TBLGender_________________________
-            List<TblGender> GenderList = new List<TblGender>();
+            List<Gender> GenderList = new List<Gender>();
 
-            GenderList = (from g in _context.TblGender
+            GenderList = (from g in _context.Gender
                           select g).ToList();
 
             ViewBag.ListOfGenders = GenderList;
             //_____________________________ TBLGender End ______________________       
             
             //___________________________ TblRelationshipStatus _____________________________           
-            List<TblRelationshipStatus> StatusList = new List<TblRelationshipStatus>();
+            List<RelationshipStatus> StatusList = new List<RelationshipStatus>();
 
-            StatusList = (from s in _context.TblRelationshipStatus
+            StatusList = (from s in _context.RelationshipStatus
                           select s).ToList();
 
             ViewBag.ListOfRelationships = StatusList;
@@ -76,9 +76,9 @@ namespace ysamedia.Controllers
             /******************* Code segment 1 - Insert In TblChurchMember ****************************/
             int maxMemberId = 1;
             
-            if (_context.TblChurchMember.Any())
+            if (_context.ChurchMember.Any())
             {
-                maxMemberId = (_context.TblChurchMember.Max(r => r.ChurchMemberId) + 1);
+                maxMemberId = (_context.ChurchMember.Max(r => r.ChurchMemberId) + 1);
             }
 
             string dob;
@@ -109,7 +109,7 @@ namespace ysamedia.Controllers
 
             model.DateRecorded = DateTime.Now;
 
-            TblChurchMember churchMember = new TblChurchMember
+            ChurchMember churchMember = new ChurchMember
             {
                     ChurchMemberId = maxMemberId,
                     FirstName = model.FirstName,                   
@@ -128,7 +128,7 @@ namespace ysamedia.Controllers
                     RelationshipId = model.RelationshipId,
                     GenderId = model.GenderId
             };
-            _context.TblChurchMember.Add(churchMember);
+            _context.ChurchMember.Add(churchMember);
             _context.SaveChanges();
 
 
@@ -136,102 +136,102 @@ namespace ysamedia.Controllers
 
             int maxDependantId = 1;
            
-            if (_context.TblDependant.Any())
+            if (_context.Dependant.Any())
             {
-                maxDependantId = (_context.TblDependant.Max(d => d.DependantId) + 1);                
+                maxDependantId = (_context.Dependant.Max(d => d.DependantId) + 1);                
             }
 
-            _context.TblDependant.AddRange(
-                new TblDependant { DependantId = maxDependantId, ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 1 },
-                new TblDependant { DependantId = (maxDependantId + 1), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 2 },
-                new TblDependant { DependantId = (maxDependantId + 2), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 3 },
-                new TblDependant { DependantId = (maxDependantId + 3), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 4 }
+            _context.Dependant.AddRange(
+                new Dependant { DependantId = maxDependantId, ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 1 },
+                new Dependant { DependantId = (maxDependantId + 1), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 2 },
+                new Dependant { DependantId = (maxDependantId + 2), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 3 },
+                new Dependant { DependantId = (maxDependantId + 3), ChurchMemberId = maxMemberId, NumDependant = Convert.ToInt32(model.NumPreschool), DependantCategoryId = 4 }
              );
             _context.SaveChanges();
                     
             /******************* Code segment 2 - Insert In TblChurchMemberOccupationBrigde **********/
             int maxID = 1;
 
-            if (_context.TblChurchMemberOccupationBridge.Any())
+            if (_context.ChurchMemberOccupationBridge.Any())
             {
-                maxID = _context.TblChurchMemberOccupationBridge.Max(c => c.Id);
+                maxID = _context.ChurchMemberOccupationBridge.Max(c => c.Id);
             }
 
-            TblChurchMemberOccupationBridge churchMemberOccupationBridge = new TblChurchMemberOccupationBridge
+            ChurchMemberOccupationBridge churchMemberOccupationBridge = new ChurchMemberOccupationBridge
             {
                 Id = ( maxID + 1),
                 ChurchMemberId = maxMemberId,
                 OccupationId = model.OccupationId
             };
-            _context.TblChurchMemberOccupationBridge.Add(churchMemberOccupationBridge);
+            _context.ChurchMemberOccupationBridge.Add(churchMemberOccupationBridge);
             _context.SaveChanges();
 
             /******************* Code segment 2 - Insert In TblAnswer ********************************/
             int maxAnswerId = 1;
             
-            if (_context.TblAnswer.Any())
+            if (_context.Answer.Any())
             {
-                maxAnswerId = _context.TblAnswer.Max(a => a.AnswerId);
+                maxAnswerId = _context.Answer.Max(a => a.AnswerId);
             }
 
-            TblAnswer answer1 = new TblAnswer
+            Answer answer1 = new Answer
             {
                 AnswerId = (maxAnswerId + 1),
-                Answer = model.Question1,
+                Answer1 = model.Question1,
                 QuestionId = 1,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer1);
+            _context.Answer.Add(answer1);
             _context.SaveChanges();
 
-            TblAnswer answer2 = new TblAnswer
+            Answer answer2 = new Answer
             {
                 AnswerId = (maxAnswerId + 2),
-                Answer = model.Question2,
+                Answer1 = model.Question2,
                 QuestionId = 2,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer2);
+            _context.Answer.Add(answer2);
             _context.SaveChanges();
 
-            TblAnswer answer3 = new TblAnswer
+            Answer answer3 = new Answer
             {
                 AnswerId = (maxAnswerId + 3),
-                Answer = model.Question3,
+                Answer1 = model.Question3,
                 QuestionId = 3,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer3);
+            _context.Answer.Add(answer3);
             _context.SaveChanges();
 
-            TblAnswer answer4 = new TblAnswer
+            Answer answer4 = new Answer
             {
                 AnswerId = (maxAnswerId + 4),
-                Answer = model.Question4,
+                Answer1 = model.Question4,
                 QuestionId = 4,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer4);
+            _context.Answer.Add(answer4);
             _context.SaveChanges();
 
-            TblAnswer answer5 = new TblAnswer
+            Answer answer5 = new Answer
             {
                 AnswerId = (maxAnswerId + 5),
-                Answer = model.Question5,
+                Answer1 = model.Question5,
                 QuestionId = 5,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer5);
+            _context.Answer.Add(answer5);
             _context.SaveChanges();
 
-            TblAnswer answer6 = new TblAnswer
+            Answer answer6 = new Answer
             {
                 AnswerId = (maxAnswerId + 6),
-                Answer = model.Question6,
+                Answer1 = model.Question6,
                 QuestionId = 6,
                 ChurchMemberId = maxMemberId
             };
-            _context.TblAnswer.Add(answer6);
+            _context.Answer.Add(answer6);
             _context.SaveChanges();
 
 

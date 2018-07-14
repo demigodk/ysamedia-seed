@@ -65,7 +65,7 @@ namespace ysamedia.Classes.ChurchMemberHelper
         {
             CompleteViewModel tempModel = new CompleteViewModel();
 
-            List<TblChurchMember> churchMember = (from c in _context.TblChurchMember
+            List<ChurchMember> churchMember = (from c in _context.ChurchMember
                                                   where c.ChurchMemberId == recordId
                                                   select c).ToList();
 
@@ -184,7 +184,7 @@ namespace ysamedia.Classes.ChurchMemberHelper
 
 
             /****************** Record from tblDependant *********************/
-            List<TblDependant> dependant = (from c in _context.TblDependant
+            List<Dependant> dependant = (from c in _context.Dependant
                                             where c.ChurchMemberId == recordId
                                             select c).ToList();
 
@@ -211,8 +211,8 @@ namespace ysamedia.Classes.ChurchMemberHelper
             }
 
             /******************** From tblDependantMemberOccupationBridge **********************/
-            List<TblChurchMemberOccupationBridge> occupationBridge = new List<TblChurchMemberOccupationBridge>();
-            occupationBridge = (from o in _context.TblChurchMemberOccupationBridge
+            List<ChurchMemberOccupationBridge> occupationBridge = new List<ChurchMemberOccupationBridge>();
+            occupationBridge = (from o in _context.ChurchMemberOccupationBridge
                                 where o.ChurchMemberId == recordId
                                 select o).ToList();
 
@@ -244,8 +244,8 @@ namespace ysamedia.Classes.ChurchMemberHelper
             }
 
             /****************** From tblAnswer ***********************/
-            List<TblAnswer> answers = new List<TblAnswer>();
-            answers = (from a in _context.TblAnswer
+            List<Answer> answers = new List<Answer>();
+            answers = (from a in _context.Answer
                        where a.ChurchMemberId == recordId
                        select a).ToList();
 
@@ -255,27 +255,27 @@ namespace ysamedia.Classes.ChurchMemberHelper
             {                
                 if (i == 0)
                 {
-                    tempModel.Question1 = answers[i].Answer;
+                    tempModel.Question1 = answers[i].Answer1;
                 }
                 else if (i == 1)
                 {
-                    tempModel.Question2 = answers[i].Answer;
+                    tempModel.Question2 = answers[i].Answer1;
                 }
                 else if (i == 2)
                 {
-                    tempModel.Question3 = answers[i].Answer;
+                    tempModel.Question3 = answers[i].Answer1;
                 }
                 else if (i == 3)
                 {
-                    tempModel.Question4 = answers[i].Answer;
+                    tempModel.Question4 = answers[i].Answer1;
                 }
                 else if (i == 4)
                 {
-                    tempModel.Question5 = answers[i].Answer;
+                    tempModel.Question5 = answers[i].Answer1;
                 }
                 else if (i == 5)
                 {
-                    tempModel.Question6 = answers[i].Answer;
+                    tempModel.Question6 = answers[i].Answer1;
                 }
             }
                         
