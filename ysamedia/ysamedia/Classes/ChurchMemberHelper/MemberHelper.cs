@@ -88,7 +88,7 @@ namespace ysamedia.Classes.ChurchMemberHelper
                 }
 
                 // Handling the date of Birth
-                string DOB = item.DateOfBirth;                
+                string DOB = (item.DateOfBirth).ToString();                
                 string[] stringSeparators = new string[] { "/" };
                 string[] result;
                
@@ -188,9 +188,9 @@ namespace ysamedia.Classes.ChurchMemberHelper
                                             where c.ChurchMemberId == recordId
                                             select c).ToList();
 
-            dependant.ToArray();
+            dependant.ToArray();            
 
-            for (int i = 0; i <= (dependant.Count + 1); i++)
+            for (int i = 0; i < (dependant.Count); i++)
             {
                 if (i == 0)
                 {
@@ -251,7 +251,7 @@ namespace ysamedia.Classes.ChurchMemberHelper
 
             answers.ToArray();
 
-            for (int i = 0; i < (answers.Count+1); i++)
+            for (int i = 0; i < (answers.Count); i++)
             {                
                 if (i == 0)
                 {

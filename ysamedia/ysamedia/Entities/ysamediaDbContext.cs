@@ -157,13 +157,23 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<ChurchMember>(entity =>
             {
-                entity.Property(e => e.ChurchMemberId).ValueGeneratedNever();
+                entity.Property(e => e.AnswerToQ1).HasMaxLength(200);
+
+                entity.Property(e => e.AnswerToQ2).HasMaxLength(200);
+
+                entity.Property(e => e.AnswerToQ3).HasMaxLength(200);
+
+                entity.Property(e => e.AnswerToQ4).HasMaxLength(200);
+
+                entity.Property(e => e.AnswerToQ5).HasMaxLength(200);
+
+                entity.Property(e => e.AnswerToQ6).HasMaxLength(200);
 
                 entity.Property(e => e.CellPhone).HasMaxLength(15);
 
                 entity.Property(e => e.City).HasMaxLength(50);
 
-                entity.Property(e => e.DateOfBirth).HasMaxLength(50);
+                entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
                 entity.Property(e => e.DateRegistered).HasColumnType("date");
 
@@ -197,6 +207,12 @@ namespace ysamedia.Entities
                     .HasForeignKey(d => d.GenderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblChurchMember_tblGender");
+
+                entity.HasOne(d => d.Occupation)
+                    .WithMany(p => p.ChurchMember)
+                    .HasForeignKey(d => d.OccupationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ChurchMember_Occupation");
 
                 entity.HasOne(d => d.Relationship)
                     .WithMany(p => p.ChurchMember)

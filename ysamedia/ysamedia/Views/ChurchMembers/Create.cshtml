@@ -14,11 +14,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ChurchMemberId" class="control-label"></label>
-                <input asp-for="ChurchMemberId" class="form-control" />
-                <span asp-validation-for="ChurchMemberId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -89,6 +84,60 @@
                 <label asp-for="PostalCode" class="control-label"></label>
                 <input asp-for="PostalCode" class="form-control" />
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OccupationId" class="control-label"></label>
+                <select asp-for="OccupationId" class ="form-control" asp-items="ViewBag.OccupationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumDepInPreSchool" class="control-label"></label>
+                <input asp-for="NumDepInPreSchool" class="form-control" />
+                <span asp-validation-for="NumDepInPreSchool" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumDepInPrimary" class="control-label"></label>
+                <input asp-for="NumDepInPrimary" class="form-control" />
+                <span asp-validation-for="NumDepInPrimary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumDepInHighSchool" class="control-label"></label>
+                <input asp-for="NumDepInHighSchool" class="form-control" />
+                <span asp-validation-for="NumDepInHighSchool" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumDepInTertiary" class="control-label"></label>
+                <input asp-for="NumDepInTertiary" class="form-control" />
+                <span asp-validation-for="NumDepInTertiary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ1" class="control-label"></label>
+                <input asp-for="AnswerToQ1" class="form-control" />
+                <span asp-validation-for="AnswerToQ1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ2" class="control-label"></label>
+                <input asp-for="AnswerToQ2" class="form-control" />
+                <span asp-validation-for="AnswerToQ2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ3" class="control-label"></label>
+                <input asp-for="AnswerToQ3" class="form-control" />
+                <span asp-validation-for="AnswerToQ3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ4" class="control-label"></label>
+                <input asp-for="AnswerToQ4" class="form-control" />
+                <span asp-validation-for="AnswerToQ4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ5" class="control-label"></label>
+                <input asp-for="AnswerToQ5" class="form-control" />
+                <span asp-validation-for="AnswerToQ5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerToQ6" class="control-label"></label>
+                <input asp-for="AnswerToQ6" class="form-control" />
+                <span asp-validation-for="AnswerToQ6" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

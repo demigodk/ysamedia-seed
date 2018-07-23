@@ -335,7 +335,7 @@ namespace ysamedia.Controllers
                     maxAnsId = _context.ScreeningAnswer.Max(a => a.AnswerId);
                 }
 
-                TblScreeningAnswer ScreenAnswer1 = new TblScreeningAnswer
+                ScreeningAnswer ScreenAnswer1 = new ScreeningAnswer
                 {
                     AnswerId = (maxAnsId + 1),
                     UserId = _userId,
@@ -345,7 +345,7 @@ namespace ysamedia.Controllers
                 _context.Add(ScreenAnswer1);
                 _context.SaveChanges();
 
-                TblScreeningAnswer ScreenAnswer2 = new TblScreeningAnswer
+                ScreeningAnswer ScreenAnswer2 = new ScreeningAnswer
                 {
                     AnswerId = (maxAnsId + 2),
                     UserId = _userId,
@@ -355,7 +355,7 @@ namespace ysamedia.Controllers
                 _context.Add(ScreenAnswer2);
                 _context.SaveChanges();
 
-                TblScreeningAnswer ScreenAnswer3 = new TblScreeningAnswer
+                ScreeningAnswer ScreenAnswer3 = new ScreeningAnswer
                 {
                     AnswerId = (maxAnsId + 3),
                     UserId = _userId,
@@ -365,7 +365,7 @@ namespace ysamedia.Controllers
                 _context.Add(ScreenAnswer3);
                 _context.SaveChanges();
 
-                TblScreeningAnswer ScreenAnswer4 = new TblScreeningAnswer
+                ScreeningAnswer ScreenAnswer4 = new ScreeningAnswer
                 {
                     AnswerId = (maxAnsId + 4),
                     UserId = _userId,

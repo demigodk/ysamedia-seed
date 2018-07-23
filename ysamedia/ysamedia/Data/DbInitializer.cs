@@ -92,7 +92,7 @@ namespace ysamedia.Data
                     new Occupation { OccupationId = 1, Occupation1 = "Student" },
                     new Occupation { OccupationId = 2, Occupation1 = "Internship" },
                     new Occupation { OccupationId = 3, Occupation1 = "Employed" },
-                    new Occupation { OccupationId = 4, Occupation1 = "Self-Employed" },
+                    new Occupation { OccupationId = 4, Occupation1 = "Self-Employed" },                   
                     new Occupation { OccupationId = 5, Occupation1 = "Other" }
 
                     );

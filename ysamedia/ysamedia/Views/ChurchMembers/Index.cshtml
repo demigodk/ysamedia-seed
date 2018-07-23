@@ -5,41 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<link href="~/css/jquery-ui.min.css" rel="stylesheet" />
-<script src="~/js/jquery.min.js"></script>
-<script src="~/js/jquery-ui.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-
-        $("#txtSearch").autocomplete({
-
-            source: '@Url.Action("GetMembers")'
-        });
-    });
-</script>*@
-
 <h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<p>
-    @using (Html.BeginForm("Index", "ChurchMembers", FormMethod.Get))
-    {
-        <b>Search By: </b> @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
-        @Html.RadioButton("searchBy", "Gender") <text>Gender</text><br />
-        @Html.TextBox("search") <input type="submit" value="Search" />
-    }
-</p>
-@*<p>
-    @using (Html.BeginForm())
-    {
-        <b>Name: </b>
-        @Html.TextBox("search", null, new { id = "txtSearch" })
-        <input type="submit" value="Search" />
-    }
-</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -50,57 +20,169 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.CellPhone)
             </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.HomePhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkPhone)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateRegistered)
             </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Province)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumDepInPreSchool)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumDepInPrimary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumDepInHighSchool)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumDepInTertiary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ4)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ5)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnswerToQ6)
+                </th>*@
             <th>
-                Action
+                @Html.DisplayNameFor(model => model.AgeGroup)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Occupation)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship)
+            </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-
-        @if (Model.Count() == 0)
+        @foreach (var item in Model)
         {
             <tr>
-                <td colspan="5">
-                    Sorry! No Records Match The Search Criteria.
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CellPhone)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.HomePhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkPhone)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRegistered)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Province)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumDepInPreSchool)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumDepInPrimary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumDepInHighSchool)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumDepInTertiary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ5)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerToQ6)
+                    </td>*@
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgeGroup.AgeRange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender.Gname)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Occupation.Occupation1)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Relationship.RelationshipCategory)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ChurchMemberId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ChurchMemberId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ChurchMemberId">Delete</a>
                 </td>
             </tr>
-        }
-        else
-        {
-
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CellPhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRegistered)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ChurchMemberId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ChurchMemberId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ChurchMemberId">Delete</a>
-                    </td>
-                </tr>
-            }
         }
     </tbody>
 </table>

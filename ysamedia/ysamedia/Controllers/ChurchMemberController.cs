@@ -20,7 +20,7 @@ namespace ysamedia.Controllers
             _context = context;           
         }
 
-        public IList<TblChurchMember> Member { get; set; }
+        public IList<ChurchMember> Member { get; set; }
 
         public async Task ChurchMembers(string searchString)
         {
@@ -114,7 +114,7 @@ namespace ysamedia.Controllers
                     ChurchMemberId = maxMemberId,
                     FirstName = model.FirstName,                   
                     LastName = model.Surname,
-                    DateOfBirth = dob,
+                    //DateOfBirth = dob,
                     CellPhone = model.CellNumber,
                     HomePhone = model.HomeNumber,
                     WorkPhone = model.WorkNumber,
@@ -241,9 +241,10 @@ namespace ysamedia.Controllers
             return RedirectToAction("ChurchMemberInfo", memberHelper.getViewModel(maxMemberId));            
         }
 
-        public IActionResult ChurchMemberInfo(CompleteViewModel model)
-        {            
-            return View(model);
+        public IActionResult ChurchMemberInfo(int id)
+        {
+            MemberHelper memberHelper = new MemberHelper(_context);
+            return View(memberHelper.getViewModel(id));
         }        
     }
 }
