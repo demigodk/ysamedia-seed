@@ -130,60 +130,54 @@ namespace ysamedia.Controllers
         {
             if (ModelState.IsValid)
             {
-                /************************* Code Segment 1 - Entering Data For tblRatingQuestion ****************************************/
-                int ratingMaxId = 0;        // Max ID in tblRatingAnswer
-
-                if (_context.RatingAnswer.Any())
-                {
-                    ratingMaxId = _context.RatingAnswer.Max(r => r.AnswerId);
-                }
-
+                /************************* Code Segment 1 - Entering Data For RatingQuestion ****************************************/                
                 _context.RatingAnswer.AddRange(
-                    new RatingAnswer { AnswerId = (ratingMaxId + 1), Rating = vm.RQuestion1, QuestionId = 1 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 2), Rating = vm.RQuestion2, QuestionId = 2 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 3), Rating = vm.RQuestion3, QuestionId = 3 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 4), Rating = vm.RQuestion4, QuestionId = 4 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 5), Rating = vm.RQuestion5, QuestionId = 5 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 6), Rating = vm.RQuestion6, QuestionId = 6 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 7), Rating = vm.RQuestion7, QuestionId = 7 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 8), Rating = vm.RQuestion8, QuestionId = 8 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 9), Rating = vm.RQuestion9, QuestionId = 9 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 10), Rating = vm.RQuestion10, QuestionId = 10 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 11), Rating = vm.RQuestion11, QuestionId = 11 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 12), Rating = vm.RQuestion12, QuestionId = 12 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 13), Rating = vm.RQuestion13, QuestionId = 13 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 14), Rating = vm.RQuestion14, QuestionId = 14 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 15), Rating = vm.RQuestion15, QuestionId = 15 },
-                    new RatingAnswer { AnswerId = (ratingMaxId + 16), Rating = vm.RQuestion16, QuestionId = 16 }
+                    new RatingAnswer { Rating = vm.RQuestion1, QuestionId = 1 },
+                    new RatingAnswer { Rating = vm.RQuestion2, QuestionId = 2 },
+                    new RatingAnswer { Rating = vm.RQuestion3, QuestionId = 3 },
+                    new RatingAnswer { Rating = vm.RQuestion4, QuestionId = 4 },
+                    new RatingAnswer { Rating = vm.RQuestion5, QuestionId = 5 },
+                    new RatingAnswer { Rating = vm.RQuestion6, QuestionId = 6 },
+                    new RatingAnswer { Rating = vm.RQuestion7, QuestionId = 7 },
+                    new RatingAnswer { Rating = vm.RQuestion8, QuestionId = 8 },
+                    new RatingAnswer { Rating = vm.RQuestion9, QuestionId = 9 },
+                    new RatingAnswer { Rating = vm.RQuestion10, QuestionId = 10 },
+                    new RatingAnswer { Rating = vm.RQuestion11, QuestionId = 11 },
+                    new RatingAnswer { Rating = vm.RQuestion12, QuestionId = 12 },
+                    new RatingAnswer { Rating = vm.RQuestion13, QuestionId = 13 },
+                    new RatingAnswer { Rating = vm.RQuestion14, QuestionId = 14 },
+                    new RatingAnswer { Rating = vm.RQuestion15, QuestionId = 15 },
+                    new RatingAnswer { Rating = vm.RQuestion16, QuestionId = 16 }
                     );
 
                 _context.SaveChanges();
 
+                /*************************************** RateAnserBridge ********************************************/
 
-                int rateBridgeMaxId = 0;    // Max ID in tblRateAnswerUserBridge
+                int ratingMaxId = 0;        // Max ID in RatingAnswer
 
-                if (_context.RateAnswerUserBridge.Any())
+                if (_context.RatingAnswer.Any())
                 {
-                    rateBridgeMaxId = _context.RateAnswerUserBridge.Max(b => b.Id);
-                }
+                    ratingMaxId = _context.RatingAnswer.Max(r => r.AnswerId);
+                }               
 
                 _context.RateAnswerUserBridge.AddRange(
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 1), UserId = _userId, AnswerId = (ratingMaxId + 1) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 2), UserId = _userId, AnswerId = (ratingMaxId + 2) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 3), UserId = _userId, AnswerId = (ratingMaxId + 3) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 4), UserId = _userId, AnswerId = (ratingMaxId + 4) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 5), UserId = _userId, AnswerId = (ratingMaxId + 5) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 6), UserId = _userId, AnswerId = (ratingMaxId + 6) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 7), UserId = _userId, AnswerId = (ratingMaxId + 7) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 8), UserId = _userId, AnswerId = (ratingMaxId + 8) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 9), UserId = _userId, AnswerId = (ratingMaxId + 9) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 10), UserId = _userId, AnswerId = (ratingMaxId + 10) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 11), UserId = _userId, AnswerId = (ratingMaxId + 11) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 12), UserId = _userId, AnswerId = (ratingMaxId + 12) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 13), UserId = _userId, AnswerId = (ratingMaxId + 13) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 14), UserId = _userId, AnswerId = (ratingMaxId + 14) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 15), UserId = _userId, AnswerId = (ratingMaxId + 15) },
-                    new RateAnswerUserBridge { Id = (rateBridgeMaxId + 16), UserId = _userId, AnswerId = (ratingMaxId + 16) }
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 1) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 2) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 3) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 4) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 5) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 6) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 7) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 8) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 9) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 10) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 11) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 12) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 13) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 14) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 15) },
+                    new RateAnswerUserBridge { UserId = _userId, AnswerId = (ratingMaxId + 16) }
                 );
 
                 _context.SaveChanges();
@@ -199,7 +193,7 @@ namespace ysamedia.Controllers
         [HttpGet]
         public IActionResult AttributeSet()
         {
-            // Getting and binding the tblAttribute entries for Multiselect
+            // Getting and binding the Attribute entries for Multiselect
             List<PositiveAttribute> PosAttributeList = new List<PositiveAttribute>();
 
             PosAttributeList = (from p in _context.PositiveAttribute
@@ -207,7 +201,7 @@ namespace ysamedia.Controllers
 
             ViewBag.ListPosAttri = PosAttributeList;
 
-            // Getting and binding the tblNegativeAttribute
+            // Getting and binding the NegativeAttribute table
             List<NegativeAttribute> NegAttributeList = new List<NegativeAttribute>();
 
             NegAttributeList = (from n in _context.NegativeAttribute
@@ -221,14 +215,8 @@ namespace ysamedia.Controllers
         [HttpPost]
         public IActionResult AttributeSet(AttributeSetViewModel vm)
         {
-            /**************************** Code Segment 1 - Entering data into tblAttributeUserBridge *****************/
-            int bridgeMaxId = 0;
-
-            if (_context.AttributeUserBridge.Any())
-            {
-                bridgeMaxId = _context.AttributeUserBridge.Max(b => b.Id);
-            }
-
+            /**************************** Code Segment 1 - Entering data into AttributeUserBridge table *****************/
+            
             // Count of positive attributes selected
             int bridgeCount = (vm.PosAttribute).Count;
 
@@ -237,9 +225,8 @@ namespace ysamedia.Controllers
             attributeIds = (vm.PosAttribute).ToArray();
 
             for (int a = 0; a < ((vm.PosAttribute).Count); a++)
-            {
-                bridgeMaxId = (bridgeMaxId + 1);
-                attrUserBridge[a] = UserScreeningSupport.createAttributeRecord(bridgeMaxId, _userId, attributeIds[a]);
+            {                
+                attrUserBridge[a] = UserScreeningSupport.createAttributeRecord(_userId, attributeIds[a]);
                 _context.Add(attrUserBridge[a]);
             }
 
@@ -247,14 +234,8 @@ namespace ysamedia.Controllers
 
             /** Code Segment 1 End **/
 
-            /***************************  Code Segment 2 - Entering data for   tblNegAttributeUserBridge  ****************************/
-            int nbridgeMaxId = 0;
-
-            if (_context.NegAttributeUserBridge.Any())
-            {
-                nbridgeMaxId = _context.NegAttributeUserBridge.Max(n => n.Id);
-            }
-
+            /***************************  Code Segment 2 - Entering data for  NegAttributeUserBridge Table  ****************************/
+            
             // Count of negative attributes selected
             int nbridgeCount = (vm.NegAttribute).Count;
 
@@ -263,9 +244,8 @@ namespace ysamedia.Controllers
             negAttributeIds = (vm.NegAttribute).ToArray();
 
             for (int i = 0; i < ((vm.NegAttribute).Count); i++)
-            {
-                nbridgeMaxId += 1;
-                negAttriUserBridge[i] = UserScreeningSupport.createNegAttributeRecord(nbridgeMaxId, _userId, negAttributeIds[i]);
+            {              
+                negAttriUserBridge[i] = UserScreeningSupport.createNegAttributeRecord(_userId, negAttributeIds[i]);
                 _context.Add(negAttriUserBridge[i]);
             }
             _context.SaveChanges();
@@ -326,18 +306,9 @@ namespace ysamedia.Controllers
         {
             if (ModelState.IsValid)
             {
-                /**Code Segment 1 - Entering data into tblScreeningAnswer **/
-                int maxAnsId = 0;
-
-                if (_context.ScreeningAnswer.Any())
-                {
-                    // Get the maximum id in the table, so I can increment it for the next record
-                    maxAnsId = _context.ScreeningAnswer.Max(a => a.AnswerId);
-                }
-
+                /**Code Segment 1 - Entering data into ScreeningAnswer Table **/                
                 ScreeningAnswer ScreenAnswer1 = new ScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 1),
+                {                   
                     UserId = _userId,
                     QuestionId = 1,
                     Answer = vm.Question1
@@ -346,8 +317,7 @@ namespace ysamedia.Controllers
                 _context.SaveChanges();
 
                 ScreeningAnswer ScreenAnswer2 = new ScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 2),
+                {                    
                     UserId = _userId,
                     QuestionId = 2,
                     Answer = vm.Question2
@@ -356,8 +326,7 @@ namespace ysamedia.Controllers
                 _context.SaveChanges();
 
                 ScreeningAnswer ScreenAnswer3 = new ScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 3),
+                {                   
                     UserId = _userId,
                     QuestionId = 3,
                     Answer = vm.Question3
@@ -366,8 +335,7 @@ namespace ysamedia.Controllers
                 _context.SaveChanges();
 
                 ScreeningAnswer ScreenAnswer4 = new ScreeningAnswer
-                {
-                    AnswerId = (maxAnsId + 4),
+                {                   
                     UserId = _userId,
                     QuestionId = 4,
                     Answer = vm.Question4

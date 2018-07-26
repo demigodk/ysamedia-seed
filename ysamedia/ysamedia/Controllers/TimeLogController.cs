@@ -71,8 +71,7 @@ namespace ysamedia.Controllers
 
                 // Write the Log record
                 Log Log = new Log
-                {
-                    LogId = (maxLogId + 1),
+                {                    
                     Date = enteredDate,
                     TimeInId = vm.TimeInID
                 };

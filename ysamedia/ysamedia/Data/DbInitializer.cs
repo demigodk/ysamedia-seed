@@ -66,24 +66,7 @@ namespace ysamedia.Data
             await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(email), "Admin");
        
             using (var ysmcontext = new ysamediaDbContext(serviceProvider.GetRequiredService<DbContextOptions<ysamediaDbContext>>()))
-            {
-
-                if (!ysmcontext.Question.Any())
-                {
-                    /**************** Seed Question Table *******************/
-                    ysmcontext.Question.AddRange(
-
-                       new Question { QuestionId = 1, Question1 = "In which denomination or church do you belong to?" },
-                       new Question { QuestionId = 2, Question1 = "What brought you here to Yahweh Shamma Assembly?" },
-                       new Question { QuestionId = 3, Question1 = "Have you been baptized?" },
-                       new Question { QuestionId = 4, Question1 = "When were you baptized?" },
-                       new Question { QuestionId = 5, Question1 = "Would you please give some comment about the service that you have just attended?" },
-                       new Question { QuestionId = 6, Question1 = "Would you like to follow some teachings and become a member at our community?" }
-                    );
-
-                    ysmcontext.SaveChanges();
-                }
-
+            {                
                 if (!ysmcontext.Occupation.Any())
                 {
                     /*************** Seed Occupation Table *******************/
@@ -194,19 +177,7 @@ namespace ysamedia.Data
                         new DriverLicence { LicenceId = 8, LicenceCode = "EC" });
 
                     ysmcontext.SaveChanges();
-                }
-
-                if (!ysmcontext.DependantCategory.Any())
-                {
-                    /***************** Seed DependantCategory Table ********************/
-                    ysmcontext.DependantCategory.AddRange(
-                        new DependantCategory { CategoryId = 1, CategoryName = "Pre-School", CategoryCount = 0 },
-                        new DependantCategory { CategoryId = 2, CategoryName = "Primary", CategoryCount = 0 },
-                        new DependantCategory { CategoryId = 3, CategoryName = "High School", CategoryCount = 0 },
-                        new DependantCategory { CategoryId = 4, CategoryName = "Tertiary", CategoryCount = 0 });
-
-                    ysmcontext.SaveChanges();
-                }
+                }                
 
                 if (!ysmcontext.PositiveAttribute.Any())
                 {

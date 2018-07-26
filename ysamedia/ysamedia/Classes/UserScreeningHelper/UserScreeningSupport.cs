@@ -11,11 +11,11 @@ namespace ysamedia.Classes.UserScreeningHelper
             _context = context;
         }
 
-        public static AttributeUserBridge createAttributeRecord(int id, string userId, int attributeId)
+        public static AttributeUserBridge createAttributeRecord(/*int id, */string userId, int attributeId)
         {
             AttributeUserBridge tempItem = new AttributeUserBridge()
             {
-                Id = id,
+                //Id = id,
                 UserId = userId,
                 AttributeId = attributeId
             };
@@ -23,11 +23,11 @@ namespace ysamedia.Classes.UserScreeningHelper
             return tempItem;
         }
 
-        public static NegAttributeUserBridge createNegAttributeRecord(int id, string userId, int attributeId)
+        public static NegAttributeUserBridge createNegAttributeRecord(/*int id, */string userId, int attributeId)
         {
             NegAttributeUserBridge tempItem = new NegAttributeUserBridge()
             {
-                Id = id,
+                //Id = id,
                 UserId = userId,
                 AttributeId = attributeId
             };

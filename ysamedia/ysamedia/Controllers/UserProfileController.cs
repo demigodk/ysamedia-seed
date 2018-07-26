@@ -36,15 +36,7 @@ namespace ysamedia.Controllers
         public async Task<IActionResult> Index([Bind("PhotoId,Photo,PhotoName,UserId")]Photo photo)
         {
             if (ModelState.IsValid)
-            {
-                // Get the maximum PK in tblPhoto
-                int maxPhotoId = 0;
-
-                if (_context.Photo.Any())
-                {
-                    maxPhotoId = _context.Photo.Max(t => t.PhotoId);
-                }
-
+            {                
                 var files = HttpContext.Request.Form.Files;
                 string fileName = null;
 
@@ -56,18 +48,14 @@ namespace ysamedia.Controllers
                         var uploads = Path.Combine(_environment.WebRootPath, "uploads\\img\\members");
                        
                         if (file.Length > 0)
-                        {
-                            //var fileName = ContentDispositionHeaderValue.Parse
-                            //    (file.ContentDisposition).FileName.Trim('"');
-
+                        {                            
                             fileName = ContentDispositionHeaderValue.Parse
                                 (file.ContentDisposition).FileName.Trim('"');
 
                             //System.Console.WriteLine(fileName);
                             using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                             {
-                                await file.CopyToAsync(fileStream);
-                                photo.PhotoId = (maxPhotoId + 1);
+                                await file.CopyToAsync(fileStream);                               
                                 photo.Photo1 = null;                                
                                 photo.PhotoName = file.FileName;
                                 photo.UserId = _userId;
@@ -99,7 +87,7 @@ namespace ysamedia.Controllers
             if (_context.Photo.Any())
             {
 
-                // This returns a list of tblPhoto.PhotoName items
+                // This returns a list of Photo.PhotoName items
                 photoName = (from u in _context.Photo
                              where u.UserId == _userId
                              select u.PhotoName).ToList();

@@ -17,7 +17,7 @@ namespace ysamedia.Classes.TimeLogHelper
         }
 
         // Enters the UserLog record into the table, using the specified parameters
-        public static UserLog createUserLogRecord(int logid, string userid, int userlogid)
+        public static UserLog createUserLogRecord(int logid,string userid, int userlogid)
         {
             UserLog termItem = new UserLog()
             {

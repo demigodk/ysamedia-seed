@@ -15,13 +15,9 @@ namespace ysamedia.Entities
 
         public virtual DbSet<Achievement> Achievement { get; set; }
         public virtual DbSet<AgeGroup> AgeGroup { get; set; }
-        public virtual DbSet<Answer> Answer { get; set; }
         public virtual DbSet<AttributeUserBridge> AttributeUserBridge { get; set; }
         public virtual DbSet<ChurchMember> ChurchMember { get; set; }
-        public virtual DbSet<ChurchMemberOccupationBridge> ChurchMemberOccupationBridge { get; set; }
         public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<Dependant> Dependant { get; set; }
-        public virtual DbSet<DependantCategory> DependantCategory { get; set; }
         public virtual DbSet<DeptUserBrigdge> DeptUserBrigdge { get; set; }
         public virtual DbSet<DlicenceUserBridge> DlicenceUserBridge { get; set; }
         public virtual DbSet<DriverLicence> DriverLicence { get; set; }
@@ -35,7 +31,6 @@ namespace ysamedia.Entities
         public virtual DbSet<Occupation> Occupation { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
         public virtual DbSet<PositiveAttribute> PositiveAttribute { get; set; }
-        public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<RateAnswerUserBridge> RateAnswerUserBridge { get; set; }
         public virtual DbSet<RatingAnswer> RatingAnswer { get; set; }
         public virtual DbSet<RatingQuestion> RatingQuestion { get; set; }
@@ -60,23 +55,12 @@ namespace ysamedia.Entities
         public virtual DbSet<WorkPreference> WorkPreference { get; set; }
 
         // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
-        // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
-            }
-        }
+        // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Achievement>(entity =>
             {
-                entity.Property(e => e.AchievementId).ValueGeneratedNever();
-
                 entity.Property(e => e.AchievementName)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -102,41 +86,16 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.AgroupId);
 
-                entity.Property(e => e.AgroupId)
-                    .HasColumnName("AGroupId")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.AgroupId).HasColumnName("AGroupId");
 
                 entity.Property(e => e.AgeRange)
                     .IsRequired()
                     .HasColumnType("nchar(10)");
             });
 
-            modelBuilder.Entity<Answer>(entity =>
-            {
-                entity.Property(e => e.AnswerId).ValueGeneratedNever();
-
-                entity.Property(e => e.Answer1)
-                    .HasColumnName("Answer")
-                    .HasMaxLength(500);
-
-                entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.Answer)
-                    .HasForeignKey(d => d.ChurchMemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblAnswer_tblChurchMember");
-
-                entity.HasOne(d => d.Question)
-                    .WithMany(p => p.Answer)
-                    .HasForeignKey(d => d.QuestionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblAnswer_tblQuestion");
-            });
-
             modelBuilder.Entity<AttributeUserBridge>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -220,29 +179,8 @@ namespace ysamedia.Entities
                     .HasConstraintName("FK_tblChurchMember_tblRelationshipStatus");
             });
 
-            modelBuilder.Entity<ChurchMemberOccupationBridge>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
-
-                entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.ChurchMemberOccupationBridge)
-                    .HasForeignKey(d => d.ChurchMemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblChurchMember");
-
-                entity.HasOne(d => d.Occupation)
-                    .WithMany(p => p.ChurchMemberOccupationBridge)
-                    .HasForeignKey(d => d.OccupationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblChurchMemberOccupationBridge_tblOccupation");
-            });
-
             modelBuilder.Entity<Department>(entity =>
             {
-                entity.Property(e => e.DepartmentId).ValueGeneratedNever();
-
                 entity.Property(e => e.DepartmentLeaderId).HasMaxLength(450);
 
                 entity.Property(e => e.DepartmentName)
@@ -255,37 +193,9 @@ namespace ysamedia.Entities
                     .HasConstraintName("FK_tblDepartment_tblUser");
             });
 
-            modelBuilder.Entity<Dependant>(entity =>
-            {
-                entity.Property(e => e.DependantId).ValueGeneratedNever();
-
-                entity.HasOne(d => d.ChurchMember)
-                    .WithMany(p => p.Dependant)
-                    .HasForeignKey(d => d.ChurchMemberId)
-                    .HasConstraintName("FK_tblDependant_tblChurchMember");
-
-                entity.HasOne(d => d.DependantCategory)
-                    .WithMany(p => p.Dependant)
-                    .HasForeignKey(d => d.DependantCategoryId)
-                    .HasConstraintName("FK_tblDependant_tblDependantCategory");
-            });
-
-            modelBuilder.Entity<DependantCategory>(entity =>
-            {
-                entity.HasKey(e => e.CategoryId);
-
-                entity.Property(e => e.CategoryId).ValueGeneratedNever();
-
-                entity.Property(e => e.CategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
             modelBuilder.Entity<DeptUserBrigdge>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -308,9 +218,7 @@ namespace ysamedia.Entities
             {
                 entity.ToTable("DLicenceUserBridge");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -333,8 +241,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.LicenceId);
 
-                entity.Property(e => e.LicenceId).ValueGeneratedNever();
-
                 entity.Property(e => e.LicenceCode)
                     .IsRequired()
                     .HasColumnType("nchar(10)");
@@ -342,8 +248,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Education>(entity =>
             {
-                entity.Property(e => e.EducationId).ValueGeneratedNever();
-
                 entity.Property(e => e.EducationType)
                     .IsRequired()
                     .HasColumnType("nchar(10)");
@@ -365,8 +269,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.Property(e => e.EmployeeId).ValueGeneratedNever();
-
                 entity.Property(e => e.Description).HasMaxLength(256);
 
                 entity.Property(e => e.JobTitle).HasMaxLength(50);
@@ -374,8 +276,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Gender>(entity =>
             {
-                entity.Property(e => e.GenderId).ValueGeneratedNever();
-
                 entity.Property(e => e.Gname)
                     .IsRequired()
                     .HasColumnName("GName")
@@ -384,8 +284,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Language>(entity =>
             {
-                entity.Property(e => e.LanguageId).ValueGeneratedNever();
-
                 entity.Property(e => e.Language1)
                     .IsRequired()
                     .HasColumnName("Language")
@@ -406,8 +304,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Log>(entity =>
             {
-                entity.Property(e => e.LogId).ValueGeneratedNever();
-
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.HasOne(d => d.TimeIn)
@@ -420,8 +316,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.AttributeId);
 
-                entity.Property(e => e.AttributeId).ValueGeneratedNever();
-
                 entity.Property(e => e.Attribute)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -429,9 +323,7 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<NegAttributeUserBridge>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -452,8 +344,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Occupation>(entity =>
             {
-                entity.Property(e => e.OccupationId).ValueGeneratedNever();
-
                 entity.Property(e => e.Occupation1)
                     .IsRequired()
                     .HasColumnName("Occupation")
@@ -462,8 +352,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Photo>(entity =>
             {
-                entity.Property(e => e.PhotoId).ValueGeneratedNever();
-
                 entity.Property(e => e.Photo1).HasColumnName("Photo");
 
                 entity.Property(e => e.PhotoName)
@@ -485,28 +373,14 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.AttributeId);
 
-                entity.Property(e => e.AttributeId).ValueGeneratedNever();
-
                 entity.Property(e => e.AttributeName)
                     .IsRequired()
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Question>(entity =>
-            {
-                entity.Property(e => e.QuestionId).ValueGeneratedNever();
-
-                entity.Property(e => e.Question1)
-                    .IsRequired()
-                    .HasColumnName("Question")
-                    .HasMaxLength(700);
-            });
-
             modelBuilder.Entity<RateAnswerUserBridge>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -529,8 +403,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.AnswerId);
 
-                entity.Property(e => e.AnswerId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.RatingAnswer)
                     .HasForeignKey(d => d.QuestionId)
@@ -542,8 +414,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.QuestionId);
 
-                entity.Property(e => e.QuestionId).ValueGeneratedNever();
-
                 entity.Property(e => e.Question)
                     .IsRequired()
                     .HasMaxLength(500);
@@ -552,8 +422,6 @@ namespace ysamedia.Entities
             modelBuilder.Entity<RelationshipStatus>(entity =>
             {
                 entity.HasKey(e => e.RelationshipId);
-
-                entity.Property(e => e.RelationshipId).ValueGeneratedNever();
 
                 entity.Property(e => e.RelationshipCategory)
                     .IsRequired()
@@ -591,8 +459,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.AnswerId);
 
-                entity.Property(e => e.AnswerId).ValueGeneratedNever();
-
                 entity.Property(e => e.Answer)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -618,8 +484,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.QuestionId);
 
-                entity.Property(e => e.QuestionId).ValueGeneratedNever();
-
                 entity.Property(e => e.Question)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -628,8 +492,6 @@ namespace ysamedia.Entities
             modelBuilder.Entity<ScreeningScripture>(entity =>
             {
                 entity.HasKey(e => e.ScriptureId);
-
-                entity.Property(e => e.ScriptureId).ValueGeneratedNever();
 
                 entity.Property(e => e.Book).HasMaxLength(50);
 
@@ -652,8 +514,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Skill>(entity =>
             {
-                entity.Property(e => e.SkillId).ValueGeneratedNever();
-
                 entity.Property(e => e.Proficiency).HasColumnType("nchar(20)");
 
                 entity.Property(e => e.SkillDesc).HasMaxLength(256);
@@ -682,8 +542,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.SkillCatId);
 
-                entity.Property(e => e.SkillCatId).ValueGeneratedNever();
-
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -691,8 +549,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Student>(entity =>
             {
-                entity.Property(e => e.StudentId).ValueGeneratedNever();
-
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -710,8 +566,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Subject>(entity =>
             {
-                entity.Property(e => e.SubjectId).ValueGeneratedNever();
-
                 entity.Property(e => e.SubjectName)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -727,8 +581,6 @@ namespace ysamedia.Entities
             {
                 entity.HasKey(e => e.TimeId);
 
-                entity.Property(e => e.TimeId).ValueGeneratedNever();
-
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -737,8 +589,6 @@ namespace ysamedia.Entities
             modelBuilder.Entity<TransportType>(entity =>
             {
                 entity.HasKey(e => e.TransportId);
-
-                entity.Property(e => e.TransportId).ValueGeneratedNever();
 
                 entity.Property(e => e.TransportName)
                     .IsRequired()
@@ -750,6 +600,8 @@ namespace ysamedia.Entities
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.TransportId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -849,8 +701,6 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Vacancy>(entity =>
             {
-                entity.Property(e => e.VacancyId).ValueGeneratedNever();
-
                 entity.Property(e => e.DatePosted).HasColumnType("date");
 
                 entity.Property(e => e.FilledBy).HasMaxLength(450);
@@ -883,8 +733,6 @@ namespace ysamedia.Entities
             modelBuilder.Entity<WorkPreference>(entity =>
             {
                 entity.HasKey(e => e.WorkPrefId);
-
-                entity.Property(e => e.WorkPrefId).ValueGeneratedNever();
 
                 entity.Property(e => e.Availability)
                     .IsRequired()
