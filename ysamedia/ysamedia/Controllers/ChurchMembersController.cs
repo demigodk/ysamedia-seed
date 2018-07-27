@@ -62,10 +62,20 @@ namespace ysamedia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChurchMemberId,FirstName,LastName,DateOfBirth,CellPhone,HomePhone,WorkPhone,Email,DateRegistered,AgeGroupId,RelationshipId,GenderId,Street,City,Province,PostalCode,OccupationId,NumDepInPreSchool,NumDepInPrimary,NumDepInHighSchool,NumDepInTertiary,AnswerToQ1,AnswerToQ2,AnswerToQ3,AnswerToQ4,AnswerToQ5,AnswerToQ6")] ChurchMember churchMember)
+        public async Task<IActionResult> Create([Bind("ChurchMemberId,FirstName,LastName,DateOfBirth,Day,Month,Year,CellPhone,HomePhone,WorkPhone,Email,DateRegistered,AgeGroupId,RelationshipId,GenderId,Street,City,Province,PostalCode,OccupationId,NumDepInPreSchool,NumDepInPrimary,NumDepInHighSchool,NumDepInTertiary,AnswerToQ1,AnswerToQ2,AnswerToQ3,AnswerToQ4,AnswerToQ5,AnswerToQ6")] ChurchMember churchMember)
         {
             if (ModelState.IsValid)
-            {
+            {               
+                if (churchMember.Year == 0)
+                {
+                    churchMember.DateOfBirth = churchMember.Day + "/" + churchMember.Month;                   
+                }
+                else
+                {
+                    churchMember.DateOfBirth = churchMember.Day + "/" + churchMember.Month + "/" + churchMember.Year;                    
+                }
+                                                                                                                        
+                churchMember.DateRegistered = DateTime.Now;
                 _context.Add(churchMember);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -102,7 +112,7 @@ namespace ysamedia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChurchMemberId,FirstName,LastName,DateOfBirth,CellPhone,HomePhone,WorkPhone,Email,DateRegistered,AgeGroupId,RelationshipId,GenderId,Street,City,Province,PostalCode,OccupationId,NumDepInPreSchool,NumDepInPrimary,NumDepInHighSchool,NumDepInTertiary,AnswerToQ1,AnswerToQ2,AnswerToQ3,AnswerToQ4,AnswerToQ5,AnswerToQ6")] ChurchMember churchMember)
+        public async Task<IActionResult> Edit(int id, [Bind("ChurchMemberId,FirstName,LastName,DateOfBirth,Month,Day,Year,CellPhone,HomePhone,WorkPhone,Email,DateRegistered,AgeGroupId,RelationshipId,GenderId,Street,City,Province,PostalCode,OccupationId,NumDepInPreSchool,NumDepInPrimary,NumDepInHighSchool,NumDepInTertiary,AnswerToQ1,AnswerToQ2,AnswerToQ3,AnswerToQ4,AnswerToQ5,AnswerToQ6")] ChurchMember churchMember)
         {
             if (id != churchMember.ChurchMemberId)
             {
@@ -111,6 +121,15 @@ namespace ysamedia.Controllers
 
             if (ModelState.IsValid)
             {
+                if (churchMember.Year == 0)
+                {
+                    churchMember.DateOfBirth = churchMember.Day + "/" + churchMember.Month;
+                }
+                else
+                {
+                    churchMember.DateOfBirth = churchMember.Day + "/" + churchMember.Month + "/" + churchMember.Year;
+                }
+
                 try
                 {
                     _context.Update(churchMember);

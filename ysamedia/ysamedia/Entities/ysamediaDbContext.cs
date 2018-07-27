@@ -55,7 +55,7 @@ namespace ysamedia.Entities
         public virtual DbSet<WorkPreference> WorkPreference { get; set; }
 
         // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
-        // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.        
+        // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -132,7 +132,7 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.City).HasMaxLength(50);
 
-                entity.Property(e => e.DateOfBirth).HasColumnType("date");
+                entity.Property(e => e.DateOfBirth).HasMaxLength(50);
 
                 entity.Property(e => e.DateRegistered).HasColumnType("date");
 
