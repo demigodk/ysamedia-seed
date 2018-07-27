@@ -212,19 +212,17 @@ namespace ysamedia.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            
-            //var viewModel = new ListHelper().generateLists();
+            ViewData["ReturnUrl"] = returnUrl;                        
 
-            //____________________________TBLGender_________________________
-            List<TblGender> GenderList = new List<TblGender>();
+            //____________________________Gender_________________________
+            List<Gender> GenderList = new List<Gender>();
 
-            GenderList = (from g in _context.TblGender
+            GenderList = (from g in _context.Gender
                           select g).ToList();
 
-            //GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
+            //GenderList.Insert(0, new Gender { GenderId = 0, Gname = "Please select" });
             ViewBag.ListOfGenders = GenderList;
-            //_______________________________TBLGender End______________________
+            //_______________________________Gender End______________________
 
 
             //__________________________ Day List______________________________
@@ -246,7 +244,6 @@ namespace ysamedia.Controllers
             ViewBag.ListOfYears = YearList;
             //____________________________________________________________________
 
-
             return View();
         }
 
@@ -263,12 +260,12 @@ namespace ysamedia.Controllers
 
             /********** Setting Data Back to ViewBag After Posting Form ******/
 
-            List<TblGender> GenderList = new List<TblGender>();
+            List<Gender> GenderList = new List<Gender>();
 
-            GenderList = (from g in _context.TblGender
+            GenderList = (from g in _context.Gender
                           select g).ToList();
 
-            GenderList.Insert(0, new TblGender { GenderId = 0, Gname = "Please select" });
+            GenderList.Insert(0, new Gender { GenderId = 0, Gname = "Please select" });
             ViewBag.ListOfGenders = GenderList;
             //______________________________________________________________________
 

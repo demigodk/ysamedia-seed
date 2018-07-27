@@ -15,7 +15,7 @@ namespace ysamedia.Models.TimeLogViewModels
         public string Email { get; set; }
 
         [NotMapped]
-        public IEnumerable<TblUser> UserCollection { get; set; }
+        public IEnumerable<User> UserCollection { get; set; }
 
         public string DisplayName { get; set; }
     }

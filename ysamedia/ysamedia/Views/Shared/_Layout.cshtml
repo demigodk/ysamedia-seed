@@ -22,8 +22,9 @@
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/css/style.css" rel="stylesheet" type="text/css" />   
-    <script src="~/js/modernizr.min.js"></script>    
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    
+    <script src="~/js/modernizr.min.js"></script>
 </head>
 
 <body>
@@ -46,7 +47,7 @@
                 <!-- User box -->
                 <div class="user-box">
                     <div class="user-img">
-                        <img src="~/uploads/img/members/Untitled-2.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid" />
+                        <img src="~/uploads/img/members/Baulduin 20180404_090755.jpg" alt="user-img" title="Profile Picture" class="rounded-circle img-fluid" />
                     </div>
                     <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a> </h5>
                     <p class="text-muted">Member</p>
@@ -78,7 +79,7 @@
                         @if (User.IsInRole("Administrator"))
                         {
                             <li>
-                                <a asp-controller="ChurchMember" asp-action="MemberRegister">
+                                <a asp-controller="ChurchMembers" asp-action="Index">
                                     <i class="fas fa-address-book"></i><span> Church Form </span>
                                 </a>
                             </li>

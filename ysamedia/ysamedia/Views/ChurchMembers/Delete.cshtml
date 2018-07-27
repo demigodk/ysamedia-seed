@@ -1,0 +1,78 @@
+﻿@model ysamedia.Entities.ChurchMember
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">           
+            <div class="row">
+                <div class="col-12">                  
+                    <h4 class="text-danger">Are you sure you want to delete member record?</h4>
+                    <div>                        
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FirstName)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.LastName)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateOfBirth)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.DateOfBirth)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateRegistered)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.DateRegistered)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.AgeGroup)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.AgeGroup.AgeRange)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Gender.Gname)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Relationship)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Relationship.RelationshipCategory)
+                            </dd>
+                        </dl>
+
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="ChurchMemberId" />
+                            <input type="submit" value="Delete" class="btn btn-danger" /> |
+                            <a asp-action="Index">Back to List</a>
+                        </form>
+                    </div>
+                    </div>
+</div>
+</div>
+</div>
+</div>

@@ -25,63 +25,62 @@
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
-    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/js/modernizr.min.js"></script>    
 </head>
-
 <body class="account-pages">
     <!-- Begin page -->
-    <div class="accountbg" style="background: url('@Url.Content("~/images/bg.jpg")');background-size: cover;"></div>
-    <div class="wrapper-page account-page-full">
-        <div class="card">
-            <div class="card-block">
-                <div class="account-box">
-                    <div class="card-box p-5">
-                        <h2 class="text-uppercase text-center pb-4">
-                            SIGN IN
-                        </h2>
-                        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                            <div class="form-group m-b-20 row">
-                                <div class="col-12">
-                                    <label for="emailaddress">Email address</label>
-                                    <input asp-for="Email" class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
-                                </div>
-                            </div>
-                            <div class="form-group row m-b-20">
-                                <div class="col-12">
-                                    <a asp-action="ForgotPassword" class="text-muted pull-right"><small>Forgot your password?</small></a>
-                                    <label for="password">Password</label>
-                                    <input asp-for="Password" class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-                                </div>
-                            </div>
-                            <div class="form-group row m-b-20">
-                                <div class="col-12">
-                                    <div class="checkbox checkbox-custom">
-                                        <input asp-for="RememberMe" id="remember" type="checkbox" checked="">
-                                        <label for="remember">
-                                            @Html.DisplayNameFor(m => m.RememberMe)
-                                        </label>
+    <div class="accountbg" style="background: url('@Url.Content("~/images/bg.jpg")');background-size: cover;"></div>                    
+            <div class="wrapper-page account-page-full">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="account-box">
+                            <div class="card-box p-5">
+                                <h2 class="text-uppercase text-center pb-4">
+                                    SIGN IN
+                                </h2>
+                                <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                    <div class="form-group m-b-20 row">
+                                        <div class="col-12">
+                                            <label for="emailaddress">Email address</label>
+                                            <input asp-for="Email" class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row m-b-20">
+                                        <div class="col-12">
+                                            <a asp-action="ForgotPassword" class="text-muted pull-right"><small>Forgot your password?</small></a>
+                                            <label for="password">Password</label>
+                                            <input asp-for="Password" class="form-control" type="password" required="" id="password" placeholder="Enter your password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row m-b-20">
+                                        <div class="col-12">
+                                            <div class="checkbox checkbox-custom">
+                                                <input asp-for="RememberMe" id="remember" type="checkbox" checked="">
+                                                <label for="remember">
+                                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row text-center m-t-10">
+                                        <div class="col-12">
+                                            <button class="btn btn-block btn-custom waves-effect waves-light" type="submit">Sign In</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row m-t-50">
+                                    <div class="col-sm-12 text-center">
+                                        <p class="text-muted">Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-dark m-l-5"><b>Sign Up</b></a></p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group row text-center m-t-10">
-                                <div class="col-12">
-                                    <button class="btn btn-block btn-custom waves-effect waves-light" type="submit">Sign In</button>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="row m-t-50">
-                            <div class="col-sm-12 text-center">
-                                <p class="text-muted">Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-dark m-l-5"><b>Sign Up</b></a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="m-t-40 text-center">
-            <p class="account-copyright">2018 © YSA MEDIA.</p>
-        </div>
-    </div>
+                <div class="m-t-40 text-center">
+                    <p class="account-copyright">2018 © YSA MEDIA.</p>
+                </div>
+            </div>          
 </body>
 </html>
 
