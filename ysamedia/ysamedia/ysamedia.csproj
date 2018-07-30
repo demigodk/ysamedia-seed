@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\img\members\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\plugins\select2\js\select2.min.js" />
   </ItemGroup>
 
