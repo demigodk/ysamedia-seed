@@ -4,31 +4,51 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ysamedia.Entities.ysamediaDbContext _context;
+
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="topbar">
         <nav class="navbar-custom">
-            <ul class="list-unstyled topbar-right-menu float-right mb-0">    
-
+            <ul class="list-unstyled topbar-right-menu float-right mb-0">               
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="false" aria-expanded="false">
-                        @*<img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">*@ <span class="ml-1"><i class="fas fa-bars"></i></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">                       
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="fas fa-portrait"></i><span>Profile</span>
+
+                    @{
+                        string userId = @UserManager.GetUserId(User);
+
+                        string photoName = "uploads/img/members/avatar_2x.png";
+
+                        var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == userId);
+
+                        if (!(photoName2 == null))
+                        {
+                            photoName = photoName2.PhotoName;
+                        }
+                       <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src='@Url.Content("~/" + photoName)' alt="user" class="rounded-circle"> <span class="ml-1"><i class="fas fa-bars"></i></span>
                         </a>
-                        <!-- item-->
-                        <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
-                            <i class="fas fa-cog"></i> <span>Settings</span>
-                        </a>
-                        <!-- item-->                       
-                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
-                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                        </a>
-                    </div>
-                </li>               
+
+                        }
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="fas fa-portrait"></i><span>Profile</span>
+                            </a>
+                            <!-- item-->
+                            <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
+                                <i class="fas fa-cog"></i> <span>Settings</span>
+                            </a>
+                            <a asp-area="" asp-controller="UserProfile" asp-action="Index" class="dropdown-item notify-item">
+                                <i class="fas fa-cog"></i> <span>Profile Photo</span>
+                            </a>
+                            <!-- item-->
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
+                                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
 
             </ul>
         </nav>

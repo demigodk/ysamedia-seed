@@ -28,6 +28,7 @@ namespace ysamedia.Entities
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<NegativeAttribute> NegativeAttribute { get; set; }
         public virtual DbSet<NegAttributeUserBridge> NegAttributeUserBridge { get; set; }
+        public virtual DbSet<NextOfKin> NextOfKin { get; set; }
         public virtual DbSet<Occupation> Occupation { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
         public virtual DbSet<PositiveAttribute> PositiveAttribute { get; set; }
@@ -56,6 +57,15 @@ namespace ysamedia.Entities
 
         // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -340,6 +350,37 @@ namespace ysamedia.Entities
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblNegAttributeUserBridge_tblUser");
+            });
+
+            modelBuilder.Entity<NextOfKin>(entity =>
+            {
+                entity.HasKey(e => e.KinId);
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(15);
+
+                entity.Property(e => e.RelationshipType).HasMaxLength(50);
+
+                entity.Property(e => e.Surname)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.WorkNumber).HasMaxLength(15);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.NextOfKin)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_NextOfKin_User");
             });
 
             modelBuilder.Entity<Occupation>(entity =>
