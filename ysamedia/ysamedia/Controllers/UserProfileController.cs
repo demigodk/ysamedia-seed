@@ -51,19 +51,22 @@ namespace ysamedia.Controllers
                         {                            
                             fileName = ContentDispositionHeaderValue.Parse
                                 (file.ContentDisposition).FileName.Trim('"');
+                            fileName = Path.GetFileName(file.FileName);
 
                             //System.Console.WriteLine(fileName);
                             using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                             {
                                 await file.CopyToAsync(fileStream);                               
-                                photo.Photo1 = null;                                
-                                photo.PhotoName = file.FileName;
+                                photo.Photo1 = null;             
+                                photo.PhotoName = fileName;
                                 photo.UserId = _userId;
                             }
                         }
                     }
                     ViewData["fileLocation"] = "\\uploads\\img\\members\\" + fileName;
                 }
+
+                ViewData["name"] = fileName;
 
                 _context.Photo.Add(photo);
                 await _context.SaveChangesAsync();                
