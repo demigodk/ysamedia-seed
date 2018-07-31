@@ -12,7 +12,16 @@
 {
     <div class="topbar">
         <nav class="navbar-custom">
-            <ul class="list-unstyled topbar-right-menu float-right mb-0">               
+            <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                <li class="hide-phone app-search">
+                    <form>
+                        <input type="text" placeholder="Search..." class="form-control">
+                        <button type="submit"><i class="fas fa-search-minus"></i></button>
+                        @*<button type="submit"><i class="fa fa-search"></i></button>*@                        
+                    </form>
+                </li>
+
                 <li class="dropdown notification-list">
 
                     @{
@@ -26,30 +35,50 @@
                         {
                             photoName = photoName2.PhotoName;
                         }
-                       <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
+                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
-                            <img src='@Url.Content("~/" + photoName)' alt="user" class="rounded-circle"> <span class="ml-1"><i class="fas fa-bars"></i></span>
+                            <img src='@Url.Content("~/" + photoName)' alt="user" class="rounded-circle"> <span class="ml-1">@UserManager.GetUserAsync(User).Result.FirstName <i class="fas fa-bars"></i></span>
                         </a>
 
-                        }
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fas fa-portrait"></i><span>Profile</span>
-                            </a>
-                            <!-- item-->
-                            <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
-                                <i class="fas fa-cog"></i> <span>Settings</span>
-                            </a>
-                            <a asp-area="" asp-controller="UserProfile" asp-action="Index" class="dropdown-item notify-item">
-                                <i class="fas fa-cog"></i> <span>Profile Photo</span>
-                            </a>
-                            <!-- item-->
-                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
-                                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                            </a>
+                    }
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
+                        <div class="dropdown-item noti-title">
+                            <h6 class="text-overflow m-0">Mbote !</h6>
                         </div>
-                    </li>
+                        <!-- item -->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fas fa-portrait"></i><span>Profile</span>
+                        </a>
+                        <!-- item-->
+                        <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
+                            <i class="fas fa-cog"></i> <span>Settings</span>
+                        </a>
+                        <a asp-area="" asp-controller="UserProfile" asp-action="Index" class="dropdown-item notify-item">
+                            <i class="fas fa-cog"></i> <span>Profile Photo</span>
+                        </a>
+                        <!-- item-->
+                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
+                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                        </a>
+                    </div>
+                </li>
 
+            </ul>
+
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-left">
+                    <button class="button-menu-mobile open-left disable-btn">
+                        <i class="dripicons-menu"></i>
+                    </button>
+                </li>
+                <li>
+                    <div class="page-title-box">
+                        <h4 class="page-title">@ViewData["Title"] </h4>
+                        @*<ol class="breadcrumb">
+                            <li class="breadcrumb-item active">Welcome to YSA Media Home Panel !</li>
+                        </ol>*@
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>
