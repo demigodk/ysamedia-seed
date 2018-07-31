@@ -39,11 +39,11 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <a href="index.html" class="logo">
-                        <span>
-                            @*<img src="assets/images/logo.png" alt="" height="22">*@
+                        <span>                           
+                            <img src="~/images/ysmlogo_sml.png" alt="" height="40"/>
                         </span>
                         <i>
-                            @*<img src="assets/images/logo_sm.png" alt="" height="28">*@
+                            @*<img src="assets/images/logo_sm.png" alt="" height="28">*@                            
                         </i>
                     </a>
                 </div>
@@ -64,9 +64,9 @@
                     <div class="user-img">                       
                         <img src='@Url.Content("~/" + photoName)' alt="user-img" title="Profile Picture" class="rounded-circle img-fluid" />                       
                     </div>
-                        <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a> </h5>                           
+                    <br/>
+                        <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a></h5>                            
                         <p class="text-muted">Member</p>
-
                     }
                 </div>
                 <!--- Sidemenu -->
@@ -108,6 +108,11 @@
                                 <li><a asp-controller="UserScreening" asp-action="AttributeSet">Section B</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="Rating">Section C</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a asp-controller="NextOfKin" asp-action="Index">
+                                <i class="fas fa-file-alt"></i><span>Next Of Kin </span>
+                            </a>
                         </li>
 
                     </ul>

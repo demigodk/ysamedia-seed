@@ -1,0 +1,75 @@
+﻿@model ysamedia.Entities.NextOfKin
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <h2 class="m-t-0 header-title">@ViewData["Title"]</h2>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-20">
+                        <form asp-action="Edit" class="form-horizontal" role="form">  
+                            <input type="hidden" asp-for="KinId" />
+
+                            <div class="form-group row">
+                                <label asp-for="Name" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>                           
+                            <div class="form-group row">
+                                <label asp-for="Surname" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="Surname" class="form-control" />
+                                    <span asp-validation-for="Surname" class="text-danger"></span>
+                                </div>
+                            </div>                           
+                            <div class="form-group row">
+                                <label asp-for="RelationshipType" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="RelationshipType" class="form-control" />
+                                    <span asp-validation-for="RelationshipType" class="text-danger"></span>
+                                </div>
+                            </div>                                                       
+                            <div class="form-group row">
+                                <label asp-for="Email" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>                           
+                            <div class="form-group row">
+                                <label asp-for="PhoneNumber" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>                          
+                            <div class="form-group row">
+                                <label asp-for="WorkNumber" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="WorkNumber" class="form-control" />
+                                    <span asp-validation-for="WorkNumber" class="text-danger"></span>
+                                </div>
+                            </div>                           
+                            <div class="form-group">
+                                <button class="btn btn-custom waves-effect waves-light" type="submit" id="validateIt">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
