@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ysamedia.Models.MemberViewModels;
 
 namespace ysamedia.Entities
 {
@@ -796,5 +797,7 @@ namespace ysamedia.Entities
                     .HasConstraintName("FK_tblWorkPreference_tblUser");
             });
         }
+
+        public DbSet<ysamedia.Models.MemberViewModels.UserViewModel> UserViewModel { get; set; }
     }
 }

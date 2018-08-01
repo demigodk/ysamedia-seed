@@ -111,7 +111,7 @@
                         {
                             <li>
                                 <a asp-controller="ChurchMembers" asp-action="Index">
-                                    <i class="fas fa-address-book"></i><span> Church Form </span>
+                                    <i class="fas fa-address-book"></i><span> Church Members </span>
                                 </a>
                             </li>
                         }
@@ -121,6 +121,7 @@
                                 <li><a asp-controller="UserScreening" asp-action="QuestionSet">Section A</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="AttributeSet">Section B</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="Rating">Section C</a></li>
+                                <li><a asp-controller="Users" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)">Additional Info</a></li>
                             </ul>
                         </li>
                         <li>
