@@ -1,5 +1,87 @@
-﻿@{
+﻿@model IEnumerable<ysamedia.Entities.User>
+
+@inject ysamedia.Entities.ysamediaDbContext _context;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="row text-center">
+    <div class="col-sm-6 col-lg-6 col-xl-3">
+        <div class="card-box widget-flat border-custom bg-custom text-white">
+            <i class="fi-tag"></i>
+            <h3 class="m-b-10">@ViewData["NumMediaMembers"]</h3>
+            <p class="text-uppercase m-b-5 font-13 font-600">Media Members</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-6 col-xl-3">
+        <div class="card-box bg-primary widget-flat border-primary text-white">
+            <i class="fi-archive"></i>
+            <h3 class="m-b-10">@ViewData["NumSundays"]</h3>
+            <p class="text-uppercase m-b-5 font-13 font-600">Sundays</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-6 col-xl-3">
+        <div class="card-box widget-flat border-success bg-success text-white">
+            <i class="fi-help"></i>
+            <h3 class="m-b-10">@ViewData["NumLogs"]</h3>
+            <p class="text-uppercase m-b-5 font-13 font-600">Time Logs</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-6 col-xl-3">
+        <div class="card-box bg-danger widget-flat border-danger text-white">
+            <i class="fi-delete"></i>
+            <h3 class="m-b-10">@ViewData["NumChurchMembers"]</h3>
+            <p class="text-uppercase m-b-5 font-13 font-600">Church Members</p>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    @{        
+        foreach (var item in Model)
+        {
+            string photoName = "uploads/img/members/avatar_2x.png";
+
+            var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == item.UserId);
+
+            if (!(photoName2 == null))
+            {
+                photoName = photoName2.PhotoName;
+            }
+
+            <div class="col-lg-4">
+                <div class="card-box ribbon-box">
+                    <div class="ribbon ribbon-custom">Media</div>
+                    <div class="text-center card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <div class="thumb-lg member-thumb m-b-10 mx-auto">
+                                <img src='@Url.Content("~/" + photoName)' class="rounded-circle img-thumbnail" alt="profile-image" height="192" width="192">
+                            </div>
+                            <div class="">
+                                <h4 class="m-b-5">@item.DisplayName</h4>
+                                <p class="text-muted">Webdesigner <span> | </span> <span> <a href="#" class="text-pink">@item.Email</a> </span></p>
+                            </div>
+                            <ul class="social-links list-inline m-t-20">
+                                <li class="list-inline-item">
+                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                </li>
+                            </ul>
+                            <a asp-action="Profile" asp-route-id="@item.UserId" type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">View Profile</a>
+                            @*<button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">View Profile</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }   
+</div>
+<!-- end row -->

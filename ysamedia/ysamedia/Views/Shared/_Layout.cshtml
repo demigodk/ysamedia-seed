@@ -72,6 +72,13 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <ul class="metismenu" id="side-menu">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">
+                                @*<i class="fas fa-church"></i><span>Home </span>*@
+                                <i class="fas fa-home"></i><span>Home </span>                                
+                            </a>
+                        </li>
+
                         @if (User.IsInRole("Admin"))
                         {
                             <li>
