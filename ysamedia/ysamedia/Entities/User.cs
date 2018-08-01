@@ -15,6 +15,7 @@ namespace ysamedia.Entities
             Education = new HashSet<Education>();
             Language = new HashSet<Language>();
             NegAttributeUserBridge = new HashSet<NegAttributeUserBridge>();
+            NextOfKin = new HashSet<NextOfKin>();
             Photo = new HashSet<Photo>();
             RateAnswerUserBridge = new HashSet<RateAnswerUserBridge>();
             ScreeningAnswer = new HashSet<ScreeningAnswer>();
@@ -65,6 +66,7 @@ namespace ysamedia.Entities
         public ICollection<Education> Education { get; set; }
         public ICollection<Language> Language { get; set; }
         public ICollection<NegAttributeUserBridge> NegAttributeUserBridge { get; set; }
+        public ICollection<NextOfKin> NextOfKin { get; set; }
         public ICollection<Photo> Photo { get; set; }
         public ICollection<RateAnswerUserBridge> RateAnswerUserBridge { get; set; }
         public ICollection<ScreeningAnswer> ScreeningAnswer { get; set; }

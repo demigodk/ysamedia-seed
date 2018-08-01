@@ -1,8 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using ysamedia.Models
+@using System.Linq;
+@using System.Security.Principal;
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject ysamedia.Entities.ysamediaDbContext _context;
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +26,7 @@
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
-    
+
     <script src="~/js/modernizr.min.js"></script>
 </head>
 
@@ -36,25 +39,46 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <a href="index.html" class="logo">
-                        <span>
-                            @*<img src="assets/images/logo.png" alt="" height="22">*@
+                        <span>                           
+                            <img src="~/images/ysmlogo_sml.png" alt="" height="40"/>
                         </span>
                         <i>
-                            @*<img src="assets/images/logo_sm.png" alt="" height="28">*@
+                            @*<img src="assets/images/logo_sm.png" alt="" height="28">*@                            
                         </i>
                     </a>
                 </div>
                 <!-- User box -->
                 <div class="user-box">
-                    <div class="user-img">
-                        <img src="~/uploads/img/members/Baulduin 20180404_090755.jpg" alt="user-img" title="Profile Picture" class="rounded-circle img-fluid" />
+                @{
+                    string userId = @UserManager.GetUserId(User);
+
+                    string photoName = "uploads/img/members/avatar_2x.png";
+
+                    var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == userId);
+
+                    if (!(photoName2 == null))
+                    {
+                        photoName = photoName2.PhotoName;
+                    }
+
+                    <div class="user-img">                       
+                        <img src='@Url.Content("~/" + photoName)' alt="user-img" title="Profile Picture" class="rounded-circle img-fluid" />                       
                     </div>
-                    <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a> </h5>
-                    <p class="text-muted">Member</p>
+                    <br/>
+                        <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a></h5>                            
+                        <p class="text-muted">Member</p>
+                    }
                 </div>
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <ul class="metismenu" id="side-menu">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">
+                                @*<i class="fas fa-church"></i><span>Home </span>*@
+                                <i class="fas fa-home"></i><span>Home </span>                                
+                            </a>
+                        </li>
+
                         @if (User.IsInRole("Admin"))
                         {
                             <li>
@@ -91,6 +115,11 @@
                                 <li><a asp-controller="UserScreening" asp-action="AttributeSet">Section B</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="Rating">Section C</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a asp-controller="NextOfKin" asp-action="Index">
+                                <i class="fas fa-file-alt"></i><span>Next Of Kin </span>
+                            </a>
                         </li>
 
                     </ul>

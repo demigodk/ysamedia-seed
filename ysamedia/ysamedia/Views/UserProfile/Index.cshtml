@@ -7,23 +7,22 @@
 
 <br />
 <h4>@ViewData["Title"]</h4>
-<h3>@ViewData["name"]</h3>
-@*@Html.Partial("_StatusMessage", Model.StatusMessage)*@
 <div class="row">
     <div class="col-md-12">
-        <form method="post" enctype="multipart/form-data" asp-controller="UserProfile" asp-action="Index" asp-antiforgery="true">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <form method="post" enctype="multipart/form-data" asp-controller="UserProfile" asp-action="Index">
             <div class="form-group">
                 <div class="col-md-10">
                     <p>Upload Profile Picture: </p>
-                    <input asp-for="PhotoName" type="file" name="pic" accept="image/*" />
+                    <input type="file" name="files" required/>
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-custom waves-effect waves-light">Upload</button>
-                @*<input type="submit" value="Upload" />*@
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-custom waves-effect waves-light">Upload</button>                   
+                </div>
             </div>
-        </form>
+        </form>       
     </div>
 </div>
 

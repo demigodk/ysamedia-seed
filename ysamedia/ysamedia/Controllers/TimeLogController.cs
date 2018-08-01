@@ -27,7 +27,7 @@ namespace ysamedia.Controllers
             List<User> UserList = new List<User>();            
 
             UserList = (from u in _context.User
-                        select u).ToList();
+                        select u).ToList();            
 
             ViewBag.ListOfUsers = UserList;
 

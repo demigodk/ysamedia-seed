@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,90 +34,79 @@ namespace ysamedia.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Index([Bind("PhotoId,Photo,PhotoName,UserId")]Photo photo)
+        [HttpPost]
+        public IActionResult Index(string name)
         {
-            if (ModelState.IsValid)
-            {                
+            var newFileName = string.Empty;
+
+            if (HttpContext.Request.Form.Files != null)
+            {
+                var fileName = string.Empty;
+                string PathDB = string.Empty;
+
                 var files = HttpContext.Request.Form.Files;
-                string fileName = null;
 
-                foreach (var Image in files)
+                foreach (var file in files)
                 {
-                    if (Image != null && Image.Length > 0)
+                    if (file.Length > 0)
                     {
-                        var file = Image;
-                        var uploads = Path.Combine(_environment.WebRootPath, "uploads\\img\\members");
-                       
-                        if (file.Length > 0)
-                        {                            
-                            fileName = ContentDispositionHeaderValue.Parse
-                                (file.ContentDisposition).FileName.Trim('"');
-                            fileName = Path.GetFileName(file.FileName);
 
-                            //System.Console.WriteLine(fileName);
-                            using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-                            {
-                                await file.CopyToAsync(fileStream);                               
-                                photo.Photo1 = null;             
-                                photo.PhotoName = fileName;
-                                photo.UserId = _userId;
-                            }
+                        // Getting FileName
+                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        // Assigning Unique FileName (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        // Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // Concating FileName + FileExtension
+                        newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path
+                        fileName = Path.Combine(_environment.WebRootPath, "uploads\\img\\members") + $@"\{newFileName}";
+
+                        // Path to store in database
+                        PathDB = "uploads\\img\\members\\" + newFileName;
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
                         }
+
+
+                        // Writing to the detabase
+                        var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == _userId);
+
+                        if (photoName2 == null)
+                        {
+                            // If no photo found (insert one)
+                            Photo photo = new Photo
+                            {
+                                Photo1 = null,
+                                PhotoName = PathDB,
+                                UserId = _userId
+                            };
+
+                            _context.Photo.Add(photo);
+                            _context.SaveChanges();
+                        }
+                        else
+                        {                          
+                            // If the user already has a photo then update the record
+                            photoName2.PhotoName = PathDB;
+                            _context.Photo.Update(photoName2);
+                            _context.SaveChanges();
+                        }                                             
                     }
-                    ViewData["fileLocation"] = "\\uploads\\img\\members\\" + fileName;
                 }
-
-                ViewData["name"] = fileName;
-
-                _context.Photo.Add(photo);
-                await _context.SaveChangesAsync();                
-                return View();
             }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-            }
-            return View(photo);
-        }
-               
-        public IActionResult Created()
-        {
-                                    
-            //string photoName = null;
-            string photoLocation = null;
-
-            List<string> photoName = new List<string>();
-
-            if (_context.Photo.Any())
-            {
-
-                // This returns a list of Photo.PhotoName items
-                photoName = (from u in _context.Photo
-                             where u.UserId == _userId
-                             select u.PhotoName).ToList();
-
-                // To get the PhotoName, I loop through the array which should have one item and assign that 
-                // name to tempName, (there should be a better way to do this, but I don't have internet access)
-                string tempName = null;
-
-                foreach (var item in photoName)
-                {
-                    tempName = item;
-                }
-
-                photoLocation = "\\uploads\\img\\members\\" + tempName;
-            }
-            else
-            {
-                photoLocation = "\\images\\" + "avatar_2x.png";
-            }
-
-            ViewData["fName"] = photoLocation;
-            ViewData["fileLocation"] = photoLocation;
 
             return View();
+            
         }
-
+       
         public IActionResult UserInformation()
         {
             return View();
