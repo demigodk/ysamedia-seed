@@ -23,11 +23,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- App css -->
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/css/icons.css" rel="stylesheet" type="text/css" />*@
     <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
 
     <script src="~/js/modernizr.min.js"></script>
+
+    @*<style>
+        .img-fluid {
+            max-width: 70px;
+            height: 70px;
+        }
+    </style>*@
 </head>
 
 <body>
@@ -61,8 +68,8 @@
                         photoName = photoName2.PhotoName;
                     }
 
-                    <div class="user-img">                       
-                        <img src='@Url.Content("~/" + photoName)' alt="user-img" title="Profile Picture" class="rounded-circle img-fluid" />                       
+                    <div class="user-img">                        
+                        <img src='@Url.Content("~/" + photoName)' alt="user-img" title="Profile Picture" class="thumb-lg rounded-circle">                        
                     </div>
                     <br/>
                         <h5><a href="#">@UserManager.GetUserAsync(User).Result.DisplayName</a></h5>                            
