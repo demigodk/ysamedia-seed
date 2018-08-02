@@ -58,15 +58,6 @@ namespace ysamedia.Entities
         // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Achievement>(entity =>
@@ -673,6 +664,8 @@ namespace ysamedia.Entities
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
+                entity.Property(e => e.City).HasMaxLength(50);
+
                 entity.Property(e => e.DateJoinedDept).HasColumnType("date");
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
@@ -692,6 +685,12 @@ namespace ysamedia.Entities
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.PhysicalAddress).HasMaxLength(450);
+
+                entity.Property(e => e.PostalCode).HasColumnType("nchar(10)");
+
+                entity.Property(e => e.Province).HasMaxLength(50);
+
+                entity.Property(e => e.Street).HasMaxLength(50);
 
                 entity.Property(e => e.Surname).HasMaxLength(256);
 

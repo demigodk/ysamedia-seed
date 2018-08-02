@@ -14,7 +14,7 @@ namespace ysamedia.Models
         public string Surname { get; set; }
         public string DisplayName { get; set; }
         public int GenderId { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }        
 
         // For navigating through the Identity objects
         public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>();

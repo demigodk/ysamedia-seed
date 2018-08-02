@@ -57,8 +57,8 @@
                     <div class="ribbon ribbon-custom">Media</div>
                     <div class="text-center card-box">
                         <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb m-b-10 mx-auto">
-                                <img src='@Url.Content("~/" + photoName)' class="rounded-circle img-thumbnail" alt="profile-image" height="192" width="192">
+                            <div class="thumb-lg member-thumb m-b-10 mx-auto">                              
+                                <img src='@Url.Content("~/" + photoName)' class="thumb-lg rounded-circle img-thumbnail " alt="profile-image">                               
                             </div>
                             <div class="">
                                 <h4 class="m-b-5">@item.DisplayName</h4>
@@ -75,8 +75,7 @@
                                     <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Skype"><i class="fa fa-skype"></i></a>
                                 </li>
                             </ul>
-                            <a asp-action="Profile" asp-route-id="@item.UserId" type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">View Profile</a>
-                            @*<button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">View Profile</button>*@
+                            <a asp-action="Profile" asp-route-id="@item.UserId" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">View Profile</a>                            
                         </div>
                     </div>
                 </div>
