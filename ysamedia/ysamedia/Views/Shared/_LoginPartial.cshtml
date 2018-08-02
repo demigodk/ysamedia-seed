@@ -40,27 +40,31 @@
                             <img src='@Url.Content("~/" + photoName)' alt="user" class="rounded-circle"> <span class="ml-1">@UserManager.GetUserAsync(User).Result.FirstName <i class="fas fa-bars"></i></span>
                         </a>
 
-                    }
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
-                        <div class="dropdown-item noti-title">
-                            <h6 class="text-overflow m-0">Mbote !</h6>
+
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
+                            <div class="dropdown-item noti-title">
+                                <h6 class="text-overflow m-0">Mbote !</h6>
+                            </div>
+                            <!-- item -->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="fas fa-portrait"></i><span>Profile</span>
+                            </a>
+                            <!-- item-->
+                            <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
+                                <i class="fas fa-cog"></i> <span>Settings</span>
+                            </a>
+                            <a asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@userId" class="dropdown-item notify-item">
+                                <i class="fas fa-cog"></i> <span>Set Up</span>
+                            </a>
+                            <a asp-area="" asp-controller="UserProfile" asp-action="Index" class="dropdown-item notify-item">
+                                <i class="fas fa-cog"></i> <span>Profile Photo</span>
+                            </a>
+                            <!-- item-->
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
+                                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                            </a>
                         </div>
-                        <!-- item -->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="fas fa-portrait"></i><span>Profile</span>
-                        </a>
-                        <!-- item-->
-                        <a asp-area="" asp-controller="Manage" asp-action="Index" class="dropdown-item notify-item">
-                            <i class="fas fa-cog"></i> <span>Settings</span>
-                        </a>
-                        <a asp-area="" asp-controller="UserProfile" asp-action="Index" class="dropdown-item notify-item">
-                            <i class="fas fa-cog"></i> <span>Profile Photo</span>
-                        </a>
-                        <!-- item-->
-                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item notify-item">
-                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                        </a>
-                    </div>
+                    }
                 </li>
 
             </ul>

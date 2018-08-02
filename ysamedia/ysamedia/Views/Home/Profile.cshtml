@@ -1,5 +1,6 @@
 ﻿@model ysamedia.Entities.User
 
+@inject UserManager<ApplicationUser> UserManager
 @inject ysamedia.Entities.ysamediaDbContext _context;
 
 @{
@@ -7,8 +8,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div class="row">
     <div class="col-sm-12">
+
         <!-- meta -->
         <div class="profile-user-box card-box bg-custom">
             <div class="row">
@@ -24,13 +27,24 @@
                         }
 
                         <span class="pull-left mr-3"><img src='@Url.Content("~/" + photoName)' alt="" class="thumb-lg rounded-circle"></span>
+                        <div class="media-body text-white">
+                            <h4 class="mt-1 mb-1 font-18">@Model.DisplayName</h4>
+                            <p class="font-13 text-light"> User Experience Specialist</p>
 
+                            @{
+                               
+                                if (string.IsNullOrEmpty(Model.City) || string.IsNullOrEmpty(Model.Province))
+                                {
+                                    <a asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)">
+                                        @*<i class="fas fa-cog"></i>*@ <p class="text-light mb-0">Physical Address Incomplete</p><span>Set Up</span>
+                                    </a>
+                                }
+                                {
+                                    <p class="text-light mb-0">@Model.City @Model.Province</p>
+                                }
+                            }
+                        </div>
                     }
-                    <div class="media-body text-white">
-                        <h4 class="mt-1 mb-1 font-18">@Model.DisplayName</h4>
-                        <p class="font-13 text-light"> User Experience Specialist</p>
-                        <p class="text-light mb-0">California, United States</p>
-                    </div>
                 </div>
                 @*<div class="col-sm-6">
                         <div class="text-right">

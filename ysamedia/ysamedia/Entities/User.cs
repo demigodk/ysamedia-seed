@@ -56,6 +56,10 @@ namespace ysamedia.Entities
         public int? GenderId { get; set; }
         public int Approved { get; set; }
         public bool? DriverLicence { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
 
         public Gender Gender { get; set; }
         public ICollection<Achievement> Achievement { get; set; }
