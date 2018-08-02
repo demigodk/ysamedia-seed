@@ -15,9 +15,7 @@ using ysamedia.Models.UserScreeningViewModels;
 namespace ysamedia.Controllers
 {
     public class UserScreeningController : Controller
-    {
-        //UserManager<ApplicationUser> UserManager;       
-
+    {       
         private readonly ysamediaDbContext _context;
         private readonly string _userId;
 

@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 using ysamedia.Entities;
 using ysamedia.Models.UserViewModels;
 
+/// <summary>
+/// @author                 :   Bondo Kalombo
+/// @date                   :   03/08/2018
+/// Purpose                 :   Used for the purpose of allowing registered media members to edit their information
+///                             and provide further information (not collected at registration)
+/// </summary>
 namespace ysamedia.Controllers
 {
     public class UsersController : Controller
