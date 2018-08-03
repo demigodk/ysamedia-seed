@@ -1,0 +1,51 @@
+﻿@model ysamedia.Models.LanguageViewModels.LanguageViewModel
+
+@{
+    ViewData["Title"] = "Edit Language";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <h2 class="m-t-0 header-title">@ViewData["Title"]</h2>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-20">
+                        <form asp-action="Edit">
+                            <input type="hidden" asp-for="LanguageId" />
+                            <div class="form-group row">
+                                <label asp-for="Language1" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <input asp-for="Language1" class="form-control" />
+                                    <span asp-validation-for="Language1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Proficiency" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <select asp-for="Proficiency" id="inputState" class="form-control">
+                                        <option>Speak, Read, Write</option>
+                                        <option>Speak, Read</option>
+                                        <option value="" hidden disabled selected>Please Select</option>
+                                    </select>
+                                    <span asp-validation-for="Proficiency" class="text-danger"></span>
+                                </div>
+                            </div>                           
+                            <input type="hidden" asp-for="PrimaryLanguage" class="form-control" />
+                            <input type="hidden" asp-for="UserId" class="form-control" />
+                            <div class="form-group">
+                                <button class="btn btn-custom waves-effect waves-light" type="submit">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

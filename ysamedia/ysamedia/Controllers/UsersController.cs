@@ -32,6 +32,7 @@ namespace ysamedia.Controllers
             }
 
             var user = await _context.User.SingleOrDefaultAsync(m => m.UserId == id);
+
             if (user == null)
             {
                 return NotFound();
