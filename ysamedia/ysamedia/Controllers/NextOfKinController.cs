@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
+using ysamedia.Models.NextOfKinViewModels;
 
 namespace ysamedia.Controllers
 {
@@ -39,12 +39,25 @@ namespace ysamedia.Controllers
             var nextOfKin = await _context.NextOfKin
                 .Include(n => n.User)
                 .SingleOrDefaultAsync(m => m.KinId == id);
+
             if (nextOfKin == null)
             {
                 return NotFound();
             }
 
-            return View(nextOfKin);
+            NextOfKinViewModel viewModel = new NextOfKinViewModel
+            {
+                KinId = nextOfKin.KinId,
+                UserId = _userId,
+                Name = nextOfKin.Name,
+                Surname = nextOfKin.Surname,
+                PhoneNumber1 = nextOfKin.PhoneNumber,
+                WorkNumber1 = nextOfKin.WorkNumber,
+                Email1 = nextOfKin.Email,
+                RelationshipType = nextOfKin.RelationshipType                
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -55,17 +68,28 @@ namespace ysamedia.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Surname,RelationshipType,KinId,Email,PhoneNumber,WorkNumber")] NextOfKin nextOfKin)
+        public async Task<IActionResult> Create([Bind("Name,Surname,RelationshipType,KinId,Email1,PhoneNumber1,WorkNumber1")] NextOfKinViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                nextOfKin.UserId = _userId;
+                NextOfKin nextOfKin = new NextOfKin
+                {
+                    KinId = viewModel.KinId,
+                    UserId = _userId,
+                    Name = viewModel.Name,
+                    Surname = viewModel.Surname,
+                    PhoneNumber = viewModel.PhoneNumber1,
+                    WorkNumber = viewModel.WorkNumber1,
+                    Email = viewModel.Email1,
+                    RelationshipType = viewModel.RelationshipType
+                };
+                
                 _context.Add(nextOfKin);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
            
-            return View(nextOfKin);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -81,15 +105,27 @@ namespace ysamedia.Controllers
             {
                 return NotFound();
             }
-           
-            return View(nextOfKin);
+
+            NextOfKinViewModel viewModel = new NextOfKinViewModel
+            {
+                KinId = nextOfKin.KinId,
+                UserId = _userId,
+                Name = nextOfKin.Name,
+                Surname = nextOfKin.Surname,
+                PhoneNumber1 = nextOfKin.PhoneNumber,
+                WorkNumber1 = nextOfKin.WorkNumber,
+                Email1 = nextOfKin.Email,
+                RelationshipType = nextOfKin.RelationshipType
+            };
+
+            return View(viewModel);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,RelationshipType,KinId,Email,PhoneNumber,WorkNumber")] NextOfKin nextOfKin)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,RelationshipType,KinId,Email1,PhoneNumber1,WorkNumber1")] NextOfKinViewModel viewModel)
         {
-            if (id != nextOfKin.KinId)
+            if (id != viewModel.KinId)
             {
                 return NotFound();
             }
@@ -98,13 +134,24 @@ namespace ysamedia.Controllers
             {
                 try
                 {
-                    nextOfKin.UserId = _userId;
+                    NextOfKin nextOfKin = new NextOfKin
+                    {
+                        KinId = viewModel.KinId,
+                        UserId = _userId,
+                        Name = viewModel.Name,
+                        Surname = viewModel.Surname,
+                        PhoneNumber = viewModel.PhoneNumber1,
+                        WorkNumber = viewModel.WorkNumber1,
+                        Email = viewModel.Email1,
+                        RelationshipType = viewModel.RelationshipType
+                    };
+                    
                     _context.Update(nextOfKin);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NextOfKinExists(nextOfKin.KinId))
+                    if (!NextOfKinExists(viewModel.KinId))
                     {
                         return NotFound();
                     }
@@ -115,7 +162,7 @@ namespace ysamedia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }            
-            return View(nextOfKin);
+            return View(viewModel);
         }
 
        [HttpGet]
@@ -129,12 +176,25 @@ namespace ysamedia.Controllers
             var nextOfKin = await _context.NextOfKin
                 .Include(n => n.User)
                 .SingleOrDefaultAsync(m => m.KinId == id);
+
             if (nextOfKin == null)
             {
                 return NotFound();
             }
 
-            return View(nextOfKin);
+            NextOfKinViewModel viewModel = new NextOfKinViewModel
+            {
+                KinId = nextOfKin.KinId,
+                UserId = _userId,
+                Name = nextOfKin.Name,
+                Surname = nextOfKin.Surname,
+                PhoneNumber1 = nextOfKin.PhoneNumber,
+                WorkNumber1 = nextOfKin.WorkNumber,
+                Email1 = nextOfKin.Email,
+                RelationshipType = nextOfKin.RelationshipType
+            };
+
+            return View(viewModel);
         }
         
         [HttpPost, ActionName("Delete")]

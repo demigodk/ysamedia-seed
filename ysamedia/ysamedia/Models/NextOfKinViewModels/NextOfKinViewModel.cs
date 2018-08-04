@@ -17,15 +17,15 @@ namespace ysamedia.Models.NextOfKinViewModels
         public string Surname { get; set; }
 
         [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
+        [Phone]
         public string PhoneNumber1 { get; set; }
 
         [Display(Name = "Work Number")]
-        [DataType(DataType.PhoneNumber)]
+        [Phone]
         public string WorkNumber1 { get; set; }
 
-        [Display(Name = "Email Address")]
-        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]        
+        [EmailAddress]
         public string Email1 { get; set; }
 
         [Display(Name = "Relationship (e.g. Aunt)")]

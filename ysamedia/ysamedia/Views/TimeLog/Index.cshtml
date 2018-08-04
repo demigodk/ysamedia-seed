@@ -29,7 +29,7 @@
                                 <label>Select Members</label>
                                 <div class="with-select">
                                     <select asp-for="SelectedIDArray"
-                                            class="chosen-select" required
+                                            class="chosen-select " required
                                             asp-items="@(new MultiSelectList(ViewBag.ListOfUsers, "UserId", "DisplayName"))" multiple="multiple"></select>
                                 </div>
                             </div>
@@ -51,10 +51,6 @@
     </div>
 </div>
 <!-- end row -->
-
-<!-- Chosen CSS-->
-<link href="~/lib/jquery-ui/themes/flick/jquery-ui.css" rel="stylesheet" />
-<link href="~/lib/chosen/chosen.css" rel="stylesheet" />
 
 <!-- Chosen Scripts -->
 @section scripts {

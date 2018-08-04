@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ysamedia.Entities.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Department</label>               
+            </th>
+            <th>
+                <label>Number Of Members</label>                
+            </th>
+            <th>
+                <label>Department Leads</label>                
+            </th>
+            <th>
+                <label>Department Deputies</label>               
+            </th>           
+            <th><label>Actions</label></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumMembers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentLead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deputy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
+                <a asp-action="AddUsers" asp-route-id="@item.DepartmentId">Add Users</a> |
+                <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

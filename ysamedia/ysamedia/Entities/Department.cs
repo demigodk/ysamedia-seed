@@ -16,8 +16,12 @@ namespace ysamedia.Entities
         public string DepartmentLeaderId { get; set; }
         public int? NumMembers { get; set; }
         public string DepartmentName { get; set; }
+        public string DepartmentLead { get; set; }
+        public string DeputyId { get; set; }
+        public string Deputy { get; set; }
 
         public User DepartmentLeader { get; set; }
+        public User DeputyNavigation { get; set; }
         public ICollection<DeptUserBrigdge> DeptUserBrigdge { get; set; }
         public ICollection<Vacancy> Vacancy { get; set; }
         public ICollection<WorkPreference> WorkPreference { get; set; }

@@ -36,21 +36,19 @@ namespace ysamedia.Models.UserViewModels
         public string DisplayName { get; set; }
         public DateTime? DateJoinedDept { get; set; }
         public DateTime? DateOfBirth { get; set; }
-
+       
         [Display(Name = "Surname")]
-        [Required(ErrorMessage = "Please Enter A Surname")]
         public string Surname { get; set; }
 
-        [Display(Name = "Name(s)")]
-        [Required(ErrorMessage = "Please Enter A First Name")]
+        [Display(Name = "Name(s)")]       
         public string FirstName { get; set; }
 
         [Phone]
-        [Display(Name = "Home Phone Number")]
+        [Display(Name = "Home Number")]
         public string HomeNumber { get; set; }
 
         [Phone]
-        [Display(Name = "Home Phone Number")]
+        [Display(Name = "Work Number")]
         public string WorkNumber { get; set; }
 
         public string PhysicalAddress { get; set; }

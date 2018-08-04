@@ -9,7 +9,8 @@ namespace ysamedia.Entities
         {
             Achievement = new HashSet<Achievement>();
             AttributeUserBridge = new HashSet<AttributeUserBridge>();
-            Department = new HashSet<Department>();
+            DepartmentDepartmentLeader = new HashSet<Department>();
+            DepartmentDeputyNavigation = new HashSet<Department>();
             DeptUserBrigdge = new HashSet<DeptUserBrigdge>();
             DlicenceUserBridge = new HashSet<DlicenceUserBridge>();
             Education = new HashSet<Education>();
@@ -64,7 +65,8 @@ namespace ysamedia.Entities
         public Gender Gender { get; set; }
         public ICollection<Achievement> Achievement { get; set; }
         public ICollection<AttributeUserBridge> AttributeUserBridge { get; set; }
-        public ICollection<Department> Department { get; set; }
+        public ICollection<Department> DepartmentDepartmentLeader { get; set; }
+        public ICollection<Department> DepartmentDeputyNavigation { get; set; }
         public ICollection<DeptUserBrigdge> DeptUserBrigdge { get; set; }
         public ICollection<DlicenceUserBridge> DlicenceUserBridge { get; set; }
         public ICollection<Education> Education { get; set; }

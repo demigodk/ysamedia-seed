@@ -27,14 +27,15 @@
     <link href="~/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
 
-    <script src="~/js/modernizr.min.js"></script>
+    <!-- For multiselectlist used mostly by TimeLogController and Views-->
+    <link href="~/lib/jquery-ui/themes/flick/jquery-ui.css" rel="stylesheet" />
+    <link href="~/lib/chosen/chosen.css" rel="stylesheet" />
 
-    @*<style>
-        .img-fluid {
-            max-width: 70px;
-            height: 70px;
-        }
-    </style>*@
+    <!-- For JQuery Calendar-->
+    <link href="~/lib/jquery-ui/themes/flick/jquery-ui.css" rel="stylesheet" />
+
+    <script src="~/js/modernizr.min.js"></script>
+   
 </head>
 
 <body>
@@ -81,8 +82,7 @@
                     <ul class="metismenu" id="side-menu">
                         <li>
                             <a asp-controller="Home" asp-action="Index">
-                                @*<i class="fas fa-church"></i><span>Home </span>*@
-                                <i class="fas fa-home"></i><span>Home </span>                                
+                                <i class="fas fa-home"></i><span>Home </span>
                             </a>
                         </li>
 
@@ -121,15 +121,11 @@
                                 <li><a asp-controller="UserScreening" asp-action="QuestionSet">Section A</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="AttributeSet">Section B</a></li>
                                 <li><a asp-controller="UserScreening" asp-action="Rating">Section C</a></li>
-                                <li><a asp-controller="Users" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)">Additional Info</a></li>
+                                <li><a asp-controller="User" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)">Additional</a></li>
+                                <li><a asp-controller="Language" asp-action="Index">Language</a></li>
+                                <li><a asp-controller="NextOfKin" asp-action="Index">Next Of Kin</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a asp-controller="NextOfKin" asp-action="Index">
-                                <i class="fas fa-file-alt"></i><span>Next Of Kin </span>
-                            </a>
-                        </li>
-
+                        </li>                                               
                     </ul>
                 </div>
                 <!-- Sidebar -->
