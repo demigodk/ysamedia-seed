@@ -1,0 +1,52 @@
+﻿@model ysamedia.Entities.Department
+
+@{
+    ViewData["Title"] = "Department Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumMembers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumMembers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentLead)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentLead)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Deputy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Deputy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentLeader)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentLeader.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeputyNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeputyNavigation.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.DepartmentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

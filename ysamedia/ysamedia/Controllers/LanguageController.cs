@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
 using ysamedia.Models.LanguageViewModels;
-using ysamedia.Models;
 
 /// <summary>
 /// @author                 :   Bondo Kalombo
@@ -30,42 +28,17 @@ namespace ysamedia.Controllers
             var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             _userId = userId;
         }
-
-        //public LanguageController(ysamediaDbContext context)
-        //{
-        //    _context = context;
-        //}
-
+        
         // GET: Language
         public async Task<IActionResult> Index()
-        {
-            //var ysamediaDbContext = _context.Language.Include(l => l.User);
+        {           
             var ysamediaDbContext = (from c in _context.Language
                                      where c.UserId == _userId
                                      select c).ToListAsync();
 
             return View(await ysamediaDbContext);
         }
-
-        // GET: Language/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var language = await _context.Language
-        //        .Include(l => l.User)
-        //        .SingleOrDefaultAsync(m => m.LanguageId == id);
-        //    if (language == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(language);
-        //}
-
+      
         // GET: Language/Create
         public IActionResult Create()
         {           

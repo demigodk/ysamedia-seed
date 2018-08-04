@@ -113,7 +113,7 @@ namespace ysamedia.Models.ChurchMembersViewModels
         public string AnswerToQ6 { get; set; }
 
         [Display(Name = "Date Recorded")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]        
         public DateTime? DateRegistered { get; set; }
 
         /**************** Connected Tables **********************/

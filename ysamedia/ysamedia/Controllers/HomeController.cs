@@ -29,15 +29,26 @@ namespace ysamedia.Controllers
                         select u).ToList();
 
             ViewData["NumMediaMembers"] = UserList.Count;
+           
+            List<User> maleList = (from m in _context.User
+                             where m.GenderId == 1
+                             select m).ToList();
 
-            List<Log> SundaysCountList = new List<Log>();
+            int maleCount = maleList.Count();
 
-            SundaysCountList = (from l in _context.Log
-                                select l).ToList();
+            ViewData["NumMales"] = maleCount;
 
-            int sundayCount = SundaysCountList.Select(x => x.Date).Distinct().Count();
 
-            ViewData["NumSundays"] = sundayCount;           
+
+            List<User> femaleList = (from m in _context.User
+                                   where m.GenderId == 2
+                                   select m).ToList();
+
+            int femaleCount = femaleList.Count();
+
+            ViewData["NumFemales"] = femaleCount;
+
+
 
             List<Log> LogList = new List<Log>();
 
@@ -69,6 +80,8 @@ namespace ysamedia.Controllers
             var mediaMember = await _context.User
                 .Include(m => m.Gender)
                 .Include(m => m.AttributeUserBridge)
+                .Include(m => m.NextOfKin)
+                .Include(m => m.Language)
                 .Include(m => m.DlicenceUserBridge)
                 .Include(m => m.NegAttributeUserBridge)
                 .Include(m => m.ScreeningAnswer)

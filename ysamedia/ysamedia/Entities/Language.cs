@@ -1,4 +1,7 @@
-﻿namespace ysamedia.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace ysamedia.Entities
 {
     public partial class Language
     {

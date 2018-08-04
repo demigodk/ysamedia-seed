@@ -124,15 +124,15 @@ namespace ysamedia.Data
                 {
                     /***************** Seed Department Table ********************/
                     ysmcontext.Department.AddRange(
-                        new Department { DepartmentId = 1, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Lights" },
-                        new Department { DepartmentId = 2, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Camera" },
-                        new Department { DepartmentId = 3, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Social Media" },
-                        new Department { DepartmentId = 4, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "CD Production" },
-                        new Department { DepartmentId = 5, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Switching" },
-                        new Department { DepartmentId = 6, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Photography" },
-                        new Department { DepartmentId = 7, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Design" },
-                        new Department { DepartmentId = 8, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Book Shop" },
-                        new Department { DepartmentId = 9, DepartmentLeaderId = null, NumMembers = 0, DepartmentName = "Journalism" });
+                        new Department { DepartmentId = 1, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Lights", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 2, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Camera", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 3, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Social Media", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 4, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "CD Production", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 5, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Switching", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 6, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Photography", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 7, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Design", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 8, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Book Shop", DepartmentLeader = null, DeputyId = null, Deputy = null },
+                        new Department { DepartmentId = 9, DepartmentLeaderId = null, NumMembers = null, DepartmentName = "Journalism", DepartmentLeader = null, DeputyId = null, Deputy = null });
 
                     ysmcontext.SaveChanges();
                 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ysamedia.Models.DepartmentViewModels;
 
 namespace ysamedia.Entities
 {
@@ -57,6 +58,15 @@ namespace ysamedia.Entities
 
         // Unable to generate entity type for table 'dbo.UserRole'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.UserToken'. Please see the warning messages.
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ysamedia;Integrated Security=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -182,16 +192,27 @@ namespace ysamedia.Entities
 
             modelBuilder.Entity<Department>(entity =>
             {
+                entity.Property(e => e.DepartmentLead).HasMaxLength(50);
+
                 entity.Property(e => e.DepartmentLeaderId).HasMaxLength(450);
 
                 entity.Property(e => e.DepartmentName)
                     .IsRequired()
                     .HasMaxLength(256);
 
+                entity.Property(e => e.Deputy).HasMaxLength(50);
+
+                entity.Property(e => e.DeputyId).HasMaxLength(450);
+
                 entity.HasOne(d => d.DepartmentLeader)
-                    .WithMany(p => p.Department)
+                    .WithMany(p => p.DepartmentDepartmentLeader)
                     .HasForeignKey(d => d.DepartmentLeaderId)
                     .HasConstraintName("FK_tblDepartment_tblUser");
+
+                entity.HasOne(d => d.DeputyNavigation)
+                    .WithMany(p => p.DepartmentDeputyNavigation)
+                    .HasForeignKey(d => d.DeputyId)
+                    .HasConstraintName("FK_Department_Department");
             });
 
             modelBuilder.Entity<DeptUserBrigdge>(entity =>
@@ -795,5 +816,7 @@ namespace ysamedia.Entities
                     .HasConstraintName("FK_tblWorkPreference_tblUser");
             });
         }
+
+        public DbSet<ysamedia.Models.DepartmentViewModels.DepartmentViewModel> DepartmentViewModel { get; set; }
     }
 }

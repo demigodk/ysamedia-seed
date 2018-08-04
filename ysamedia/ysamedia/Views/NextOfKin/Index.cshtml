@@ -7,8 +7,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="card-box">
-            <h3 class="m-t-0 header-title">@ViewData["Title"]</h3>
+        <div class="card-box">            
             <p>
                 <a asp-action="Create">Create New</a>
             </p>
@@ -16,22 +15,22 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Name)
+                            <label>Name</label>                            
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Surname)
+                            <label>Surname</label>                           
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.RelationshipType)
+                            <label>Relationship (e.g. Aunt)</label>                           
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Email)
+                            <label>Email Address</label>                            
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                            <label>Phone Number</label>                            
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.WorkNumber)
+                            <label>Work Number</label>                           
                         </th>
                         <th>Action</th>
                     </tr>
