@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ysamedia.Entities.Language>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Language</title>
+</head>
+<body>
+
+<div>
+    <h4>Language</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var item in Model)
+        {
+
+        <p>@Html.DisplayFor(modelItem => item.Language1)</p>
+                    
+               
+            <p>@Html.DisplayFor(modelItem => item.Proficiency)</p>
+                    
+                
+                
+        }        
+    </dl>
+</div>
+</body>
+</html>

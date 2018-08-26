@@ -1680,12 +1680,12 @@ code {
   border-color: #02c0ce;
 }
 
-.btn-custom:hover, .btn-custom:focus, .btn-custom:active, .btn-custom.active,
-.btn-custom.focus, .btn-custom:active, .btn-custom:focus, .btn-custom:hover,
-.open > .dropdown-toggle.btn-custom {
-  background-color: #02a8b5;
-  border: 1px solid #02a8b5;
-}
+    .btn-custom:hover, .btn-custom:focus, .btn-custom:active, .btn-custom.active,
+    .btn-custom.focus, .btn-custom:active, .btn-custom:focus, .btn-custom:hover,
+    .open > .dropdown-toggle.btn-custom {
+        background-color: #1E73BE;
+        border: 1px solid #1E73BE;
+    }
 
 .btn-custom.focus, .btn-custom:focus, .btn-outline-custom.focus, .btn-outline-custom:focus,
 .btn-custom:not([disabled]):not(.disabled).active, .btn-custom:not([disabled]):not(.disabled):active, .show > .btn-custom.dropdown-toggle {

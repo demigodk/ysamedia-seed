@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
 using ysamedia.Models;
@@ -13,12 +15,14 @@ namespace ysamedia.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
         private readonly ysamediaDbContext _context;
-
-        public HomeController(ysamediaDbContext context)
+        private readonly string _userId;
+       
+        public HomeController(ysamediaDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _userId = userId;
         }
 
         public IActionResult Index()
@@ -77,17 +81,22 @@ namespace ysamedia.Controllers
                 return NotFound();
             }
 
+            List<Language> LanguageList = new List<Language>();
+
+            LanguageList = (from l in _context.Language
+                       select l).ToList();
+
             var mediaMember = await _context.User
                 .Include(m => m.Gender)
                 .Include(m => m.AttributeUserBridge)
                 .Include(m => m.NextOfKin)
-                .Include(m => m.Language)
+                .Include(m => m.Language)                
                 .Include(m => m.DlicenceUserBridge)
                 .Include(m => m.NegAttributeUserBridge)
                 .Include(m => m.ScreeningAnswer)
                 .Include(m => m.Photo)
                 .Include(m => m.RateAnswerUserBridge)
-                .SingleOrDefaultAsync(m => m.UserId == id);
+                .SingleOrDefaultAsync(m => m.UserId == id);            
 
             if (mediaMember == null)
             {
@@ -95,6 +104,16 @@ namespace ysamedia.Controllers
             }            
 
             return View(mediaMember);
+        }
+
+        // GET: Language
+        public async Task<IActionResult> Language()
+        {
+            var ysamediaDbContext = (from c in _context.Language
+                                     where c.UserId == _userId
+                                     select c).ToListAsync();
+
+            return View(await ysamediaDbContext);
         }
 
         public IActionResult Error()

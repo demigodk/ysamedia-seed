@@ -81,7 +81,11 @@
                     <p class="text-muted font-13">
                         <strong>Languages :</strong>
                         <span class="m-l-5">
-                            <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
+                            <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us">@Model.Language</span>
+                            @foreach(var item in Model.Language)
+                            {
+                                @item
+                            }
                             @*<span>English</span>*@
                         </span>
                         <span class="m-l-5">
@@ -218,6 +222,7 @@
             <div class="clearfix"></div>
             <div class="">
                 <div class="">
+
                     @*<h5 class="text-custom m-b-5">Lead designer / Developer</h5>
                     <p class="m-b-0">websitename.com</p>
                     <p><b>2010-2015</b></p>

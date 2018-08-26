@@ -28,7 +28,7 @@ namespace ysamedia.Controllers
             var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             _userId = userId;
         }
-        
+                
         // GET: Language
         public async Task<IActionResult> Index()
         {           
