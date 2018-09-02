@@ -8,7 +8,8 @@ using ysamedia.Entities;
 namespace ysamedia.Models.ChurchMembersViewModels
 {
     public class ChurchMembersViewModel
-    {
+    {        
+
         [Key]
         public int ChurchMemberId { get; set; }
 

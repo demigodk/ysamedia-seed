@@ -1,4 +1,4 @@
-﻿@model ysamedia.Entities.User
+﻿@model ysamedia.Models.UserProfileViewModels.CombinedProfileViewModel
 
 @inject UserManager<ApplicationUser> UserManager
 @inject ysamedia.Entities.ysamediaDbContext _context;
@@ -7,7 +7,6 @@
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="row">
     <div class="col-sm-12">
@@ -19,7 +18,7 @@
                     @{
                         string photoName = "uploads/img/members/avatar_2x.png";
 
-                        var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == Model.UserId);
+                        var photoName2 = _context.Photo.FirstOrDefault(p => p.UserId == Model.UserViewModel.UserId);
 
                         if (!(photoName2 == null))
                         {
@@ -28,19 +27,19 @@
 
                         <span class="pull-left mr-3"><img src='@Url.Content("~/" + photoName)' alt="" class="thumb-lg rounded-circle"></span>
                         <div class="media-body text-white">
-                            <h4 class="mt-1 mb-1 font-18">@Model.DisplayName</h4>
-                            <p class="font-13 text-light">@Model.Email</p>
+                            <h4 class="mt-1 mb-1 font-18">@Model.UserViewModel.DisplayName</h4>
+                            <p class="font-13 text-light">@Model.UserViewModel.Email</p>
 
                             @{
                                
-                                if (string.IsNullOrEmpty(Model.City) || string.IsNullOrEmpty(Model.Province))
+                                if (string.IsNullOrEmpty(Model.UserViewModel.City) || string.IsNullOrEmpty(Model.UserViewModel.Province))
                                 {
                                     <a asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)">
                                         @*<i class="fas fa-cog"></i>*@ <p class="text-light mb-0">Physical Address Incomplete</p>@*<span>Set Up</span>*@
                                     </a>
                                 }
                                 {
-                                    <p class="text-light mb-0">@Model.City @Model.Province</p>
+                                    <p class="text-light mb-0">@Model.UserViewModel.City @Model.UserViewModel.Province</p>
                                 }
                             }
                         </div>
@@ -66,52 +65,38 @@
         <div class="card-box ribbon-box">
             <div class="ribbon ribbon-primary">Personal Information</div>
             <div class="clearfix"></div>
-            <div class="panel-body">
-                <p class="text-muted font-13">
-                    @*Hye, I’m Johnathan Doe residing in this beautiful world. I create websites and mobile apps with great UX and UI design. I have done work with big companies like Nokia, Google and Yahoo. Meet me or Contact me for any queries. One Extra line for filling space. Fill as many you want.*@
-                </p>
-                @*<hr />*@
+            <div class="panel-body">               
                 <div class="text-left">
-                    <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15">@Model.DisplayName</span></p>
-                    <p class="text-muted font-13"><strong>Mobile :</strong><span class="m-l-15">@Model.PhoneNumber</span></p>
-                    <p class="text-muted font-13"><strong>Address :</strong> <span class="m-l-15">@Model.Street @Model.City @Model.Province @Model.PostalCode</span></p>
-                    <p class="text-muted font-13"><strong>Date Of Birth :</strong> <span class="m-l-15">@Model.DateOfBirth</span></p>
-                    <p class="text-muted font-13"><strong>Gender :</strong> <span class="m-l-15">@Model.Gender.Gname</span></p>
+                    <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15">@Model.UserViewModel.DisplayName</span></p>
+                    <p class="text-muted font-13"><strong>Mobile :</strong><span class="m-l-15">@Model.UserViewModel.PhoneNumber</span></p>
+                    <p class="text-muted font-13"><strong>Address :</strong> <span class="m-l-15">@Model.UserViewModel.Street @Model.UserViewModel.City @Model.UserViewModel.Province @Model.UserViewModel.PostalCode</span></p>
+                    <p class="text-muted font-13"><strong>Date Of Birth :</strong> <span class="m-l-15">@Model.UserViewModel.DateOfBirth</span></p>
+                    <p class="text-muted font-13"><strong>Gender :</strong> <span class="m-l-15">@Model.GenderViewModel.Gname</span></p>
 
                     <p class="text-muted font-13">
                         <strong>Languages :</strong>
-                        <span class="m-l-5">
-                            <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
-                            <span>English</span>
-                        </span>
-                        <span class="m-l-5">
-                            <span class="flag-icon flag-icon-de m-r-5" title="de"></span>
-                            <span>German</span>
-                        </span>
-                        <span class="m-l-5">
-                            <span class="flag-icon flag-icon-es m-r-5" title="es"></span>
-                            <span>Spanish</span>
-                        </span>
-                        <span class="m-l-5">
-                            <span class="flag-icon flag-icon-fr m-r-5" title="fr"></span>
-                            <span>French</span>
-                        </span>
+                        @foreach (var item in Model.LanguageViewModel)
+                        {
+                            <span class="m-l-5">
+                                <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
+                                <span><b>@item.Language1</b> (@item.Proficiency)</span>
+                            </span>
+                        }                       
                     </p>
-                </div>
-                <ul class="social-links list-inline m-t-20 m-b-0">                   
-                </ul>
+                </div>                
             </div>
         </div>
        
         <div class="card-box ribbon-box">
             <div class="ribbon ribbon-primary">Responses To Section C</div>
             <div class="clearfix"></div>
-            <div class="inbox-widget">
+
+            @*<div class="inbox-widget">
                 <a href="#">
                     <div class="inbox-item">
                         <div class="inbox-item-img"><img src="assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
                         <p class="inbox-item-text">A group should always have shared vision and goals</p>
-                        @*<p class="inbox-item-text">I've finished it! See you so...</p>*@
+                        
                         <p class="inbox-item-date m-t-10">
                             <button type="button" class="btn btn-icon btn-sm waves-effect waves-light btn-success"> Reply </button>
                         </p>
@@ -177,69 +162,30 @@
                         </p>
                     </div>
                 </a>
-            </div>
+            </div>*@
+
         </div>
     </div>
 
     <div class="col-md-8">
-        @*<div class="row">
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-layers float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Orders</h6>
-                    <h2 class="m-b-20" data-plugin="counterup">1,587</h2>
-                    <span class="badge badge-custom"> +11% </span> <span class="text-muted">From previous period</span>
-                </div>
-            </div><!-- end col -->
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-paypal float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Revenue</h6>
-                    <h2 class="m-b-20">$<span data-plugin="counterup">46,782</span></h2>
-                    <span class="badge badge-danger"> -29% </span> <span class="text-muted">From previous period</span>
-                </div>
-            </div><!-- end col -->
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-rocket float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Product Sold</h6>
-                    <h2 class="m-b-20" data-plugin="counterup">1,890</h2>
-                    <span class="badge badge-custom"> +89% </span> <span class="text-muted">Last year</span>
-                </div>
-            </div><!-- end col -->
-        </div>*@
-        <!-- end row -->
+       
 
         <div class="card-box ribbon-box">
-            <div class="ribbon ribbon-primary">Next Of Kin</div>
-            @*<h4 class="header-title mt-0 mb-3">Experience</h4>*@
+            <div class="ribbon ribbon-primary">Next Of Kin</div>           
             <div class="clearfix"></div>
             <div class="">
                 <div class="">
-                    <h5 class="text-custom m-b-5">Lead designer / Developer</h5>
-                    <p class="m-b-0">websitename.com</p>
-                    <p><b>2010-2015</b></p>
-                    <p class="text-muted font-13 m-b-0">
-                        Lorem Ipsum is simply dummy text
-                        of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book.
-                    </p>
-                </div>
-                <hr>
-                <div class="">
-                    <h5 class="text-custom m-b-5">Senior Graphic Designer</h5>
-                    <p class="m-b-0">coderthemes.com</p>
-                    <p><b>2007-2009</b></p>
-                    <p class="text-muted font-13">
-                        Lorem Ipsum is simply dummy text
-                        of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book.
-                    </p>
-                </div>
+
+                    @foreach (var item in Model.NextOfKinViewModel)
+                    {                       
+                        <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15">@item.Name - @item.Surname</span></p>
+                        <p class="text-muted font-13"><strong>Relationship :</strong><span class="m-l-15"> @item.RelationshipType</span></p>
+                        <p class="text-muted font-13"><strong>Phone Number :</strong> <span class="m-l-15">@item.PhoneNumber</span></p>
+                        <p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">@item.Email</span></p>
+                       
+                        <hr />
+                    }
+                </div>                
             </div>
         </div>
 
@@ -248,7 +194,7 @@
             @*<h4 class="header-title mt-0 mb-3">Experience</h4>*@
             <div class="clearfix"></div>
             <div class="">
-                <div class="">
+                @*<div class="">
                     <h5 class="text-custom m-b-5">Lead designer / Developer</h5>
                     <p class="m-b-0">websitename.com</p>
                     <p><b>2010-2015</b></p>
@@ -259,10 +205,10 @@
                         1500s, when an unknown printer took a galley of type and
                         scrambled it to make a type specimen book.
                     </p>
-                </div>
+                </div>*@
                 <hr>
                 <div class="">
-                    <h5 class="text-custom m-b-5">Senior Graphic Designer</h5>
+                    @*<h5 class="text-custom m-b-5">Senior Graphic Designer</h5>
                     <p class="m-b-0">coderthemes.com</p>
                     <p><b>2007-2009</b></p>
                     <p class="text-muted font-13">
@@ -271,73 +217,13 @@
                         been the industry's standard dummy text ever since the
                         1500s, when an unknown printer took a galley of type and
                         scrambled it to make a type specimen book.
-                    </p>
+                    </p>*@
                 </div>
             </div>
         </div>
 
 
-        @*<div class="card-box">
-            <h4 class="header-title mb-3">My Projects</h4>
-            <div class="table-responsive">
-                <table class="table m-b-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Project Name</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Assign</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-info">Work in Progress</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Adminox Frontend</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-success">Pending</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-pink">Done</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Adminox Frontend</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-purple">Work in Progress</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-warning">Coming soon</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>*@
-
-
+       
     </div>
     <!-- end col -->
 </div>

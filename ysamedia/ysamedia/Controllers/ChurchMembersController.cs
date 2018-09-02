@@ -45,7 +45,7 @@ namespace ysamedia.Controllers
             {
                 return NotFound();
             }
-
+            
             ChurchMembersViewModel viewModel = new ChurchMembersViewModel
             {
                 ChurchMemberId = churchMember.ChurchMemberId,
