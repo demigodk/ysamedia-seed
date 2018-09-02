@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ysamedia.Entities;
 using ysamedia.Models;
+using ysamedia.Models.UserProfileViewModels;
 
 namespace ysamedia.Controllers
 {
@@ -16,15 +17,12 @@ namespace ysamedia.Controllers
     public class HomeController : Controller
     {
         private readonly ysamediaDbContext _context;
-        private readonly string _userId;
-       
-        public HomeController(ysamediaDbContext context, IHttpContextAccessor httpContextAccessor)
-        {
-            _context = context;
-            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            _userId = userId;
-        }
 
+        public HomeController(ysamediaDbContext context)
+        {
+            _context = context;           
+        }
+       
         public IActionResult Index()
         {
             List<User> UserList = new List<User>();
@@ -81,40 +79,29 @@ namespace ysamedia.Controllers
                 return NotFound();
             }
 
-            List<Language> LanguageList = new List<Language>();
+            CombinedProfileViewModel model = new CombinedProfileViewModel();
 
-            LanguageList = (from l in _context.Language
-                       select l).ToList();
+            model.UserViewModel = _context.User.FirstOrDefault(u => u.UserId == id);
 
-            var mediaMember = await _context.User
-                .Include(m => m.Gender)
-                .Include(m => m.AttributeUserBridge)
-                .Include(m => m.NextOfKin)
-                .Include(m => m.Language)                
-                .Include(m => m.DlicenceUserBridge)
-                .Include(m => m.NegAttributeUserBridge)
-                .Include(m => m.ScreeningAnswer)
-                .Include(m => m.Photo)
-                .Include(m => m.RateAnswerUserBridge)
-                .SingleOrDefaultAsync(m => m.UserId == id);            
-
-            if (mediaMember == null)
+            if (model.UserViewModel == null)
             {
                 return NotFound();
-            }            
+            }
 
-            return View(mediaMember);
-        }
+            model.LanguageViewModel = (from l in _context.Language
+                                       where l.UserId == id
+                                       select l).ToList();
 
-        // GET: Language
-        public async Task<IActionResult> Language()
-        {
-            var ysamediaDbContext = (from c in _context.Language
-                                     where c.UserId == _userId
-                                     select c).ToListAsync();
+            model.GenderViewModel = (from g in _context.Gender
+                                     where g.GenderId == model.UserViewModel.GenderId
+                                     select g).FirstOrDefault();
 
-            return View(await ysamediaDbContext);
-        }
+            model.NextOfKinViewModel = (from n in _context.NextOfKin
+                                        where n.UserId == id
+                                        select n).ToList();
+
+            return View(model);
+        }       
 
         public IActionResult Error()
         {

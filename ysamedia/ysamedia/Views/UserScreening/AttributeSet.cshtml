@@ -22,9 +22,13 @@
                                 <p class="col-12 col-form-label">Select From List</p>
                                 <div class="col-12">
                                     <div class="with-select">
-                                        <select asp-for="PosAttribute"
+                                        @*<select asp-for="PosAttribute"
                                                 class="chosen-select"
-                                                asp-items="@(new MultiSelectList(ViewBag.ListPosAttri, "AttributeId", "AttributeName"))" multiple="multiple"></select>
+                                                asp-items="@(new MultiSelectList(ViewBag.ListPosAttri, "AttributeId", "AttributeName"))" multiple="multiple"></select>*@
+                                         @Html.ListBoxFor(p => p.PosAttribute,
+                                       new MultiSelectList(ViewBag.ListPosAttri, "AttributeId", "AttributeName"),
+                                       new { @class = "chosen-select" })
+                                       @*@Html.HiddenFor(s => s.UserId)*@ 
                                     </div>
                                 </div>
                             </div>
