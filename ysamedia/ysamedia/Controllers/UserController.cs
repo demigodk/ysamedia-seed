@@ -115,7 +115,8 @@ namespace ysamedia.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");               
             }
             ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "Gname", user.GenderId);
             return View(user);

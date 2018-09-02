@@ -36,8 +36,10 @@
                         <div class="account-box">
                             <div class="card-box p-5">
                                 <h2 class="text-uppercase text-center pb-4">
-                                    SIGN IN
-                                </h2>
+                                    <a asp-controller="Account" asp-action="Login" class="text-success">
+                                        @ViewData["Title"]
+                                    </a>
+                                </h2>                                
                                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                                     <div class="form-group m-b-20 row">
                                         <div class="col-12">
